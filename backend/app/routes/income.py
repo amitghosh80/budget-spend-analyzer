@@ -120,6 +120,19 @@ def confirm_income(request: ConfirmRequest) -> ConfirmResponse:
             continue
 
         final_category = item.reclassified_category or detected.category
+
+        # Determine effective amount_per_occurrence:
+        # 1. fix-all override takes priority
+        # 2. per-month overrides → compute average of overridden monthly totals
+        # 3. fall back to detected value
+        if item.amount_per_occurrence is not None:
+            effective_amount = item.amount_per_occurrence
+        elif item.monthly_overrides:
+            override_values = list(item.monthly_overrides.values())
+            effective_amount = round(sum(override_values) / len(override_values), 2)
+        else:
+            effective_amount = detected.amount_per_occurrence
+
         confirmed_list.append(
             ConfirmedIncome(
                 id=detected.id,
@@ -127,7 +140,7 @@ def confirm_income(request: ConfirmRequest) -> ConfirmResponse:
                 category=final_category,
                 original_category=detected.category,
                 status=item.status,
-                amount_per_occurrence=item.amount_per_occurrence if item.amount_per_occurrence is not None else detected.amount_per_occurrence,
+                amount_per_occurrence=effective_amount,
                 total_amount=detected.total_amount,
                 frequency=detected.frequency,
                 is_fixed_income=detected.is_recurring and detected.frequency in ("monthly", "biweekly"),

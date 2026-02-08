@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from pydantic import BaseModel
 
@@ -11,6 +11,12 @@ class FileResult(BaseModel):
     size_bytes: Optional[int] = None
     status: str
     error: Optional[str] = None
+
+
+class MonthlyTotal(BaseModel):
+    month: str  # e.g. "Jan 2025", "Dec 2024"
+    total: float
+    transaction_count: int
 
 
 class DetectedIncome(BaseModel):
@@ -25,6 +31,7 @@ class DetectedIncome(BaseModel):
     confidence: str  # high, medium, low
     sample_descriptions: List[str]
     is_recurring: bool
+    monthly_totals: List[MonthlyTotal] = []
 
 
 class UploadResponse(BaseModel):
@@ -39,6 +46,7 @@ class ConfirmationItem(BaseModel):
     status: str  # confirmed, dismissed, reclassified
     reclassified_category: Optional[str] = None
     amount_per_occurrence: Optional[float] = None
+    monthly_overrides: Optional[Dict[int, float]] = None
 
 
 class ConfirmRequest(BaseModel):

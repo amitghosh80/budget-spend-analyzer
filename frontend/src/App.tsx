@@ -3,6 +3,7 @@ import UploadStatements from "./pages/UploadStatements";
 import IncomeReview from "./pages/IncomeReview";
 import IncomeConfirmed from "./pages/IncomeConfirmed";
 import { UploadResponse, ConfirmResponse, DetectedIncome } from "./api/incomeApi";
+import type { MonthlyOverrides } from "./pages/IncomeReview";
 
 type Step = "upload" | "review" | "confirmed";
 
@@ -10,14 +11,16 @@ const App = () => {
   const [step, setStep] = useState<Step>("upload");
   const [detected, setDetected] = useState<DetectedIncome[]>([]);
   const [confirmResult, setConfirmResult] = useState<ConfirmResponse | null>(null);
+  const [monthlyOverrides, setMonthlyOverrides] = useState<MonthlyOverrides>({});
 
   const handleUploadComplete = (data: UploadResponse) => {
     setDetected(data.detected_income);
     setStep("review");
   };
 
-  const handleConfirmed = (resp: ConfirmResponse) => {
+  const handleConfirmed = (resp: ConfirmResponse, overrides: MonthlyOverrides) => {
     setConfirmResult(resp);
+    setMonthlyOverrides(overrides);
     setStep("confirmed");
   };
 
@@ -32,6 +35,7 @@ const App = () => {
   const handleReset = () => {
     setDetected([]);
     setConfirmResult(null);
+    setMonthlyOverrides({});
     setStep("upload");
   };
 
@@ -66,7 +70,7 @@ const App = () => {
           <IncomeReview detected={detected} onConfirmed={handleConfirmed} onMoreDetected={handleMoreDetected} />
         )}
         {step === "confirmed" && confirmResult && (
-          <IncomeConfirmed result={confirmResult} onReset={handleReset} />
+          <IncomeConfirmed result={confirmResult} detected={detected} monthlyOverrides={monthlyOverrides} onReset={handleReset} />
         )}
       </main>
     </div>

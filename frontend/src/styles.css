@@ -454,6 +454,101 @@ body {
   box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
 }
 
+/* ---- Per-Month Occurrences ---- */
+
+.monthly-breakdown {
+  margin-bottom: 14px;
+}
+
+.monthly-breakdown__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.monthly-breakdown__title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--slate-400);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.toggle-expand--reset {
+  background: none;
+  border: none;
+  color: var(--slate-400);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.toggle-expand--reset:hover {
+  color: var(--red);
+}
+
+.occurrence-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: 8px;
+}
+
+.occurrence-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.occurrence-row:hover {
+  background: var(--slate-100);
+}
+
+.occurrence-row__month {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--slate-800);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.occurrence-row__txns {
+  font-size: 0.78rem;
+  color: var(--slate-400);
+  flex: 1;
+  white-space: nowrap;
+}
+
+.occurrence-row__amount {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.amount-input--sm {
+  width: 85px;
+  font-size: 0.9rem;
+}
+
+.amount-input:disabled {
+  background: var(--slate-50);
+  color: var(--slate-600);
+  cursor: default;
+}
+
 .income-card__rule {
   font-size: 0.8rem;
   color: var(--slate-400);
@@ -613,6 +708,121 @@ body {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+/* ---- Month Summary (Confirmed Page) ---- */
+
+.month-summary {
+  margin-bottom: 28px;
+  padding: 20px;
+  background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+  border: 1px solid #c7d2fe;
+  border-radius: var(--radius-sm);
+}
+
+.month-summary__title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--slate-400);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+
+.month-summary__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.month-summary__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 10px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--slate-200);
+}
+
+.month-summary__month {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--slate-600);
+  margin-bottom: 4px;
+}
+
+.month-summary__value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--purple);
+}
+
+/* ---- Month Breakdown (Confirmed Page) ---- */
+
+.month-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.month-block {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.month-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+  border-bottom: 1px solid var(--slate-200);
+}
+
+.month-block__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slate-800);
+}
+
+.month-block__total {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--purple);
+}
+
+.month-block__sources {
+  display: flex;
+  flex-direction: column;
+}
+
+.month-block__source {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.month-block__source:last-child {
+  border-bottom: none;
+}
+
+.month-block__source-name {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--slate-600);
+}
+
+.month-block__source-amount {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--slate-800);
 }
 
 /* ---- Confirmed Page ---- */

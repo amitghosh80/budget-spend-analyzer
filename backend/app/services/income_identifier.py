@@ -10,7 +10,7 @@ from collections import defaultdict
 from typing import Dict, List, Optional, Tuple
 from uuid import uuid4
 
-from app.models import DetectedIncome
+from app.models import DetectedIncome, MonthlyTotal
 from app.services.pdf_parser import RawTransaction
 
 # ---------------------------------------------------------------------------
@@ -106,6 +106,8 @@ def identify_income(transactions: List[RawTransaction]) -> List[DetectedIncome]:
         frequency = _detect_frequency(group["dates"], count)
         confidence = _compute_confidence(count, frequency, group["category"])
 
+        monthly = _aggregate_monthly(group["dates"], amounts)
+
         results.append(
             DetectedIncome(
                 id=uuid4().hex[:12],
@@ -119,6 +121,7 @@ def identify_income(transactions: List[RawTransaction]) -> List[DetectedIncome]:
                 confidence=confidence,
                 sample_descriptions=group["descriptions"][:3],
                 is_recurring=is_recurring,
+                monthly_totals=monthly,
             )
         )
 
@@ -181,6 +184,8 @@ def identify_income_by_keywords(
         frequency = _detect_frequency(group["dates"], count)
         confidence = _compute_confidence(count, frequency, group["category"])
 
+        monthly = _aggregate_monthly(group["dates"], amounts)
+
         results.append(
             DetectedIncome(
                 id=uuid4().hex[:12],
@@ -194,6 +199,7 @@ def identify_income_by_keywords(
                 confidence=confidence,
                 sample_descriptions=group["descriptions"][:3],
                 is_recurring=is_recurring,
+                monthly_totals=monthly,
             )
         )
 
@@ -296,6 +302,61 @@ def _detect_frequency(dates: List[str], count: int) -> str:
     if median_gap <= 50:
         return "monthly"
     return "quarterly"
+
+
+MONTH_NAMES = [
+    "", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+]
+
+
+def _aggregate_monthly(dates: List[str], amounts: List[float]) -> List[MonthlyTotal]:
+    """Group transactions by month and sum their amounts."""
+    buckets: Dict[str, float] = defaultdict(float)
+    counts: Dict[str, int] = defaultdict(int)
+    sort_keys: Dict[str, tuple] = {}
+
+    for date_str, amount in zip(dates, amounts):
+        parts = date_str.split("/")
+        if len(parts) < 2:
+            continue
+        try:
+            month_num = int(parts[0])
+        except ValueError:
+            continue
+
+        # Extract year if present (MM/DD/YYYY or MM/DD/YY)
+        if len(parts) >= 3:
+            try:
+                year = int(parts[2])
+                if year < 100:
+                    year += 2000
+            except ValueError:
+                year = 0
+        else:
+            year = 0
+
+        if year > 0:
+            label = f"{MONTH_NAMES[month_num]} {year}"
+            sort_key = (year, month_num)
+        else:
+            label = MONTH_NAMES[month_num]
+            sort_key = (0, month_num)
+
+        buckets[label] += amount
+        counts[label] += 1
+        sort_keys[label] = sort_key
+
+    # Sort chronologically
+    sorted_labels = sorted(buckets.keys(), key=lambda k: sort_keys[k])
+    return [
+        MonthlyTotal(
+            month=label,
+            total=round(buckets[label], 2),
+            transaction_count=counts[label],
+        )
+        for label in sorted_labels
+    ]
 
 
 def _compute_confidence(count: int, frequency: str, category: str) -> str:

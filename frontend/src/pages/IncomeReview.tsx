@@ -7,9 +7,11 @@ import {
   ConfirmResponse,
 } from "../api/incomeApi";
 
+export type MonthlyOverrides = Record<string, Record<number, string>>;
+
 type Props = {
   detected: DetectedIncome[];
-  onConfirmed: (resp: ConfirmResponse) => void;
+  onConfirmed: (resp: ConfirmResponse, overrides: MonthlyOverrides) => void;
   onMoreDetected: (newItems: DetectedIncome[]) => void;
 };
 
@@ -40,6 +42,7 @@ const CONFIDENCE_STYLES: Record<string, { bg: string; text: string }> = {
 const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
   const [decisions, setDecisions] = useState<Record<string, "confirmed" | "dismissed">>({});
   const [amountOverrides, setAmountOverrides] = useState<Record<string, string>>({});
+  const [monthlyOverrides, setMonthlyOverrides] = useState<Record<string, Record<number, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [rescanOpen, setRescanOpen] = useState(false);
@@ -53,10 +56,70 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
     setDecisions((prev) => ({ ...prev, [id]: status }));
   };
 
+  const setMonthAmount = (itemId: string, index: number, value: string) => {
+    setMonthlyOverrides((prev) => ({
+      ...prev,
+      [itemId]: { ...prev[itemId], [index]: value },
+    }));
+  };
+
+  const resetMonthly = (itemId: string) => {
+    setMonthlyOverrides((prev) => {
+      const next = { ...prev };
+      delete next[itemId];
+      return next;
+    });
+    setAmountOverrides((prev) => {
+      const next = { ...prev };
+      delete next[itemId];
+      return next;
+    });
+  };
+
+  const getEffectiveAmount = (item: DetectedIncome): string => {
+    const perMonth = monthlyOverrides[item.id];
+    const months = item.monthly_totals ?? [];
+    if (perMonth && Object.keys(perMonth).length > 0 && months.length > 0) {
+      const values = months.map((m, i) => {
+        const ov = perMonth[i];
+        const parsed = ov !== undefined ? parseFloat(ov) : NaN;
+        return isNaN(parsed) ? m.total : parsed;
+      });
+      const avg = values.reduce((s, v) => s + v, 0) / values.length;
+      return avg.toFixed(2);
+    }
+    return amountOverrides[item.id] ?? item.amount_per_occurrence.toString();
+  };
+
+  const isPerMonthMode = (id: string) => {
+    const perMonth = monthlyOverrides[id];
+    return perMonth && Object.keys(perMonth).length > 0;
+  };
+
   const handleSubmit = async () => {
     setSubmitting(true);
     setError(null);
     const confirmations: ConfirmationItem[] = detected.map((d) => {
+      const perMonth = monthlyOverrides[d.id];
+      const hasPerMonth = perMonth && Object.keys(perMonth).length > 0;
+
+      // Per-month mode: send monthly_overrides
+      if (hasPerMonth) {
+        const overrides: Record<number, number> = {};
+        for (const [idx, val] of Object.entries(perMonth)) {
+          const parsed = parseFloat(val);
+          if (!isNaN(parsed)) {
+            overrides[Number(idx)] = parsed;
+          }
+        }
+        return {
+          id: d.id,
+          status: decisions[d.id] || "dismissed",
+          monthly_overrides: Object.keys(overrides).length > 0 ? overrides : undefined,
+        };
+      }
+
+      // Fix-all mode
       const override = amountOverrides[d.id];
       const parsed = override !== undefined ? parseFloat(override) : NaN;
       return {
@@ -67,7 +130,7 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
     });
     try {
       const resp = await confirmIncome(confirmations);
-      onConfirmed(resp);
+      onConfirmed(resp, monthlyOverrides);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Confirmation failed.");
     } finally {
@@ -162,25 +225,58 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
                         </span>
                       </div>
 
+                      {(item.monthly_totals?.length ?? 0) > 0 && (
+                        <div className="monthly-breakdown">
+                          <div className="monthly-breakdown__header">
+                            <span className="monthly-breakdown__title">Monthly Income</span>
+                            {isPerMonthMode(item.id) && (
+                              <button
+                                type="button"
+                                className="toggle-expand toggle-expand--reset"
+                                onClick={() => resetMonthly(item.id)}
+                              >
+                                Reset
+                              </button>
+                            )}
+                          </div>
+                          <div className="occurrence-list">
+                            {item.monthly_totals.map((mt, idx) => (
+                              <div key={idx} className="occurrence-row">
+                                <span className="occurrence-row__month">{mt.month}</span>
+                                <span className="occurrence-row__txns">
+                                  {mt.transaction_count} txn{mt.transaction_count !== 1 ? "s" : ""}
+                                </span>
+                                <div className="occurrence-row__amount">
+                                  <span className="detail__dollar">$</span>
+                                  <input
+                                    type="text"
+                                    inputMode="decimal"
+                                    className="amount-input amount-input--sm"
+                                    value={
+                                      monthlyOverrides[item.id]?.[idx] ??
+                                      mt.total.toString()
+                                    }
+                                    onChange={(e) =>
+                                      setMonthAmount(item.id, idx, e.target.value)
+                                    }
+                                  />
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
                       <div className="income-card__details">
                         <div className="detail">
-                          <span className="detail__label">Per occurrence</span>
-                          <div className="detail__editable">
-                            <span className="detail__dollar">$</span>
-                            <input
-                              type="text"
-                              inputMode="decimal"
-                              className="amount-input"
-                              value={amountOverrides[item.id] ?? item.amount_per_occurrence.toString()}
-                              onChange={(e) =>
-                                setAmountOverrides((prev) => ({ ...prev, [item.id]: e.target.value }))
-                              }
-                            />
-                          </div>
+                          <span className="detail__label">Avg / month</span>
+                          <span className="detail__value detail__value--accent">
+                            ${getEffectiveAmount(item)}
+                          </span>
                         </div>
                         <div className="detail">
                           <span className="detail__label">Total</span>
-                          <span className="detail__value detail__value--accent">
+                          <span className="detail__value">
                             ${item.total_amount.toLocaleString()}
                           </span>
                         </div>

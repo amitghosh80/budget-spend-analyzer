@@ -8,6 +8,12 @@ export type FileResult = {
   error?: string | null;
 };
 
+export type MonthlyTotal = {
+  month: string;
+  total: number;
+  transaction_count: number;
+};
+
 export type DetectedIncome = {
   id: string;
   source_name: string;
@@ -20,6 +26,7 @@ export type DetectedIncome = {
   confidence: string;
   sample_descriptions: string[];
   is_recurring: boolean;
+  monthly_totals: MonthlyTotal[];
 };
 
 export type UploadResponse = {
@@ -34,6 +41,7 @@ export type ConfirmationItem = {
   status: "confirmed" | "dismissed" | "reclassified";
   reclassified_category?: string | null;
   amount_per_occurrence?: number | null;
+  monthly_overrides?: Record<number, number> | null;
 };
 
 export type ConfirmedIncome = {
