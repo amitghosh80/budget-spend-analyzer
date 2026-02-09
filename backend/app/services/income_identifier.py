@@ -119,7 +119,7 @@ def identify_income(transactions: List[RawTransaction]) -> List[DetectedIncome]:
                 occurrence_count=count,
                 frequency=frequency,
                 confidence=confidence,
-                sample_descriptions=group["descriptions"][:3],
+                sample_descriptions=group["descriptions"],
                 is_recurring=is_recurring,
                 monthly_totals=monthly,
             )
@@ -197,7 +197,7 @@ def identify_income_by_keywords(
                 occurrence_count=count,
                 frequency=frequency,
                 confidence=confidence,
-                sample_descriptions=group["descriptions"][:3],
+                sample_descriptions=group["descriptions"],
                 is_recurring=is_recurring,
                 monthly_totals=monthly,
             )

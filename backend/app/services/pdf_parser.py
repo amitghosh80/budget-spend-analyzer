@@ -42,6 +42,19 @@ def extract_transactions(pdf_path: Path) -> List[RawTransaction]:
 
 def _parse_transaction_line(line: str) -> Optional[RawTransaction]:
     """Try to parse a single line as a deposit/credit transaction."""
+    # PDF metadata markers (e.g. "*end*transaction detail") sometimes merge
+    # with the next line's date, garbling it.  Try to recover: find a lone
+    # digit inside the marker text that precedes the date and belongs to it.
+    # Example: "*end*transac1tion detail2/26" → date should be "12/26".
+    if "*" in line:
+        m = re.search(
+            r"\*[^*]*?(\d)(?:[a-zA-Z ]+)(\d{1,2}/\d{1,2}(?:/\d{2,4})?)\s+(.+)",
+            line,
+        )
+        if m:
+            date_str = m.group(1) + m.group(2)
+            line = date_str + " " + m.group(3)
+
     # Look for lines with a date and a dollar amount
     # Common formats: MM/DD  description  amount
     date_match = re.match(r"(\d{1,2}/\d{1,2}(?:/\d{2,4})?)\s+(.+)", line)
