@@ -6,6 +6,7 @@ export type FileResult = {
   size_bytes?: number | null;
   status: string;
   error?: string | null;
+  transaction_count?: number | null;
 };
 
 export type MonthlyTotal = {

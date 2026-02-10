@@ -9,8 +9,9 @@ class FileResult(BaseModel):
     filename: str
     stored_as: Optional[str] = None
     size_bytes: Optional[int] = None
-    status: str
+    status: str  # stored, skipped, warning, error
     error: Optional[str] = None
+    transaction_count: Optional[int] = None
 
 
 class MonthlyTotal(BaseModel):

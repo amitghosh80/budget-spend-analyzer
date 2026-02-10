@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import json
+import logging
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import List
 from uuid import uuid4
 
-from fastapi import APIRouter, File, UploadFile
+from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from app.models import (
     ConfirmationItem,
@@ -24,19 +26,34 @@ router = APIRouter()
 
 STORAGE_DIR = Path(__file__).resolve().parents[1] / "storage" / "uploads"
 CONFIRMED_PATH = Path(__file__).resolve().parents[1] / "storage" / "confirmed_income.json"
+UPLOAD_LOG_PATH = Path(__file__).resolve().parents[1] / "storage" / "upload_log.json"
+
+MAX_FILES = 12
+
+logger = logging.getLogger(__name__)
 
 # In-memory cache of most recent detected income (keyed by id)
 _detected_cache: dict[str, DetectedIncome] = {}
 # In-memory cache of raw transactions for rescan
 _transactions_cache: list[RawTransaction] = []
+# Track stored file paths for cleanup after confirmation
+_stored_files: list[Path] = []
 
 
 @router.post("/upload", response_model=UploadResponse)
 async def upload_statements(files: List[UploadFile] = File(...)) -> UploadResponse:
     """Upload PDF statements, parse them, and identify income transactions."""
+    if len(files) > MAX_FILES:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Maximum {MAX_FILES} statements allowed (received {len(files)}).",
+        )
+
     STORAGE_DIR.mkdir(parents=True, exist_ok=True)
     file_results: List[FileResult] = []
     all_transactions = []
+
+    _stored_files.clear()
 
     for upload in files:
         fname = upload.filename or "unknown"
@@ -49,11 +66,34 @@ async def upload_statements(files: List[UploadFile] = File(...)) -> UploadRespon
         try:
             content = await upload.read()
             stored_path.write_bytes(content)
+            _stored_files.append(stored_path)
+
             txns = extract_transactions(stored_path)
             all_transactions.extend(txns)
-            file_results.append(
-                FileResult(filename=fname, stored_as=stored_name, size_bytes=len(content), status="stored")
-            )
+
+            _log_upload(fname, stored_name, len(content), len(txns))
+
+            if len(txns) == 0:
+                file_results.append(
+                    FileResult(
+                        filename=fname,
+                        stored_as=stored_name,
+                        size_bytes=len(content),
+                        status="warning",
+                        error="No transactions found — file may be corrupt or unsupported format.",
+                        transaction_count=0,
+                    )
+                )
+            else:
+                file_results.append(
+                    FileResult(
+                        filename=fname,
+                        stored_as=stored_name,
+                        size_bytes=len(content),
+                        status="stored",
+                        transaction_count=len(txns),
+                    )
+                )
         except Exception as exc:
             file_results.append(FileResult(filename=fname, status="error", error=str(exc)))
 
@@ -70,7 +110,7 @@ async def upload_statements(files: List[UploadFile] = File(...)) -> UploadRespon
 
     return UploadResponse(
         total_files=len(file_results),
-        stored_files=sum(1 for f in file_results if f.status == "stored"),
+        stored_files=sum(1 for f in file_results if f.status in ("stored", "warning")),
         file_results=file_results,
         detected_income=detected,
     )
@@ -151,6 +191,9 @@ def confirm_income(request: ConfirmRequest) -> ConfirmResponse:
     # Persist to disk
     _save_confirmed(confirmed_list)
 
+    # Auto-delete uploaded PDFs now that income is confirmed
+    _cleanup_uploaded_files()
+
     return ConfirmResponse(confirmed=confirmed_list, dismissed_count=dismissed)
 
 
@@ -186,3 +229,54 @@ def _load_confirmed() -> List[ConfirmedIncome]:
 
 def _safe(filename: str) -> str:
     return "".join(ch for ch in filename if ch.isalnum() or ch in "-_.")
+
+
+def _cleanup_uploaded_files() -> None:
+    """Delete stored PDFs after confirmation and log the deletions."""
+    deleted = 0
+    for path in _stored_files:
+        try:
+            if path.exists():
+                path.unlink()
+                _log_deletion(path.name)
+                deleted += 1
+        except OSError:
+            logger.warning("Failed to delete %s", path)
+    _stored_files.clear()
+    if deleted:
+        logger.info("Cleaned up %d uploaded PDF(s) after confirmation", deleted)
+
+
+def _log_upload(filename: str, stored_as: str, size_bytes: int, transaction_count: int) -> None:
+    """Append an upload event to the upload log."""
+    _append_log_entry({
+        "event": "upload",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "filename": filename,
+        "stored_as": stored_as,
+        "size_bytes": size_bytes,
+        "transaction_count": transaction_count,
+    })
+
+
+def _log_deletion(stored_name: str) -> None:
+    """Append a deletion event to the upload log."""
+    _append_log_entry({
+        "event": "delete",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "stored_as": stored_name,
+    })
+
+
+def _append_log_entry(entry: dict) -> None:
+    """Append a single entry to the JSON upload log."""
+    UPLOAD_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        if UPLOAD_LOG_PATH.exists():
+            log = json.loads(UPLOAD_LOG_PATH.read_text(encoding="utf-8"))
+        else:
+            log = []
+        log.append(entry)
+        UPLOAD_LOG_PATH.write_text(json.dumps(log, indent=2), encoding="utf-8")
+    except Exception:
+        logger.warning("Failed to write upload log entry: %s", entry)

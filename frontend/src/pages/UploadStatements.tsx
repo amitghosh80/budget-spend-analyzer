@@ -5,6 +5,8 @@ type Props = {
   onComplete: (data: UploadResponse) => void;
 };
 
+const MAX_FILES = 12;
+
 const UploadStatements = ({ onComplete }: Props) => {
   const [files, setFiles] = useState<FileList | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -13,6 +15,10 @@ const UploadStatements = ({ onComplete }: Props) => {
   const handleUpload = async () => {
     if (!files || files.length === 0) {
       setError("Please select at least one PDF statement.");
+      return;
+    }
+    if (files.length > MAX_FILES) {
+      setError(`Maximum ${MAX_FILES} statements allowed (you selected ${files.length}).`);
       return;
     }
     setUploading(true);
@@ -37,6 +43,15 @@ const UploadStatements = ({ onComplete }: Props) => {
         salary, rental, and other recurring deposits. Credit card statements
         will be uploaded later for tracking expenses.
       </p>
+
+      <div className="security-banner">
+        <span className="security-banner__icon">&#128274;</span>
+        <span>
+          Your uploaded statements are processed securely and{" "}
+          <strong>automatically deleted</strong> once you confirm your income.
+          Only transaction metadata (dates, amounts, categories) is retained.
+        </span>
+      </div>
 
       <label className="file-drop">
         <input
