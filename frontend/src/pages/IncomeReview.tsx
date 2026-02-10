@@ -20,6 +20,8 @@ const CATEGORY_COLORS: Record<string, string> = {
   rental: "#f59e0b",
   pension: "#10b981",
   freelance: "#ec4899",
+  interest: "#06b6d4",
+  payments: "#14b8a6",
   other: "#8b5cf6",
   transfer: "#64748b",
 };
@@ -29,6 +31,8 @@ const CATEGORY_LABELS: Record<string, string> = {
   rental: "Rental Income",
   pension: "Pension / Social Security",
   freelance: "Freelance / Consulting",
+  interest: "Interest Income",
+  payments: "Payments Received",
   other: "Other Income",
   transfer: "Transfer",
 };
@@ -168,8 +172,11 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
     return acc;
   }, {});
 
-  const categoryOrder = ["salary", "rental", "pension", "freelance", "other", "transfer"];
-  const sortedCategories = categoryOrder.filter((c) => groups[c]);
+  const categoryOrder = ["salary", "rental", "pension", "freelance", "interest", "payments", "other", "transfer"];
+  const sortedCategories = [
+    ...categoryOrder.filter((c) => groups[c]),
+    ...Object.keys(groups).filter((c) => !categoryOrder.includes(c)),
+  ];
 
   return (
     <div className="step-card fade-in">
