@@ -1,0 +1,3370 @@
+{
+  "unique_pdfs": {
+    "2025-11-09.pdf": "backend\\app\\storage\\uploads\\848c544c_2025-11-09.pdf",
+    "2025-12-10.pdf": "backend\\app\\storage\\uploads\\3bbc3cf1_2025-12-10.pdf",
+    "20251010-statements-1874-.pdf": "backend\\app\\storage\\uploads\\daabaf3f_20251010-statements-1874-.pdf",
+    "20251110-statements-1874-.pdf": "backend\\app\\storage\\uploads\\154eb494_20251110-statements-1874-.pdf",
+    "20251128-statements-3278-.pdf": "backend\\app\\storage\\uploads\\0066d39a_20251128-statements-3278-.pdf",
+    "20251231-statements-3278-.pdf": "backend\\app\\storage\\uploads\\03ef5715_20251231-statements-3278-.pdf",
+    "2026-01-09.pdf": "backend\\app\\storage\\uploads\\7d3a12e5_2026-01-09.pdf",
+    "20260110-statements-1874-.pdf": "backend\\app\\storage\\uploads\\fa875887_20260110-statements-1874-.pdf",
+    "20260130-statements-3278-.pdf": "backend\\app\\storage\\uploads\\08dbf3ac_20260130-statements-3278-.pdf",
+    "GetDocument.pdf": "backend\\app\\storage\\uploads\\02c985f1_GetDocument.pdf",
+    "GetDocument1.pdf": "backend\\app\\storage\\uploads\\01011e39_GetDocument1.pdf",
+    "GetDocument2.pdf": "backend\\app\\storage\\uploads\\17fa627a_GetDocument2.pdf",
+    "test.pdf": "backend\\app\\storage\\uploads\\4c610896_test.pdf"
+  },
+  "total_raw_transactions": 612,
+  "transactions_per_pdf": {
+    "2025-11-09.pdf": {
+      "count": 117,
+      "transactions": [
+        {
+          "date": "10/10/25",
+          "amount": 1.37,
+          "description": "GglPay DOLLAR TREE 000005424 BOTHELL WA"
+        },
+        {
+          "date": "10/10/25",
+          "amount": 52.92,
+          "description": "GglPay HOMEGOODS # 0759 000000759 WOODINVILLE WA"
+        },
+        {
+          "date": "10/10/25",
+          "amount": 96.27,
+          "description": "UNION 76 09438532 WOODINVILLE WA"
+        },
+        {
+          "date": "10/11/25",
+          "amount": 40.0,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "10/11/25",
+          "amount": 130.2,
+          "description": "AT&T COR DF ATLANTA GA"
+        },
+        {
+          "date": "10/11/25",
+          "amount": 56.9,
+          "description": "FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "10/11/25",
+          "amount": 3.81,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "10/12/25",
+          "amount": 35.45,
+          "description": "GglPay MAYURI FOODS & VIDEO 0000 BOTHELL WA"
+        },
+        {
+          "date": "10/12/25",
+          "amount": 27.47,
+          "description": "TACO BELL BOTHELL WA"
+        },
+        {
+          "date": "10/12/25",
+          "amount": 32.35,
+          "description": "GglPay FLOWER WORLD INC 0000 SNOHOMISH WA"
+        },
+        {
+          "date": "10/12/25",
+          "amount": 30.0,
+          "description": "22727 BOTHELL EVERETT HWY 57444030902 BOTHELL WA"
+        },
+        {
+          "date": "10/13/25",
+          "amount": 9.0,
+          "description": "GglPay VILLAGE THEATRE EVERETT Everett WA"
+        },
+        {
+          "date": "10/13/25",
+          "amount": 10.0,
+          "description": "GglPay VILLAGE THEATRE EVERETT Everett WA"
+        },
+        {
+          "date": "10/13/25",
+          "amount": 19.85,
+          "description": "DAIRY QUEEN #12467 0000 BOTHELL WA"
+        },
+        {
+          "date": "10/14/25",
+          "amount": 1039.86,
+          "description": "ALDERWOOD WATER AND WASTEWATER DISTRIC LYNNWOOD WA"
+        },
+        {
+          "date": "10/14/25",
+          "amount": 174.73,
+          "description": "AT&T 800-288-2020 TX"
+        },
+        {
+          "date": "10/14/25",
+          "amount": 174.95,
+          "description": "DAVE & BUSTER'S, INC. COPPELL TX"
+        },
+        {
+          "date": "10/15/25",
+          "amount": 5.0,
+          "description": "TST* THE RIDGE ACTIVITY C 00201013 BOTHELL WA"
+        },
+        {
+          "date": "10/15/25",
+          "amount": 60.12,
+          "description": "AT&T OK7U 76673 NA BOTHELL WA"
+        },
+        {
+          "date": "10/15/25",
+          "amount": 36.05,
+          "description": "SIMPLISAFE 888-957-4675 MA"
+        },
+        {
+          "date": "10/16/25",
+          "amount": 661.4,
+          "description": "GET LIT LIGHTING LAKE STEVENS WA"
+        },
+        {
+          "date": "10/16/25",
+          "amount": 19.62,
+          "description": "GglPay STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "10/17/25",
+          "amount": 61.07,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "10/18/25",
+          "amount": 10.98,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "10/18/25",
+          "amount": 10.39,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "10/18/25",
+          "amount": 67.63,
+          "description": "DD *DOORDASH MOUNTBAO SAN FRANCISCO CA"
+        },
+        {
+          "date": "10/18/25",
+          "amount": 36.16,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "10/19/25",
+          "amount": 84.34,
+          "description": "CHEVRON 0375744/CHEVRON BOTHELL WA"
+        },
+        {
+          "date": "10/19/25",
+          "amount": 20.0,
+          "description": "VERCEL INC. COVINA CA"
+        },
+        {
+          "date": "10/19/25",
+          "amount": 35.2,
+          "description": "THE HOME DEPOT BOTHELL WA"
+        },
+        {
+          "date": "10/19/25",
+          "amount": 25.3,
+          "description": "GglPay THE HOME DEPOT BOTHELL WA"
+        },
+        {
+          "date": "10/19/25",
+          "amount": 5.68,
+          "description": "GglPay STARBUCKS STORE 3356 BOTHELL WA"
+        },
+        {
+          "date": "10/19/25",
+          "amount": 51.0,
+          "description": "BHINDESHI BOTHELL WA"
+        },
+        {
+          "date": "10/19/25",
+          "amount": 91.83,
+          "description": "GglPay WALGREENS BOTHELL WA"
+        },
+        {
+          "date": "10/20/25",
+          "amount": 9.75,
+          "description": "TST* THE RIDGE ACTIVITY C 00201013 BOTHELL WA"
+        },
+        {
+          "date": "10/20/25",
+          "amount": 47.12,
+          "description": "DD *DOORDASH BIRYANIHO SAN FRANCISCO CA"
+        },
+        {
+          "date": "10/20/25",
+          "amount": 4.69,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "10/21/25",
+          "amount": 5.0,
+          "description": "TST* THE RIDGE ACTIVITY C 00201013 BOTHELL WA"
+        },
+        {
+          "date": "10/22/25",
+          "amount": 22.03,
+          "description": "GOOGLE *GOOGLE ONE G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "10/22/25",
+          "amount": 55.55,
+          "description": "22727 BOTHELL EVERETT HWY 57444030902 BOTHELL WA"
+        },
+        {
+          "date": "10/22/25",
+          "amount": 11.02,
+          "description": "GOOGLE *SLING LIVE TV G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "10/22/25",
+          "amount": 30.6,
+          "description": "GglPay FRED MEYERS BELLEVUE WA"
+        },
+        {
+          "date": "10/23/25",
+          "amount": 26.79,
+          "description": "BT*DD *DOORDASH JUSTPOK SAN FRANCISCO CA"
+        },
+        {
+          "date": "10/23/25",
+          "amount": 64.58,
+          "description": "DD *DOORDASH DUECUCINA SAN FRANCISCO CA"
+        },
+        {
+          "date": "10/23/25",
+          "amount": 11.06,
+          "description": "SAMSUNG ELECTRONICS 650-934-5824 NJ"
+        },
+        {
+          "date": "10/24/25",
+          "amount": 3.31,
+          "description": "DISNEY PLUS BURBANK CA"
+        },
+        {
+          "date": "10/24/25",
+          "amount": 6.06,
+          "description": "GglPay MS CM FOODHALL 9 64186 REDMOND WA"
+        },
+        {
+          "date": "10/24/25",
+          "amount": 65.7,
+          "description": "TST* KIZUKI RAMEN & IZAKA 00012571 BELLEVUE WA"
+        },
+        {
+          "date": "10/24/25",
+          "amount": 15.0,
+          "description": "GglPay SP LADY YUM KIRKLAND WA"
+        },
+        {
+          "date": "10/24/25",
+          "amount": 8.0,
+          "description": "ACE PARKING LOT PT BELLEVUE WA"
+        },
+        {
+          "date": "10/24/25",
+          "amount": 10.99,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "10/25/25",
+          "amount": 15.55,
+          "description": "MCDONALD'S BOTHELL WA"
+        },
+        {
+          "date": "10/25/25",
+          "amount": 27.02,
+          "description": "DAIRY QUEEN #12467 12467 BOTHELL WA"
+        },
+        {
+          "date": "10/25/25",
+          "amount": 20.57,
+          "description": "GglPay DOLLAR TREE 000005424 BOTHELL WA"
+        },
+        {
+          "date": "10/26/25",
+          "amount": 5.52,
+          "description": "NOLA Kirkland WA"
+        },
+        {
+          "date": "10/26/25",
+          "amount": 45.51,
+          "description": "WAL-MART 2594 2594 LYNNWOOD WA"
+        },
+        {
+          "date": "10/26/25",
+          "amount": 8.83,
+          "description": "DAIRY QUEEN #12467 12467 BOTHELL WA"
+        },
+        {
+          "date": "10/26/25",
+          "amount": 16.99,
+          "description": "GglPay WALGREENS BOTHELL WA"
+        },
+        {
+          "date": "10/27/25",
+          "amount": 18.72,
+          "description": "GOOGLE *HBO MAX STREAM G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "10/27/25",
+          "amount": 6.04,
+          "description": "GglPay MS CM FOODHALL 9 64186 REDMOND WA"
+        },
+        {
+          "date": "10/27/25",
+          "amount": 59.05,
+          "description": "DD *DOORDASH BIRYANIHO SAN FRANCISCO CA"
+        },
+        {
+          "date": "10/28/25",
+          "amount": 65.53,
+          "description": "THE WEEK JUNIOR 877-245-8151 NY"
+        },
+        {
+          "date": "10/28/25",
+          "amount": 22.0,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "10/28/25",
+          "amount": 57.15,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "10/29/25",
+          "amount": 8.84,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "10/29/25",
+          "amount": 1.6,
+          "description": "GglPay MARKET AT BUILDING 9 30415 REDMOND WA"
+        },
+        {
+          "date": "10/30/25",
+          "amount": 116.16,
+          "description": "GglPay TST* INCHINS BAMBOO GARD 00174802 BOTHELL WA"
+        },
+        {
+          "date": "10/30/25",
+          "amount": 21.21,
+          "description": "DD *DOORDASH CHAATHOUS SAN FRANCISCO CA"
+        },
+        {
+          "date": "10/30/25",
+          "amount": 52.76,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "10/31/25",
+          "amount": 10.21,
+          "description": "GglPay SAFEWAY #0535 0535 BOTHELL WA"
+        },
+        {
+          "date": "10/31/25",
+          "amount": 44.47,
+          "description": "GglPay UNION 76 09438607 BOTHELL WA"
+        },
+        {
+          "date": "10/31/25",
+          "amount": 14.99,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "11/01/25",
+          "amount": 41.08,
+          "description": "WAL-MART 2594 2594 LYNNWOOD WA"
+        },
+        {
+          "date": "11/01/25",
+          "amount": 21.86,
+          "description": "OPENAI *CHATGPT SUBSCR SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/01/25",
+          "amount": 96.14,
+          "description": "TRUGREEN LOCKBOX 800-878-4733 TN"
+        },
+        {
+          "date": "11/01/25",
+          "amount": 6.99,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "11/01/25",
+          "amount": 12.6,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "11/01/25",
+          "amount": 18.36,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "11/01/25",
+          "amount": 11.58,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "11/01/25",
+          "amount": 280.0,
+          "description": "SSMA WOODINVILLE WA"
+        },
+        {
+          "date": "11/02/25",
+          "amount": 35.36,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "11/02/25",
+          "amount": 40.95,
+          "description": "DD *DOORDASH THEPORTOF SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/02/25",
+          "amount": 126.24,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "11/03/25",
+          "amount": 25.43,
+          "description": "GglPay FRED MEYER LYNNWOOD WA"
+        },
+        {
+          "date": "11/05/25",
+          "amount": 57.62,
+          "description": "GglPay FRED MEYERS BELLEVUE WA"
+        },
+        {
+          "date": "11/05/25",
+          "amount": 4.4,
+          "description": "GglPay FRED MEYERS BELLEVUE WA"
+        },
+        {
+          "date": "11/06/25",
+          "amount": 31.52,
+          "description": "DIMENSION HAIR SALON 545500001821347 877-8144102 WA"
+        },
+        {
+          "date": "11/06/25",
+          "amount": 51.48,
+          "description": "GglPay SAFEWAY #0535 0535 BOTHELL WA"
+        },
+        {
+          "date": "11/06/25",
+          "amount": 66.9,
+          "description": "DD *DOORDASH FIVEGUYSB SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/06/25",
+          "amount": 5.0,
+          "description": "TST* THE RIDGE ACTIVITY C 00201013 BOTHELL WA"
+        },
+        {
+          "date": "11/06/25",
+          "amount": 39.03,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "11/07/25",
+          "amount": 15.42,
+          "description": "GOOGLE *YOUTUBEPREMIUM G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "11/07/25",
+          "amount": 57.97,
+          "description": "DD *DOORDASH PANDAEXPR SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/07/25",
+          "amount": 30.98,
+          "description": "GglPay WALGREENS BOTHELL WA"
+        },
+        {
+          "date": "11/07/25",
+          "amount": 19.55,
+          "description": "DD *DOORDASH GYROSTOP SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/07/25",
+          "amount": 39.01,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "11/07/25",
+          "amount": 5.49,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "11/08/25",
+          "amount": 24.27,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "11/08/25",
+          "amount": 9.18,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "11/08/25",
+          "amount": 5.49,
+          "description": "GglPay SAFEWAY #0535 0535 BOTHELL WA"
+        },
+        {
+          "date": "11/08/25",
+          "amount": 45.31,
+          "description": "DD *DOORDASH BIRYANIHO SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/08/25",
+          "amount": 27.05,
+          "description": "GglPay DOLLAR TREE 000005424 BOTHELL WA"
+        },
+        {
+          "date": "11/08/25",
+          "amount": 8.09,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "11/09/25",
+          "amount": 351.68,
+          "description": "HELLO INDIA Everett WA"
+        },
+        {
+          "date": "10/12/25",
+          "amount": 88.0,
+          "description": "CANYON CREEK ELEMENTARY GLOW RUN*CANYO Sultan WA"
+        },
+        {
+          "date": "10/13/25",
+          "amount": 89.95,
+          "description": "HAND AND STONE MC MILL CREEK WA"
+        },
+        {
+          "date": "10/14/25",
+          "amount": 91.71,
+          "description": "TST* INCHINS BAMBOO GARD 00174802 BOTHELL WA"
+        },
+        {
+          "date": "10/15/25",
+          "amount": 23.17,
+          "description": "TST* CAFE ANCLAIR - 9TH A 00085687 SEATTLE WA"
+        },
+        {
+          "date": "10/17/25",
+          "amount": 12.08,
+          "description": "GOURMONDO CATERING SEATTLE WA"
+        },
+        {
+          "date": "10/24/25",
+          "amount": 10.92,
+          "description": "APPLE.COM/BILL INTERNET CHARGE CA"
+        },
+        {
+          "date": "10/24/25",
+          "amount": 10.92,
+          "description": "APPLE.COM/BILL INTERNET CHARGE CA"
+        },
+        {
+          "date": "10/24/25",
+          "amount": 11.05,
+          "description": "GOOGLE *GOOGLE ONE G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "10/31/25",
+          "amount": 21.46,
+          "description": "EINSTEIN BROS BAGELS2161 2161 SEATTLE WA"
+        },
+        {
+          "date": "11/03/25",
+          "amount": 2.76,
+          "description": "APOLLO-MKT CAFE 50360 SEATTLE WA"
+        },
+        {
+          "date": "11/09/25",
+          "amount": 34.49,
+          "description": "AMIT GHOSH PLAN FEE - HAURY`S LAKE C"
+        },
+        {
+          "date": "11/09/25",
+          "amount": 128.11,
+          "description": "Interest Charge on Purchases"
+        },
+        {
+          "date": "10/09/25",
+          "amount": 2946.85,
+          "description": "HAURY`S LAKE CITY COSEATTLE 3"
+        }
+      ]
+    },
+    "2025-12-10.pdf": {
+      "count": 115,
+      "transactions": [
+        {
+          "date": "11/09/25",
+          "amount": 6.99,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "11/09/25",
+          "amount": 2.69,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "11/09/25",
+          "amount": 86.74,
+          "description": "22727 BOTHELL EVERETT HWY 57444030902 BOTHELL WA"
+        },
+        {
+          "date": "11/09/25",
+          "amount": 192.45,
+          "description": "DAVE & BUSTER'S, INC. COPPELL TX"
+        },
+        {
+          "date": "11/12/25",
+          "amount": 22.63,
+          "description": "CHICK-FIL-A #03814 000000000564864 BOTHELL WA"
+        },
+        {
+          "date": "11/12/25",
+          "amount": 25.65,
+          "description": "DD *DOORDASH HOTIRONMO SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/12/25",
+          "amount": 5.0,
+          "description": "TST* THE RIDGE ACTIVITY C 00201013 BOTHELL WA"
+        },
+        {
+          "date": "11/12/25",
+          "amount": 50.68,
+          "description": "GglPay UNION 76 09438607 BOTHELL WA"
+        },
+        {
+          "date": "11/14/25",
+          "amount": 212.83,
+          "description": "AT&T 800-288-2020 TX"
+        },
+        {
+          "date": "11/15/25",
+          "amount": 131.36,
+          "description": "GglPay SAFEWAY #0535 0535 BOTHELL WA"
+        },
+        {
+          "date": "11/15/25",
+          "amount": 55.67,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "11/15/25",
+          "amount": 24.09,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "11/15/25",
+          "amount": 2.96,
+          "description": "INDIA SUPERMARKET BOTHELL WA"
+        },
+        {
+          "date": "11/15/25",
+          "amount": 101.6,
+          "description": "INDIA SUPERMARKET BOTHELL WA"
+        },
+        {
+          "date": "11/15/25",
+          "amount": 36.05,
+          "description": "SIMPLISAFE 888-957-4675 MA"
+        },
+        {
+          "date": "11/16/25",
+          "amount": 4.75,
+          "description": "GglPay PINKABELLA CUPCAKES Lynwood WA"
+        },
+        {
+          "date": "11/16/25",
+          "amount": 51.66,
+          "description": "BT*PUNCHBOWL.COM FRAMINGHAM MA"
+        },
+        {
+          "date": "11/16/25",
+          "amount": 298.07,
+          "description": "GglPay UNIQLO USA LLC NEW YORK NY"
+        },
+        {
+          "date": "11/16/25",
+          "amount": 278.28,
+          "description": "ZARA USA 12430 YNNWOOD WA"
+        },
+        {
+          "date": "11/16/25",
+          "amount": 13.36,
+          "description": "GglPay PANERA BREAD #202267 BOTHELL WA"
+        },
+        {
+          "date": "11/18/25",
+          "amount": 64.0,
+          "description": "ETSY, INC. BROOKLYN NY"
+        },
+        {
+          "date": "11/18/25",
+          "amount": 44.4,
+          "description": "CHEVRON 0375744/CHEVRON BOTHELL WA"
+        },
+        {
+          "date": "11/19/25",
+          "amount": 12.22,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "11/19/25",
+          "amount": 25.79,
+          "description": "DD *DOORDASH JUSTPOK SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/20/25",
+          "amount": 59.34,
+          "description": "DD *DOORDASH APPLEBEES SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/20/25",
+          "amount": 11.02,
+          "description": "GOOGLE *SLING LIVE TV G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "11/21/25",
+          "amount": 38.77,
+          "description": "GglPay TST* THE MATADOR - REDMON 300558069 REDMOND WA"
+        },
+        {
+          "date": "11/21/25",
+          "amount": 15.43,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "11/21/25",
+          "amount": 4.41,
+          "description": "DAIRY QUEEN #12467 12467 BOTHELL WA"
+        },
+        {
+          "date": "11/21/25",
+          "amount": 51.64,
+          "description": "GglPay UNION 76 09438607 BOTHELL WA"
+        },
+        {
+          "date": "11/21/25",
+          "amount": 50.0,
+          "description": "PB *THE OVERLAKE REDMOND WA"
+        },
+        {
+          "date": "11/22/25",
+          "amount": 21.41,
+          "description": "DD *DOORDASH CHAATHOUS SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/22/25",
+          "amount": 86.6,
+          "description": "DD *DOORDASH BIRYANIHO SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/22/25",
+          "amount": 41.0,
+          "description": "DD *DOORDASH CHICK-FIL SAN FRANCISCO CA"
+        },
+        {
+          "date": "11/22/25",
+          "amount": 22.03,
+          "description": "GOOGLE *GOOGLE ONE G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "11/22/25",
+          "amount": 38.49,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "11/22/25",
+          "amount": 9.83,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "11/23/25",
+          "amount": 11.06,
+          "description": "SAMSUNG ELECTRONICS 650-934-5824 NJ"
+        },
+        {
+          "date": "11/23/25",
+          "amount": 9.49,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "11/24/25",
+          "amount": 3.31,
+          "description": "DISNEY PLUS BURBANK CA"
+        },
+        {
+          "date": "11/24/25",
+          "amount": 11.99,
+          "description": "MCDONALD'S F5586 000000000182888 BELLEVUE WA"
+        },
+        {
+          "date": "11/24/25",
+          "amount": 70.59,
+          "description": "DOMINO'S 7020 000007020 BOTHELL WA"
+        },
+        {
+          "date": "11/25/25",
+          "amount": 70.0,
+          "description": "GglPay BASKIN #332178 332178 BOTHELL WA"
+        },
+        {
+          "date": "11/25/25",
+          "amount": 43.74,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "11/26/25",
+          "amount": 10.61,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "11/26/25",
+          "amount": 17.98,
+          "description": "GglPay ROSS DRESS FOR LESS LYNNWOOD WA"
+        },
+        {
+          "date": "11/26/25",
+          "amount": 20.37,
+          "description": "GOOGLE *HBO MAX STREAM G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "11/26/25",
+          "amount": 8.67,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "11/26/25",
+          "amount": 11.0,
+          "description": "NORTHSHORE SD 000912200896803 BOTHELL WA"
+        },
+        {
+          "date": "11/27/25",
+          "amount": 104.19,
+          "description": "AADAT CUISINE OF INDIA Des Moines WA"
+        },
+        {
+          "date": "11/27/25",
+          "amount": 19.09,
+          "description": "GglPay SAFEWAY STORE POULSBO WA"
+        },
+        {
+          "date": "11/27/25",
+          "amount": 76.16,
+          "description": "GglPay SAFEWAY #0186 0186 KINGSTON WA"
+        },
+        {
+          "date": "11/27/25",
+          "amount": 69.24,
+          "description": "UNION 76 09438607 BOTHELL WA"
+        },
+        {
+          "date": "11/27/25",
+          "amount": 7.18,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "11/27/25",
+          "amount": 22.79,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "11/28/25",
+          "amount": 8.17,
+          "description": "GglPay SAFEWAY #0186 0186 KINGSTON WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 5.08,
+          "description": "GglPay HOT SHOTS JAVA POULSBO WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 78.86,
+          "description": "TST* JJS FISH HOUSE 300696113 POULSBO WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 9.73,
+          "description": "GglPay STARBUCKS STORE 0335 GIG HARBOR WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 34.05,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 25.89,
+          "description": "GglPay STARBUCKS STORE 0335 GIG HARBOR WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 4.48,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 1.38,
+          "description": "GglPay DOLLARTREE 000006086 MILL CREEK WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 28.04,
+          "description": "INDIA SUPERMARKET BOTHELL WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 58.95,
+          "description": "22727 BOTHELL EVERETT HWY 57444030902 BOTHELL WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 2.73,
+          "description": "GglPay DOLLAR TREE 000005424 BOTHELL WA"
+        },
+        {
+          "date": "11/29/25",
+          "amount": 15.95,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "11/30/25",
+          "amount": 22.12,
+          "description": "GglPay VISENTA STUDIO WA LLC Lynnwood WA"
+        },
+        {
+          "date": "11/30/25",
+          "amount": 7.99,
+          "description": "GglPay MILL CREEK CNTL MKT MILL CREEK WA"
+        },
+        {
+          "date": "11/30/25",
+          "amount": 13.66,
+          "description": "DOLLAR TREE 000005424 BOTHELL WA"
+        },
+        {
+          "date": "11/30/25",
+          "amount": 234.0,
+          "description": "GglPay DAVE & BUSTERS #158 TAB 158 LYNNWOOD WA"
+        },
+        {
+          "date": "11/30/25",
+          "amount": 212.28,
+          "description": "GglPay DAVE & BUSTERS #158 TAB 158 LYNNWOOD WA"
+        },
+        {
+          "date": "11/30/25",
+          "amount": 310.81,
+          "description": "DAVE & BUSTERS #158 158 LYNNWOOD WA"
+        },
+        {
+          "date": "12/01/25",
+          "amount": 21.86,
+          "description": "OPENAI *CHATGPT SUBSCR SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/01/25",
+          "amount": 280.0,
+          "description": "SSMA WOODINVILLE WA"
+        },
+        {
+          "date": "12/01/25",
+          "amount": 17.32,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "12/02/25",
+          "amount": 5.0,
+          "description": "TST* THE RIDGE ACTIVITY C 00201013 BOTHELL WA"
+        },
+        {
+          "date": "12/03/25",
+          "amount": 41.02,
+          "description": "GglPay SAFEWAY #0490 0490 BELLEVUE WA"
+        },
+        {
+          "date": "12/03/25",
+          "amount": 14.4,
+          "description": "GglPay FRED MEYERS BELLEVUE WA"
+        },
+        {
+          "date": "12/04/25",
+          "amount": 46.87,
+          "description": "GglPay UNION 76 09438607 BOTHELL WA"
+        },
+        {
+          "date": "12/05/25",
+          "amount": 4.0,
+          "description": "GglPay CULTURES COFFEE HOUSE Bothell WA"
+        },
+        {
+          "date": "12/05/25",
+          "amount": 11.32,
+          "description": "CHICK-FIL-A #03814 000000000564864 BOTHELL WA"
+        },
+        {
+          "date": "12/05/25",
+          "amount": 60.29,
+          "description": "GglPay BASKIN #332178 332178 BOTHELL WA"
+        },
+        {
+          "date": "12/05/25",
+          "amount": 15.46,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "12/06/25",
+          "amount": 6.52,
+          "description": "GglPay KONA ICE OF EVERETT Bothell WA"
+        },
+        {
+          "date": "12/06/25",
+          "amount": 453.39,
+          "description": "DAVE & BUSTERS #158 158 LYNNWOOD WA"
+        },
+        {
+          "date": "12/06/25",
+          "amount": 90.58,
+          "description": "GglPay SAFEWAY #0535 0535 BOTHELL WA"
+        },
+        {
+          "date": "12/06/25",
+          "amount": 50.97,
+          "description": "DD *DOORDASH MAYURIFOO SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/06/25",
+          "amount": 7.18,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "12/06/25",
+          "amount": 49.99,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "12/06/25",
+          "amount": 74.46,
+          "description": "GglPay UNION 76 09438607 BOTHELL WA"
+        },
+        {
+          "date": "12/07/25",
+          "amount": 15.42,
+          "description": "GOOGLE *YOUTUBEPREMIUM G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "12/07/25",
+          "amount": 16.48,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "12/08/25",
+          "amount": 285.94,
+          "description": "ALDERWOOD WATER AND WASTEWATER DISTRIC LYNNWOOD WA"
+        },
+        {
+          "date": "12/09/25",
+          "amount": 17.73,
+          "description": "GglPay TST* BEECHER'S HANDMADE C 300003638 BELLEVUE WA"
+        },
+        {
+          "date": "12/09/25",
+          "amount": 91.6,
+          "description": "DIMENSION HAIR SALON 545500001821347 877-8144102 WA"
+        },
+        {
+          "date": "12/09/25",
+          "amount": 24.65,
+          "description": "CHICK-FIL-A #03814 000000000564864 BOTHELL WA"
+        },
+        {
+          "date": "12/10/25",
+          "amount": 48.99,
+          "description": "GglPay TST* DOUGH ZONE - WOODINV 300570277 WOODINVILLE WA"
+        },
+        {
+          "date": "11/10/25",
+          "amount": 2.99,
+          "description": "APPLE.COM/BILL INTERNET CHARGE CA"
+        },
+        {
+          "date": "11/15/25",
+          "amount": 26.0,
+          "description": "ZENOTIUSA_POS*HAND AND STONE MC MILL CREEK WA"
+        },
+        {
+          "date": "11/16/25",
+          "amount": 22.82,
+          "description": "HAPPY LEMON - BOTHELL BOTHELL WA"
+        },
+        {
+          "date": "11/16/25",
+          "amount": 65.24,
+          "description": "PANDORA 218572 LYNNWOOD WA"
+        },
+        {
+          "date": "11/18/25",
+          "amount": 41.97,
+          "description": "QFC BOTHELL WA"
+        },
+        {
+          "date": "11/20/25",
+          "amount": 6.34,
+          "description": "TST* CAFE ANCLAIR - 9TH A 00085687 SEATTLE WA"
+        },
+        {
+          "date": "11/22/25",
+          "amount": 10.92,
+          "description": "APPLE.COM/BILL INTERNET CHARGE CA"
+        },
+        {
+          "date": "11/22/25",
+          "amount": 227.13,
+          "description": "MARSHALLS LYNNWOOD WA"
+        },
+        {
+          "date": "11/24/25",
+          "amount": 11.05,
+          "description": "GOOGLE *GOOGLE ONE G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "12/01/25",
+          "amount": 3.59,
+          "description": "APOLLO-MKT CAFE 50360 SEATTLE WA"
+        },
+        {
+          "date": "12/01/25",
+          "amount": 82.05,
+          "description": "BATH AND BODY WORKS BATH AND BODY W NEW ALBANY OH"
+        },
+        {
+          "date": "12/05/25",
+          "amount": 9.88,
+          "description": "APOLLO-MKT CAFE 50360 SEATTLE WA"
+        },
+        {
+          "date": "12/09/25",
+          "amount": 6.57,
+          "description": "APOLLO-MKT CAFE 50360 SEATTLE WA"
+        },
+        {
+          "date": "12/10/25",
+          "amount": 2.99,
+          "description": "APPLE.COM/BILL INTERNET CHARGE CA"
+        },
+        {
+          "date": "12/10/25",
+          "amount": 34.49,
+          "description": "AMIT GHOSH PLAN FEE - HAURY`S LAKE C"
+        },
+        {
+          "date": "12/10/25",
+          "amount": 134.99,
+          "description": "Interest Charge on Purchases"
+        },
+        {
+          "date": "10/09/25",
+          "amount": 1196.52,
+          "description": "HAURY`S LAKE CITY COSEATTLE 3"
+        }
+      ]
+    },
+    "20251010-statements-1874-.pdf": {
+      "count": 22,
+      "transactions": [
+        {
+          "date": "09/18",
+          "amount": 2500.0,
+          "description": "Payment Thank You-Mobile -"
+        },
+        {
+          "date": "09/10",
+          "amount": 2.99,
+          "description": "APPLE.COM/BILL 866-712-7753 CA"
+        },
+        {
+          "date": "09/10",
+          "amount": 17.48,
+          "description": "HP *INSTANT INK 855-785-2777 CA"
+        },
+        {
+          "date": "09/15",
+          "amount": 38.28,
+          "description": "AMAZON MKTPL*S85Z49XX3 Amzn.com/bill WA"
+        },
+        {
+          "date": "09/15",
+          "amount": 15.7,
+          "description": "AMAZON MKTPL*MG9516MN3 Amzn.com/bill WA"
+        },
+        {
+          "date": "09/17",
+          "amount": 9.99,
+          "description": "DD *DOORDASHDASHPASS DOORDASH.COM CA"
+        },
+        {
+          "date": "09/16",
+          "amount": 27.64,
+          "description": "Netflix.com 408-5403700 CA"
+        },
+        {
+          "date": "09/22",
+          "amount": 10.92,
+          "description": "APPLE.COM/BILL 866-712-7753 CA"
+        },
+        {
+          "date": "09/23",
+          "amount": 36.39,
+          "description": "AMAZON MKTPL*BE7423XD3 Amzn.com/bill WA"
+        },
+        {
+          "date": "09/28",
+          "amount": 4.99,
+          "description": "RING BASIC PLAN RING.COM CA"
+        },
+        {
+          "date": "09/28",
+          "amount": 43.71,
+          "description": "AMAZON MKTPL*JQ6PB4N23 Amzn.com/bill WA"
+        },
+        {
+          "date": "09/28",
+          "amount": 116.58,
+          "description": "AMAZON MKTPL*NJ67H5WH0 Amzn.com/bill WA"
+        },
+        {
+          "date": "09/30",
+          "amount": 53.96,
+          "description": "AMAZON MKTPL*429365NH3 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/02",
+          "amount": 10.92,
+          "description": "AMAZON MKTPL*NV57P38K0 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/03",
+          "amount": 59.0,
+          "description": "WWW.MUSICCIRCLE.IN KOLKATA"
+        },
+        {
+          "date": "10/06",
+          "amount": 40.94,
+          "description": "UBER *TRIP HELP.UBER.COM CA"
+        },
+        {
+          "date": "10/07",
+          "amount": 33.43,
+          "description": "Amazon.com*NF8K080I0 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/09",
+          "amount": 12.3,
+          "description": "AMAZON MKTPL*NF0ZN01O1 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/10",
+          "amount": 85.99,
+          "description": "AMAZON MKTPL*NF4UI74J2 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/10",
+          "amount": 41.17,
+          "description": "PURCHASE INTEREST CHARGE"
+        },
+        {
+          "date": "09/14",
+          "amount": 9.54,
+          "description": "AMAZON MARKETPLACE AMZN.COM/BILLWA"
+        },
+        {
+          "date": "10/09",
+          "amount": 19.38,
+          "description": "AMAZON MARKETPLACE AMZN.COM/BILLWA"
+        }
+      ]
+    },
+    "20251110-statements-1874-.pdf": {
+      "count": 41,
+      "transactions": [
+        {
+          "date": "10/11",
+          "amount": 10.81,
+          "description": "AMAZON MKTPLACE PMTS Amzn.com/bill WA -"
+        },
+        {
+          "date": "10/15",
+          "amount": 1000.0,
+          "description": "Payment Thank You-Mobile -"
+        },
+        {
+          "date": "11/03",
+          "amount": 17.38,
+          "description": "AMAZON MKTPLACE PMTS Amzn.com/bill WA -"
+        },
+        {
+          "date": "11/04",
+          "amount": 34.36,
+          "description": "AMAZON MKTPLACE PMTS Amzn.com/bill WA -"
+        },
+        {
+          "date": "10/10",
+          "amount": 2.99,
+          "description": "APPLE.COM/BILL 866-712-7753 CA"
+        },
+        {
+          "date": "10/12",
+          "amount": 29.5,
+          "description": "AMAZON MKTPL*NF3814I51 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/14",
+          "amount": 17.48,
+          "description": "HP *INSTANT INK 855-785-2777 CA"
+        },
+        {
+          "date": "10/16",
+          "amount": 9.99,
+          "description": "Amazon Grocery Subscri 888-280-4331 WA"
+        },
+        {
+          "date": "10/16",
+          "amount": 32.79,
+          "description": "AMAZON MKTPL*NM72Z2LU2 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/15",
+          "amount": 11.44,
+          "description": "AMAZON MKTPL*NM5A56C82 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/17",
+          "amount": 9.99,
+          "description": "DD *DOORDASHDASHPASS DOORDASH.COM CA"
+        },
+        {
+          "date": "10/16",
+          "amount": 27.64,
+          "description": "NETFLIX.COM NETFLIX.COM CA"
+        },
+        {
+          "date": "10/18",
+          "amount": 1.95,
+          "description": "help.blossomup.co SantaFe NM"
+        },
+        {
+          "date": "10/20",
+          "amount": 185.8,
+          "description": "AMAZON MKTPL*NM1VK12Q2 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/21",
+          "amount": 92.9,
+          "description": "AMAZON MKTPL*NM58F0952 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/22",
+          "amount": 15.27,
+          "description": "AMAZON MKTPL*NU72C0C32 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/23",
+          "amount": 67.78,
+          "description": "AMAZON MKTPL*NU1G91N72 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/23",
+          "amount": 5.88,
+          "description": "AMAZON MKTPL*NU42N5WL0 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/23",
+          "amount": 54.64,
+          "description": "AMAZON MKTPL*NU9IB7E62 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/23",
+          "amount": 39.34,
+          "description": "AMAZON MKTPL*NU1P67A92 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/23",
+          "amount": 27.31,
+          "description": "AMAZON MKTPL*NU6AI6YY1 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/23",
+          "amount": 14.88,
+          "description": "AMAZON MKTPL*NU4AG9IE1 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/28",
+          "amount": 4.99,
+          "description": "RING BASIC PLAN RING.COM CA"
+        },
+        {
+          "date": "10/28",
+          "amount": 40.31,
+          "description": "AMAZON MKTPL*N48Y59S41 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/28",
+          "amount": 21.85,
+          "description": "AMAZON MKTPL*N422J6ZR2 Amzn.com/bill WA"
+        },
+        {
+          "date": "10/28",
+          "amount": 42.85,
+          "description": "SHELL OIL 57444030902 BOTHELL WA"
+        },
+        {
+          "date": "10/30",
+          "amount": 6.55,
+          "description": "AMAZON MKTPL*NK1IY7FF1 Amzn.com/bill WA"
+        },
+        {
+          "date": "11/01",
+          "amount": 59.0,
+          "description": "WWW.MUSICCIRCLE.IN KOLKATA"
+        },
+        {
+          "date": "10/31",
+          "amount": 25.31,
+          "description": "AMAZON MKTPL*NK0Y581G0 Amzn.com/bill WA"
+        },
+        {
+          "date": "11/01",
+          "amount": 423.28,
+          "description": "COSTCO WHSE #0747 WOODINVILLE WA"
+        },
+        {
+          "date": "11/01",
+          "amount": 83.85,
+          "description": "COSTCO GAS #0747 WOODINVILLE WA"
+        },
+        {
+          "date": "11/03",
+          "amount": 34.36,
+          "description": "AMAZON MKTPL*NK28L0QI1 Amzn.com/bill WA"
+        },
+        {
+          "date": "11/03",
+          "amount": 16.38,
+          "description": "AMAZON MKTPL*NK1KF1SU0 Amzn.com/bill WA"
+        },
+        {
+          "date": "11/03",
+          "amount": 16.36,
+          "description": "AMAZON MKTPL*NK7HW6QM1 Amzn.com/bill WA"
+        },
+        {
+          "date": "11/05",
+          "amount": 5.0,
+          "description": "AMAZON MKTPL*BT5PG0FO0 Amzn.com/bill WA"
+        },
+        {
+          "date": "11/05",
+          "amount": 13.37,
+          "description": "Amazon.com*NK71546V2 Amzn.com/bill WA"
+        },
+        {
+          "date": "11/07",
+          "amount": 9.83,
+          "description": "Kindle Svcs*BT3RZ40N1 888-802-3080 WA"
+        },
+        {
+          "date": "11/10",
+          "amount": 35.3,
+          "description": "PURCHASE INTEREST CHARGE"
+        },
+        {
+          "date": "10/15",
+          "amount": 5.9,
+          "description": "AMAZON MARKETPLACE AMZN.COM/BILLWA"
+        },
+        {
+          "date": "10/22",
+          "amount": 17.23,
+          "description": "AMAZON MARKETPLACE AMZN.COM/BILLWA"
+        },
+        {
+          "date": "11/02",
+          "amount": 23.4,
+          "description": "AMAZON MARKETPLACE AMZN.COM/BILLWA"
+        }
+      ]
+    },
+    "20251128-statements-3278-.pdf": {
+      "count": 22,
+      "transactions": [
+        {
+          "date": "11/03",
+          "amount": 5699.32,
+          "description": "Zelle Payment From Brian Heredia Wfct0Zg24X3Q"
+        },
+        {
+          "date": "11/03",
+          "amount": 52.0,
+          "description": "Zelle Payment To Nil Jpm99Bt6Iklo -"
+        },
+        {
+          "date": "11/03",
+          "amount": 3129.27,
+          "description": "Loandepot Msp ACH PPD ID: 2939213310 -"
+        },
+        {
+          "date": "11/03",
+          "amount": 1540.24,
+          "description": "Nsm Dbamr.Cooper Nsm Dbamr 9713377 Web ID: 0000452701 -"
+        },
+        {
+          "date": "11/04",
+          "amount": 670.0,
+          "description": "Pl*Hoaduespaymnt Web Pmts Y8Px48 Web ID: 9000375093 -"
+        },
+        {
+          "date": "11/04",
+          "amount": 120.0,
+          "description": "Zelle Payment To 2064583103 Jpm99Bth2Etf -"
+        },
+        {
+          "date": "11/05",
+          "amount": 165.0,
+          "description": "Best Buy Auto Pymt 721820342000077 Web ID: Citiautfdr -"
+        },
+        {
+          "date": "11/05",
+          "amount": 49.2,
+          "description": "Puget Sound Ener Billpay PPD ID: 0000000160 -"
+        },
+        {
+          "date": "11/06",
+          "amount": 2450.0,
+          "description": "Venmo Cashout PPD ID: 5264681992"
+        },
+        {
+          "date": "11/06",
+          "amount": 546.12,
+          "description": "Pl*Hoaduespaymnt Web Pmts Sqhl58 Web ID: 9000375093 -"
+        },
+        {
+          "date": "11/06",
+          "amount": 2500.0,
+          "description": "American Express ACH Pmt W4746 Web ID: 2005032111 -"
+        },
+        {
+          "date": "11/10",
+          "amount": 65.0,
+          "description": "Zelle Payment To Nil Jpm99Bu2Cpol -"
+        },
+        {
+          "date": "11/10",
+          "amount": 100.0,
+          "description": "ATM Withdrawal 11/09 22833 Bothell Everett Bothell WA Card 0136 -"
+        },
+        {
+          "date": "11/10",
+          "amount": 2500.0,
+          "description": "11/10 Online Transfer 26907777997 To Firsttech ######3212 Transaction -"
+        },
+        {
+          "date": "11/14",
+          "amount": 1500.0,
+          "description": "Microsoft Edipayment PPD ID: 9911144442"
+        },
+        {
+          "date": "11/17",
+          "amount": 1500.0,
+          "description": "11/17 Payment To Chase Card Ending IN 1874 -"
+        },
+        {
+          "date": "11/21",
+          "amount": 200.0,
+          "description": "Zelle Payment To Gilda's Cleaning Services LLC Jpm99Bvjhxad -"
+        },
+        {
+          "date": "11/24",
+          "amount": 160.0,
+          "description": "ATM Withdrawal 11/24 22833 Bothell Everett Bothell WA Card 0136 -"
+        },
+        {
+          "date": "11/28",
+          "amount": 2900.0,
+          "description": "Zelle Payment From Petro Kushnirenko Wfct0Zjnhzzg"
+        },
+        {
+          "date": "11/28",
+          "amount": 1500.0,
+          "description": "Microsoft Edipayment PPD ID: 9911144442"
+        },
+        {
+          "date": "11/28",
+          "amount": 1000.0,
+          "description": "11/28 Online Transfer 26754300434 To Firsttech ######3212 Transaction -"
+        },
+        {
+          "date": "11/28",
+          "amount": 0.02,
+          "description": "Interest Payment"
+        }
+      ]
+    },
+    "20251231-statements-3278-.pdf": {
+      "count": 23,
+      "transactions": [
+        {
+          "date": "12/01",
+          "amount": 2450.0,
+          "description": "Venmo Cashout PPD ID: 5264681992"
+        },
+        {
+          "date": "12/01",
+          "amount": 4000.0,
+          "description": "11/29 Online Transfer 27140652290 To Firsttech ######3212 Transaction -"
+        },
+        {
+          "date": "12/02",
+          "amount": 120.0,
+          "description": "Zelle Payment To 2064583103 Jpm99Bws91Vu -"
+        },
+        {
+          "date": "12/02",
+          "amount": 1540.24,
+          "description": "Nsm Dbamr.Cooper Nsm Dbamr 0411358 Web ID: 0000452701 -"
+        },
+        {
+          "date": "12/03",
+          "amount": 3.5,
+          "description": "ATM Surcharge Refund 12/03 1645 140th NE Bellevue WA Card 0136"
+        },
+        {
+          "date": "12/03",
+          "amount": 4145.0,
+          "description": "Zelle Payment From Brian Heredia Wfct0Zk93Cpk"
+        },
+        {
+          "date": "12/03",
+          "amount": 203.5,
+          "description": "Non-Chase ATM Withdraw 12/03 1645 140th NE Bellevue WA Card 0136 -"
+        },
+        {
+          "date": "12/04",
+          "amount": 670.0,
+          "description": "Pl*Hoaduespaymnt Web Pmts R14488 Web ID: 9000375093 -"
+        },
+        {
+          "date": "12/05",
+          "amount": 165.0,
+          "description": "Best Buy Auto Pymt 721847161860064 Web ID: Citiautfdr -"
+        },
+        {
+          "date": "12/08",
+          "amount": 78.0,
+          "description": "Zelle Payment To Nil Jpm99Bxf2Et6 -"
+        },
+        {
+          "date": "12/08",
+          "amount": 546.12,
+          "description": "Pl*Hoaduespaymnt Web Pmts Nxzm88 Web ID: 9000375093 -"
+        },
+        {
+          "date": "12/08",
+          "amount": 136.48,
+          "description": "Puget Sound Ener Billpay PPD ID: 0000000160 -"
+        },
+        {
+          "date": "12/12",
+          "amount": 1717.08,
+          "description": "12/12 Payment To Chase Card Ending IN 1874 -"
+        },
+        {
+          "date": "12/12",
+          "amount": 160.0,
+          "description": "Non-Chase ATM Withdraw 12/12 15220 NE 40th St Redmond WA Card -"
+        },
+        {
+          "date": "12/15",
+          "amount": 1500.0,
+          "description": "Microsoft Edipayment PPD ID: 9911144442"
+        },
+        {
+          "date": "12/15",
+          "amount": 85.0,
+          "description": "Zelle Payment To Nil Jpm99Byfag9M -"
+        },
+        {
+          "date": "12/15",
+          "amount": 400.0,
+          "description": "Zelle Payment To Erling Zamora 27342268970 -"
+        },
+        {
+          "date": "12/17",
+          "amount": 3.5,
+          "description": "ATM Surcharge Refund 12/17 1645 140th NE Bellevue WA Card 0136"
+        },
+        {
+          "date": "12/17",
+          "amount": 163.5,
+          "description": "Non-Chase ATM Withdraw 12/17 1645 140th NE Bellevue WA Card 0136 -"
+        },
+        {
+          "date": "12/26",
+          "amount": 2900.0,
+          "description": "Zelle Payment From Petro Kushnirenko Wfct0Zms6Xgv"
+        },
+        {
+          "date": "12/29",
+          "amount": 1000.0,
+          "description": "12/29 Online Transfer 27096915704 To Firsttech ######3212 Transaction -"
+        },
+        {
+          "date": "12/31",
+          "amount": 1500.0,
+          "description": "Microsoft Edipayment PPD ID: 9911144442"
+        },
+        {
+          "date": "12/31",
+          "amount": 0.03,
+          "description": "Interest Payment"
+        }
+      ]
+    },
+    "2026-01-09.pdf": {
+      "count": 141,
+      "transactions": [
+        {
+          "date": "12/11/25",
+          "amount": 85.19,
+          "description": "TST* DOUGH ZONE - WOODINV 300570277 WOODINVILLE WA"
+        },
+        {
+          "date": "12/11/25",
+          "amount": 25.97,
+          "description": "HANGTAG PARKING MIAMI FL"
+        },
+        {
+          "date": "12/11/25",
+          "amount": 22.06,
+          "description": "GglPay SP GIGGLE GLOW BELLEVUE WA"
+        },
+        {
+          "date": "12/11/25",
+          "amount": 51.41,
+          "description": "SHOWPASS* XMASMARKE-PX NEWARK DE"
+        },
+        {
+          "date": "12/11/25",
+          "amount": 19.94,
+          "description": "GglPay ALTENGARTZ LLC ALEXANDRIA VA"
+        },
+        {
+          "date": "12/11/25",
+          "amount": 31.29,
+          "description": "QFC BOTHELL WA"
+        },
+        {
+          "date": "12/12/25",
+          "amount": 11.37,
+          "description": "GglPay TST* 2GUYSGRILLONWHEELS 300748095 WOODINVILLE WA"
+        },
+        {
+          "date": "12/12/25",
+          "amount": 13.78,
+          "description": "GglPay SULLY EATS Seattle WA"
+        },
+        {
+          "date": "12/12/25",
+          "amount": 16.86,
+          "description": "GglPay TORNADO POTATO/LANGOSTINOSUSHI BURR Olympia WA"
+        },
+        {
+          "date": "12/12/25",
+          "amount": 15.86,
+          "description": "GglPay TORNADO POTATO/LANGOSTINOSUSHI BURR Olympia WA"
+        },
+        {
+          "date": "12/12/25",
+          "amount": 11.02,
+          "description": "GglPay CAFE 121 13447 REDMOND WA"
+        },
+        {
+          "date": "12/13/25",
+          "amount": 11.56,
+          "description": "GglPay CHAI N MORE BELLEVUE WA"
+        },
+        {
+          "date": "12/13/25",
+          "amount": 55.04,
+          "description": "GglPay CHAI N MORE BELLEVUE WA"
+        },
+        {
+          "date": "12/13/25",
+          "amount": 5.5,
+          "description": "CHAI N MORE BELLEVUE WA"
+        },
+        {
+          "date": "12/13/25",
+          "amount": 93.69,
+          "description": "22727 BOTHELL EVERETT HWY 57444030902 BOTHELL WA"
+        },
+        {
+          "date": "12/13/25",
+          "amount": 10.0,
+          "description": "ACE PARKING 3288 3288 SEATTLE WA"
+        },
+        {
+          "date": "12/13/25",
+          "amount": 4.19,
+          "description": "22727 BOTHELL EVERETT HWY 57444030902 BOTHELL WA"
+        },
+        {
+          "date": "12/13/25",
+          "amount": 117.51,
+          "description": "QFC BOTHELL WA"
+        },
+        {
+          "date": "12/14/25",
+          "amount": 212.25,
+          "description": "AT&T 800-288-2020 TX"
+        },
+        {
+          "date": "12/14/25",
+          "amount": 48.24,
+          "description": "UNION 76 09438607 BOTHELL WA"
+        },
+        {
+          "date": "12/15/25",
+          "amount": 270.5,
+          "description": "ALDERWOOD WATER AND WASTEWATER DISTRIC LYNNWOOD WA"
+        },
+        {
+          "date": "12/15/25",
+          "amount": 36.05,
+          "description": "SIMPLISAFE 888-957-4675 MA"
+        },
+        {
+          "date": "12/16/25",
+          "amount": 78.66,
+          "description": "DD *DOORDASH ROYALBIRY SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/16/25",
+          "amount": 14.8,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "12/17/25",
+          "amount": 34.0,
+          "description": "GglPay SUPERCUTS BOTHELL WA"
+        },
+        {
+          "date": "12/17/25",
+          "amount": 29.26,
+          "description": "CHICK-FIL-A #03299 000000000563921 BELLEVUE WA"
+        },
+        {
+          "date": "12/18/25",
+          "amount": 40.22,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "12/18/25",
+          "amount": 19.5,
+          "description": "GglPay BASKIN #332178 332178 BOTHELL WA"
+        },
+        {
+          "date": "12/18/25",
+          "amount": 1209.52,
+          "description": "BBTM*RSM - WASHINGTON BBTM RSM Wash NEWTON MA"
+        },
+        {
+          "date": "12/19/25",
+          "amount": 13.21,
+          "description": "GglPay CURRYPOINT Bellevue WA"
+        },
+        {
+          "date": "12/19/25",
+          "amount": 27.79,
+          "description": "BT*DD *DOORDASH JUSTPOK SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/19/25",
+          "amount": 17.99,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "12/19/25",
+          "amount": 4.07,
+          "description": "GglPay CAFE 121 13447 REDMOND WA"
+        },
+        {
+          "date": "12/19/25",
+          "amount": 9.92,
+          "description": "DAIRY QUEEN #12467 12467 BOTHELL WA"
+        },
+        {
+          "date": "12/19/25",
+          "amount": 28.27,
+          "description": "GglPay WALGREENS BOTHELL WA"
+        },
+        {
+          "date": "12/19/25",
+          "amount": 15.91,
+          "description": "GglPay RGL EVERETT STDM 16 EVERETT WA"
+        },
+        {
+          "date": "12/19/25",
+          "amount": 9.88,
+          "description": "GglPay RGL EVERETT STDM 16 EVERETT WA"
+        },
+        {
+          "date": "12/20/25",
+          "amount": 37.0,
+          "description": "FANDANGO.COM 866-857-5191 CA"
+        },
+        {
+          "date": "12/20/25",
+          "amount": 44.09,
+          "description": "BT*DD *DOORDASH FIVEGUYSB SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/20/25",
+          "amount": 11.02,
+          "description": "GOOGLE *SLING LIVE TV G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "12/21/25",
+          "amount": 4.97,
+          "description": "SAMMAMISH POINT ESPRESSO Redmond WA"
+        },
+        {
+          "date": "12/21/25",
+          "amount": 113.49,
+          "description": "GglPay TST* MTR 300732727 BELLEVUE WA"
+        },
+        {
+          "date": "12/21/25",
+          "amount": 13.18,
+          "description": "MCDONALD'S F11996 000000000634674 SAMMAMISH WA"
+        },
+        {
+          "date": "12/21/25",
+          "amount": 89.67,
+          "description": "GglPay 22631 NE INGLEWOOD HILL ROAD 574225 SAMMAMISH WA"
+        },
+        {
+          "date": "12/22/25",
+          "amount": 14.32,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "12/22/25",
+          "amount": 33.96,
+          "description": "GglPay SAFEWAY #0535 0535 BOTHELL WA"
+        },
+        {
+          "date": "12/22/25",
+          "amount": 22.03,
+          "description": "GOOGLE *GOOGLE ONE G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "12/22/25",
+          "amount": 21.78,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 9.68,
+          "description": "DELTA AIR LINES ATLANTA"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 4.67,
+          "description": "GglPay VIDA CONCESSIONS INC Atlanta GA"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 68.0,
+          "description": "WINTERFEST PENSACOLA FL"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 88.65,
+          "description": "GglPay TST* SHAGGYS - PENSACOLA 00042885 PENSACOLA BEACH FL"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 14.97,
+          "description": "GglPay HUDSON ST 1476 1476 SEATAC WA"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 12.63,
+          "description": "GglPay HUDSON ST 1476 1476 SEATAC WA"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 11.06,
+          "description": "SAMSUNG ELECTRONICS 650-934-5824 NJ"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 29.81,
+          "description": "GglPay HJAIA CONCESSIONS, LLC ATLANTA GA"
+        },
+        {
+          "date": "12/24/25",
+          "amount": 6.0,
+          "description": "PENSACOLA WINTERFEST Pensacola FL"
+        },
+        {
+          "date": "12/24/25",
+          "amount": 6.9,
+          "description": "LEVEL PARKING LLC Pensacola FL"
+        },
+        {
+          "date": "12/24/25",
+          "amount": 199.07,
+          "description": "Fairfield by Marriott Inn & Su Pensacola Beach FL"
+        },
+        {
+          "date": "12/24/25",
+          "amount": 14.35,
+          "description": "DISNEY PLUS BURBANK CA"
+        },
+        {
+          "date": "12/24/25",
+          "amount": 11.99,
+          "description": "GglPay VARONA-PARADIES, L.L.C. ATLANTA GA"
+        },
+        {
+          "date": "12/24/25",
+          "amount": 30.88,
+          "description": "PANERA BREAD CAFE INSTORE GULF BREEZE FL"
+        },
+        {
+          "date": "12/24/25",
+          "amount": 25.0,
+          "description": "GULF ISLANDS NATL SEASH 000005320 GULF BREEZE FL"
+        },
+        {
+          "date": "12/25/25",
+          "amount": 169.6,
+          "description": "TST* THE WHARF FISH & OYS 300619339 PENSACOLA BEA FL"
+        },
+        {
+          "date": "12/25/25",
+          "amount": 73.78,
+          "description": "GglPay RIPTIDES AT HOLIDAY INN R 068880021 PENSACOLA BEA FL"
+        },
+        {
+          "date": "12/25/25",
+          "amount": 18.58,
+          "description": "HOLIDAY INN RESORT PENSA PNSPB PENSACOLA BEA FL"
+        },
+        {
+          "date": "12/25/25",
+          "amount": 134.51,
+          "description": "TST* SENOR FROGS - PENSAC 00183164 PENSACOLA BEACH FL"
+        },
+        {
+          "date": "12/26/25",
+          "amount": 47.6,
+          "description": "GglPay FLORIDA HEALING ARTS AND BODYWORK Cheifland FL"
+        },
+        {
+          "date": "12/26/25",
+          "amount": 106.72,
+          "description": "AJS SEAFOOD & OYSTER BAR 0688800225428 DESTIN FL"
+        },
+        {
+          "date": "12/26/25",
+          "amount": 66.73,
+          "description": "#12 ALVINS ISLAND PENSACOLA BEA FL"
+        },
+        {
+          "date": "12/26/25",
+          "amount": 20.37,
+          "description": "GOOGLE *HBO MAX STREAM G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "12/26/25",
+          "amount": 5.47,
+          "description": "GglPay HARBORWALK MARINA HARBORWALK MARI DESTIN FL"
+        },
+        {
+          "date": "12/26/25",
+          "amount": 25.7,
+          "description": "EXXONMOBIL GULF BREEZE FL"
+        },
+        {
+          "date": "12/27/25",
+          "amount": 168.59,
+          "description": "TST* BOUNCE BEACH PENSACO 300720188 PENSACOLA BEA FL"
+        },
+        {
+          "date": "12/27/25",
+          "amount": 94.48,
+          "description": "#12 ALVINS ISLAND PENSACOLA BEA FL"
+        },
+        {
+          "date": "12/27/25",
+          "amount": 122.04,
+          "description": "DD *DOORDASH TASTEOFIN SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/27/25",
+          "amount": 112.61,
+          "description": "CRABS RESTAURANT GULF BREEZE FL"
+        },
+        {
+          "date": "12/27/25",
+          "amount": 70.14,
+          "description": "Fairfield by Marriott Inn & Su Pensacola Beach FL"
+        },
+        {
+          "date": "12/27/25",
+          "amount": 25.0,
+          "description": "HOOTERS OF PENSACOLA BEAC 927540339842 GULF BREEZE FL"
+        },
+        {
+          "date": "12/27/25",
+          "amount": 14.96,
+          "description": "HOOTERS OF PENSACOLA BEAC 927540339842 GULF BREEZE FL"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 8.87,
+          "description": "GglPay SAMBAZON 650000012571876 PENSACOLA FL"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 5.38,
+          "description": "GglPay SAVANAH'S CANDY @ATL 719 719 ATL ATLANTA GA"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 40.04,
+          "description": "GglPay EINSTEIN BROS BAGELS POST 650000012 PENSACOLA FL"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 492.55,
+          "description": "ENTERPRISE REN190619 06010190619 PENSACOLA FL"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 18.92,
+          "description": "PANERA BREAD CAFE INSTORE GULF BREEZE FL"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 5.33,
+          "description": "GULF 116 COAST PETRL 000000000254466 GULF BREEZE FL"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 9.66,
+          "description": "GglPay VARONA-PARADIES, L.L.C. ATLANTA GA"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 19.34,
+          "description": "GglPay VARONA-PARADIES, L.L.C. ATLANTA GA"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 4.89,
+          "description": "GglPay VARONA-PARADIES, L.L.C. ATLANTA GA"
+        },
+        {
+          "date": "12/28/25",
+          "amount": 3.86,
+          "description": "GglPay EINSTEIN BROS BAGELS POST 650000012 PENSACOLA FL"
+        },
+        {
+          "date": "12/29/25",
+          "amount": 18.14,
+          "description": "BT*DD *DOORDASH HOTIRONMO SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/29/25",
+          "amount": 1396.8,
+          "description": "Fairfield by Marriott Inn & Su Pensacola Beach FL"
+        },
+        {
+          "date": "12/29/25",
+          "amount": 9.8,
+          "description": "GglPay PARADIES-ATLANTA, LLC ATLANTA GA"
+        },
+        {
+          "date": "12/29/25",
+          "amount": 3.55,
+          "description": "GglPay ATL TODAY D1 Atlanta GA"
+        },
+        {
+          "date": "12/30/25",
+          "amount": 59.63,
+          "description": "BT*DD *DOORDASH THECHEESE SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/30/25",
+          "amount": 222.0,
+          "description": "SEA AIRPORT PARKING SEATTLE WA"
+        },
+        {
+          "date": "12/30/25",
+          "amount": 5.92,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "12/30/25",
+          "amount": 30.28,
+          "description": "BASKIN #332178 332178 BOTHELL WA"
+        },
+        {
+          "date": "12/31/25",
+          "amount": 40.02,
+          "description": "BT*DD *DOORDASH THEPORTOF SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/31/25",
+          "amount": 5.68,
+          "description": "STARBUCKS STORE 5779 WOODINVILLE WA"
+        },
+        {
+          "date": "12/31/25",
+          "amount": 46.56,
+          "description": "GglPay ROSS DRESS FOR LESS LYNNWOOD WA"
+        },
+        {
+          "date": "12/31/25",
+          "amount": 113.08,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "01/01/26",
+          "amount": 21.86,
+          "description": "OPENAI *CHATGPT SUBSCR SAN FRANCISCO CA"
+        },
+        {
+          "date": "01/01/26",
+          "amount": 17.0,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "01/01/26",
+          "amount": 77.97,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "01/01/26",
+          "amount": 280.0,
+          "description": "SSMA WOODINVILLE WA"
+        },
+        {
+          "date": "01/02/26",
+          "amount": 19.2,
+          "description": "INDIA SUPERMARKET BOTHELL WA"
+        },
+        {
+          "date": "01/02/26",
+          "amount": 217.93,
+          "description": "GglPay FRED MEYER BOTHELL WA"
+        },
+        {
+          "date": "01/02/26",
+          "amount": 3.98,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "01/02/26",
+          "amount": 5.13,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "01/02/26",
+          "amount": 11.28,
+          "description": "GglPay QFC BOTHELL WA"
+        },
+        {
+          "date": "01/03/26",
+          "amount": 24.33,
+          "description": "GglPay TARGET LYNNWOOD WA"
+        },
+        {
+          "date": "01/03/26",
+          "amount": 6.29,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "01/03/26",
+          "amount": 24.65,
+          "description": "GglPay MAYURI FOODS & VIDEO BOTHELL WA"
+        },
+        {
+          "date": "01/03/26",
+          "amount": 239.63,
+          "description": "ECOSHIELD PEST CONTROL 436845558700406 TUKWILA WA"
+        },
+        {
+          "date": "01/04/26",
+          "amount": 11.5,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "01/04/26",
+          "amount": 17.72,
+          "description": "GglPay PCC - BOTHELL 000000000465438 BOTHELL WA"
+        },
+        {
+          "date": "01/04/26",
+          "amount": 3.26,
+          "description": "STARBUCKS STORE 2890 BOTHELL WA"
+        },
+        {
+          "date": "01/04/26",
+          "amount": 13.9,
+          "description": "ERACTOLL 866328248 877-860-1258 FL"
+        },
+        {
+          "date": "01/06/26",
+          "amount": 71.44,
+          "description": "7-ELEVEN 23378 00072337824 BOTHELL WA"
+        },
+        {
+          "date": "01/06/26",
+          "amount": 19.85,
+          "description": "DAIRY QUEEN #12467 12467 BOTHELL WA"
+        },
+        {
+          "date": "01/07/26",
+          "amount": 28.63,
+          "description": "BT*DD *DOORDASH PANDAEXPR SAN FRANCISCO CA"
+        },
+        {
+          "date": "01/07/26",
+          "amount": 15.43,
+          "description": "GOOGLE *YOUTUBEPREMIUM G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "01/07/26",
+          "amount": 18.38,
+          "description": "CHICK-FIL-A #03814 000000000564864 BOTHELL WA"
+        },
+        {
+          "date": "01/07/26",
+          "amount": 6.06,
+          "description": "GglPay CAFE 121 13447 REDMOND WA"
+        },
+        {
+          "date": "01/07/26",
+          "amount": 10.27,
+          "description": "PANERA BREAD #202267 BOTHELL WA"
+        },
+        {
+          "date": "01/07/26",
+          "amount": 45.22,
+          "description": "22727 BOTHELL EVERETT HWY 57444030902 BOTHELL WA"
+        },
+        {
+          "date": "01/08/26",
+          "amount": 96.14,
+          "description": "TRUGREEN LOCKBOX 800-878-4733 TN"
+        },
+        {
+          "date": "01/08/26",
+          "amount": 9.92,
+          "description": "GglPay CAFE 121 13447 REDMOND WA"
+        },
+        {
+          "date": "01/09/26",
+          "amount": 92.26,
+          "description": "BT*DD *DOORDASH BIRYANIDI SAN FRANCISCO CA"
+        },
+        {
+          "date": "12/11/25",
+          "amount": 6.57,
+          "description": "APOLLO-MKT CAFE 50360 SEATTLE WA"
+        },
+        {
+          "date": "12/12/25",
+          "amount": 14.55,
+          "description": "KELLY CANNOLI LLC Snohomish WA"
+        },
+        {
+          "date": "12/12/25",
+          "amount": 20.39,
+          "description": "RACLETTE Monroe WA"
+        },
+        {
+          "date": "12/12/25",
+          "amount": 15.41,
+          "description": "THE HALAL GUYS SLU 014020400000124 SEATTLE WA"
+        },
+        {
+          "date": "12/22/25",
+          "amount": 10.92,
+          "description": "APPLE.COM/BILL INTERNET CHARGE CA"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 10.0,
+          "description": "BHAKTI BEAUTY CARE Bothell WA"
+        },
+        {
+          "date": "12/23/25",
+          "amount": 11.38,
+          "description": "EINSTEIN BROS BAGELS PRE 6500000125715 PENSACOLA FL"
+        },
+        {
+          "date": "12/24/25",
+          "amount": 11.05,
+          "description": "GOOGLE *GOOGLE ONE G.CO/HELPPAY# CA"
+        },
+        {
+          "date": "01/05/26",
+          "amount": 5.79,
+          "description": "APOLLO-MKT CAFE 50360 SEATTLE WA"
+        },
+        {
+          "date": "01/09/26",
+          "amount": 16.95,
+          "description": "Interest Charge on Purchases"
+        },
+        {
+          "date": "10/09/25",
+          "amount": 225.82,
+          "description": "HAURY`S LAKE CITY COSEATTLE 3"
+        }
+      ]
+    },
+    "20260110-statements-1874-.pdf": {
+      "count": 17,
+      "transactions": [
+        {
+          "date": "12/12",
+          "amount": 1717.08,
+          "description": "Payment Thank You - Web -"
+        },
+        {
+          "date": "12/11",
+          "amount": 59.0,
+          "description": "WWW.MUSICCIRCLE.IN KOLKATA"
+        },
+        {
+          "date": "12/14",
+          "amount": 17.48,
+          "description": "HP *INSTANT INK 855-785-2777 CA"
+        },
+        {
+          "date": "12/16",
+          "amount": 9.99,
+          "description": "Amazon Grocery Subscri 888-280-4331 WA"
+        },
+        {
+          "date": "12/16",
+          "amount": 27.64,
+          "description": "NETFLIX.COM NETFLIX.COM CA"
+        },
+        {
+          "date": "12/17",
+          "amount": 9.99,
+          "description": "DD *DOORDASHDASHPASS DOORDASH.COM CA"
+        },
+        {
+          "date": "12/20",
+          "amount": 3.96,
+          "description": "AMAZON MKTPL*ON6ZB4PK3 Amzn.com/bill WA"
+        },
+        {
+          "date": "12/21",
+          "amount": 21.85,
+          "description": "AMAZON MKTPL*8B9C25EN3 Amzn.com/bill WA"
+        },
+        {
+          "date": "12/22",
+          "amount": 58.31,
+          "description": "AMAZON MKTPL*9T6EO2G63 Amzn.com/bill WA"
+        },
+        {
+          "date": "12/24",
+          "amount": 34.97,
+          "description": "AMAZON MKTPL*HY0783193 Amzn.com/bill WA"
+        },
+        {
+          "date": "12/28",
+          "amount": 4.99,
+          "description": "RING BASIC PLAN RING.COM CA"
+        },
+        {
+          "date": "12/30",
+          "amount": 10.74,
+          "description": "COSTCO WHSE #0747 WOODINVILLE WA"
+        },
+        {
+          "date": "12/30",
+          "amount": 49.43,
+          "description": "COSTCO WHSE #0747 WOODINVILLE WA"
+        },
+        {
+          "date": "12/31",
+          "amount": 151.93,
+          "description": "AMAZON PRIME*D39YT7CW3 Amzn.com/bill WA"
+        },
+        {
+          "date": "12/31",
+          "amount": 13.6,
+          "description": "85C BAKERY CAFE USA LYNNWOOD WA"
+        },
+        {
+          "date": "01/02",
+          "amount": 9.09,
+          "description": "Amazon.com*YX5DE4YD3 Amzn.com/bill WA"
+        },
+        {
+          "date": "12/21",
+          "amount": 3.46,
+          "description": "AMAZON MARKETPLACE AMZN.COM/BILLWA"
+        }
+      ]
+    },
+    "20260130-statements-3278-.pdf": {
+      "count": 28,
+      "transactions": [
+        {
+          "date": "01/02",
+          "amount": 3.0,
+          "description": "ATM Surcharge Refund 01/02 8502 160th Ave NE Redmond WA Card"
+        },
+        {
+          "date": "01/02",
+          "amount": 2450.0,
+          "description": "Venmo Cashout PPD ID: 5264681992"
+        },
+        {
+          "date": "01/02",
+          "amount": 372.0,
+          "description": "Zelle Payment To Ranjit.Gupta 27547632191 -"
+        },
+        {
+          "date": "01/02",
+          "amount": 1540.24,
+          "description": "Nsm Dbamr.Cooper Nsm Dbamr 1191475 Web ID: 0000452701 -"
+        },
+        {
+          "date": "01/02",
+          "amount": 203.0,
+          "description": "Non-Chase ATM Withdraw 01/02 8502 160th Ave NE Redmond WA Card -"
+        },
+        {
+          "date": "01/05",
+          "amount": 4145.0,
+          "description": "Zelle Payment From Brian Heredia Wfct0Znr6Jy7"
+        },
+        {
+          "date": "01/05",
+          "amount": 60.0,
+          "description": "Zelle Payment To 2064583103 Jpm99C0T2Bh2 -"
+        },
+        {
+          "date": "01/05",
+          "amount": 165.0,
+          "description": "Best Buy Auto Pymt 721873081920154 Web ID: Citiautfdr -"
+        },
+        {
+          "date": "01/05",
+          "amount": 4000.0,
+          "description": "American Express ACH Pmt W1252 Web ID: 2005032111 -"
+        },
+        {
+          "date": "01/06",
+          "amount": 670.0,
+          "description": "Pl*Hoaduespaymnt Web Pmts 1Flgc8 Web ID: 9000375093 -"
+        },
+        {
+          "date": "01/06",
+          "amount": 546.12,
+          "description": "Pl*Hoaduespaymnt Web Pmts J8Bsc8 Web ID: 9000375093 -"
+        },
+        {
+          "date": "01/06",
+          "amount": 168.21,
+          "description": "Puget Sound Ener Billpay PPD ID: 0000000160 -"
+        },
+        {
+          "date": "01/07",
+          "amount": 2.0,
+          "description": "Zelle Payment To Friendsofthebothelllibrary Jpm99C15Ud0Q -"
+        },
+        {
+          "date": "01/07",
+          "amount": 100.0,
+          "description": "Non-Chase ATM Withdraw 01/07 15220 NE 40th St Redmond WA Card -"
+        },
+        {
+          "date": "01/07",
+          "amount": 40.0,
+          "description": "Non-Chase ATM Withdraw 01/07 15220 NE 40th St Redmond WA Card -"
+        },
+        {
+          "date": "01/08",
+          "amount": 200.0,
+          "description": "Zelle Payment To Gilda's Cleaning Services LLC Jpm99C1Copya -"
+        },
+        {
+          "date": "01/09",
+          "amount": 3000.0,
+          "description": "First Tech Fcu Extrnltfr Amit Ghosh Web ID: 321180379"
+        },
+        {
+          "date": "01/12",
+          "amount": 88.0,
+          "description": "Zelle Payment To Nil Jpm99C1M83Pb -"
+        },
+        {
+          "date": "01/12",
+          "amount": 6391.99,
+          "description": "Loandepot Msp ACH PPD ID: 1939213310 -"
+        },
+        {
+          "date": "01/15",
+          "amount": 1500.0,
+          "description": "Microsoft Edipayment PPD ID: 9911144442"
+        },
+        {
+          "date": "01/20",
+          "amount": 55.0,
+          "description": "Zelle Payment To Nil Jpm99C2Fy97R -"
+        },
+        {
+          "date": "01/21",
+          "amount": 140.0,
+          "description": "Non-Chase ATM Withdraw 01/21 15220 NE 40th St Redmond WA Card -"
+        },
+        {
+          "date": "01/26",
+          "amount": 68.0,
+          "description": "Zelle Payment To Nil Jpm99C35W2FL -"
+        },
+        {
+          "date": "01/27",
+          "amount": 2900.0,
+          "description": "Zelle Payment From Petro Kushnirenko Wfct0Zqwf4Gc"
+        },
+        {
+          "date": "01/28",
+          "amount": 60.0,
+          "description": "Zelle Payment To 2064583103 Jpm99C3Hgt1S -"
+        },
+        {
+          "date": "01/28",
+          "amount": 1000.0,
+          "description": "01/28 Online Transfer 27499026264 To Firsttech ######3212 Transaction -"
+        },
+        {
+          "date": "01/30",
+          "amount": 1500.0,
+          "description": "Microsoft Edipayment PPD ID: 9911144442"
+        },
+        {
+          "date": "01/30",
+          "amount": 0.03,
+          "description": "Interest Payment"
+        }
+      ]
+    },
+    "GetDocument.pdf": {
+      "count": 26,
+      "transactions": [
+        {
+          "date": "01/01",
+          "amount": 5.01,
+          "description": "Starting Balance"
+        },
+        {
+          "date": "01/01",
+          "amount": 2500.0,
+          "description": "01/01 Deposit Transfer From ******0912"
+        },
+        {
+          "date": "01/05",
+          "amount": 0.68,
+          "description": "01/05 ACH Deposit GREENLIGHT APP - ACCTVERIFY"
+        },
+        {
+          "date": "01/05",
+          "amount": 0.47,
+          "description": "01/05 ACH Deposit GREENLIGHT APP - ACCTVERIFY"
+        },
+        {
+          "date": "01/06",
+          "amount": 3000.0,
+          "description": "01/06 Deposit Transfer From ******0912"
+        },
+        {
+          "date": "01/13",
+          "amount": 4257.19,
+          "description": "01/13 ACH Deposit MICROSOFT - EDIPAYMENT"
+        },
+        {
+          "date": "01/15",
+          "amount": 376.57,
+          "description": "01/15 ACH Deposit PAYPAL TRANSFER - TRANSFER"
+        },
+        {
+          "date": "01/23",
+          "amount": 10000.0,
+          "description": "01/23 ACH Deposit AMIT GHOSH M2M 88850042 - P2P"
+        },
+        {
+          "date": "01/28",
+          "amount": 4257.2,
+          "description": "01/28 ACH Deposit MICROSOFT - EDIPAYMENT"
+        },
+        {
+          "date": "01/30",
+          "amount": 1000.0,
+          "description": "01/30 ACH Deposit JPMorgan Chase - Ext Trnsfr"
+        },
+        {
+          "date": "01/02",
+          "amount": 2759.0,
+          "description": "01/02 ACH Debit CAL BANK TRUST 000000000000000000 - LOAN PAYMT -"
+        },
+        {
+          "date": "01/05",
+          "amount": 1.15,
+          "description": "01/05 ACH Debit GREENLIGHT APP - ACCTVERIFY -"
+        },
+        {
+          "date": "01/05",
+          "amount": 33.0,
+          "description": "01/05 ACH Debit AMERICAN FAMILY - WEBPAYMENT -"
+        },
+        {
+          "date": "01/05",
+          "amount": 34.69,
+          "description": "01/05 ACH Debit TRANSAMERICA - PREMIUM -"
+        },
+        {
+          "date": "01/05",
+          "amount": 9758.52,
+          "description": "01/05 ACH Debit BOEING EMP CR U 000000000000000000 - LOAN PAYMT -"
+        },
+        {
+          "date": "01/07",
+          "amount": 3000.0,
+          "description": "01/07 Descriptive Withdrawal OLB External Transfer -"
+        },
+        {
+          "date": "01/09",
+          "amount": 20.0,
+          "description": "01/09 ACH Debit GREENLIGHT APP - APP -"
+        },
+        {
+          "date": "01/09",
+          "amount": 493.49,
+          "description": "01/09 ACH Debit BMW BANK - BMWFS PYMT -"
+        },
+        {
+          "date": "01/13",
+          "amount": 5.08,
+          "description": "01/13 ACH Debit BANK CARD - PAYMENT -"
+        },
+        {
+          "date": "01/20",
+          "amount": 331.55,
+          "description": "01/20 ACH Debit AMERICAN FAMILY - WEBPAYMENT -"
+        },
+        {
+          "date": "01/21",
+          "amount": 111.23,
+          "description": "01/21 ACH Debit PUDNO1-SNOHOMISH 425-783-1000 - UTILITY -"
+        },
+        {
+          "date": "01/26",
+          "amount": 66.4,
+          "description": "01/26 ACH Debit COMCAST-XFINITY 800-266-2278 - CABLE SVCS -"
+        },
+        {
+          "date": "01/26",
+          "amount": 7000.0,
+          "description": "01/26 ACH Debit AMEX EPAYMENT ER AM - ACH PMT -"
+        },
+        {
+          "date": "01/28",
+          "amount": 1017.0,
+          "description": "01/28 ACH Debit IRS - USATAXPYMT -"
+        },
+        {
+          "date": "01/30",
+          "amount": 140.0,
+          "description": "01/30 ATM Withdrawal FIRST TECH 15220 NE 40TH ST REDMOND WAUS -"
+        },
+        {
+          "date": "01/30",
+          "amount": 40.0,
+          "description": "01/30 ATM Withdrawal FIRST TECH 15220 NE 40TH ST REDMOND WAUS -"
+        }
+      ]
+    },
+    "GetDocument1.pdf": {
+      "count": 20,
+      "transactions": [
+        {
+          "date": "12/01",
+          "amount": 5.01,
+          "description": "Starting Balance"
+        },
+        {
+          "date": "12/01",
+          "amount": 2500.0,
+          "description": "12/01 Deposit Transfer From ******0912"
+        },
+        {
+          "date": "12/02",
+          "amount": 1000.0,
+          "description": "12/02 ACH Deposit JPMorgan Chase - Ext Trnsfr"
+        },
+        {
+          "date": "12/02",
+          "amount": 4000.0,
+          "description": "12/02 ACH Deposit JPMorgan Chase - Ext Trnsfr"
+        },
+        {
+          "date": "12/12",
+          "amount": 10000.0,
+          "description": "12/12 ACH Deposit AMIT GHOSH M2M 88850042 - P2P"
+        },
+        {
+          "date": "12/15",
+          "amount": 5504.77,
+          "description": "12/15 ACH Deposit MICROSOFT - EDIPAYMENT"
+        },
+        {
+          "date": "12/29",
+          "amount": 6072.15,
+          "description": "12/29 ACH Deposit MICROSOFT - EDIPAYMENT"
+        },
+        {
+          "date": "12/31",
+          "amount": 1000.0,
+          "description": "12/31 ACH Deposit JPMorgan Chase - Ext Trnsfr"
+        },
+        {
+          "date": "12/01",
+          "amount": 46.49,
+          "description": "12/01 ACH Debit BK OF AMER VISA - ONLINE PMT -"
+        },
+        {
+          "date": "12/01",
+          "amount": 2759.0,
+          "description": "12/01 ACH Debit CAL BANK TRUST 000000000000000000 - LOAN PAYMT -"
+        },
+        {
+          "date": "12/02",
+          "amount": 34.69,
+          "description": "12/02 ACH Debit TRANSAMERICA - PREMIUM -"
+        },
+        {
+          "date": "12/05",
+          "amount": 9758.52,
+          "description": "12/05 ACH Debit BOEING EMP CR U 000000000000000000 - LOAN PAYMT -"
+        },
+        {
+          "date": "12/09",
+          "amount": 493.49,
+          "description": "12/09 ACH Debit BMW BANK - BMWFS PYMT -"
+        },
+        {
+          "date": "12/15",
+          "amount": 576.24,
+          "description": "12/15 ACH Debit PAYPAL INSTANT TRANSFER - INST XFER -"
+        },
+        {
+          "date": "12/15",
+          "amount": 4500.0,
+          "description": "12/15 ACH Debit AMEX EPAYMENT ER AM - ACH PMT -"
+        },
+        {
+          "date": "12/16",
+          "amount": 4724.94,
+          "description": "12/16 ACH Debit AMEX EPAYMENT ER AM - ACH PMT -"
+        },
+        {
+          "date": "12/17",
+          "amount": 153.03,
+          "description": "12/17 ACH Debit GREEN WORLD IRRI FIRST TECH FCU B - BILL PAYMT -"
+        },
+        {
+          "date": "12/17",
+          "amount": 302.77,
+          "description": "12/17 ACH Debit AMERICAN FAMILY - WEBPAYMENT -"
+        },
+        {
+          "date": "12/23",
+          "amount": 121.86,
+          "description": "12/23 ACH Debit PUDNO1-SNOHOMISH 425-783-1000 - UTILITY -"
+        },
+        {
+          "date": "12/26",
+          "amount": 52.45,
+          "description": "12/26 ACH Debit COMCAST-XFINITY 800-266-2278 - CABLE SVCS -"
+        }
+      ]
+    },
+    "GetDocument2.pdf": {
+      "count": 20,
+      "transactions": [
+        {
+          "date": "11/01",
+          "amount": 5.01,
+          "description": "Starting Balance"
+        },
+        {
+          "date": "11/01",
+          "amount": 2500.0,
+          "description": "11/01 Deposit Transfer From ******0912"
+        },
+        {
+          "date": "11/10",
+          "amount": 1500.0,
+          "description": "11/10 Deposit Ghosh Credit to 9324733212 CK"
+        },
+        {
+          "date": "11/12",
+          "amount": 2500.0,
+          "description": "11/12 ACH Deposit JPMorgan Chase - Ext Trnsfr"
+        },
+        {
+          "date": "11/12",
+          "amount": 5504.77,
+          "description": "11/12 ACH Deposit MICROSOFT - EDIPAYMENT"
+        },
+        {
+          "date": "11/14",
+          "amount": 619.3,
+          "description": "11/14 ACH Deposit PAYPAL TRANSFER - TRANSFER"
+        },
+        {
+          "date": "11/26",
+          "amount": 5504.77,
+          "description": "11/26 ACH Deposit MICROSOFT - EDIPAYMENT"
+        },
+        {
+          "date": "11/03",
+          "amount": 2759.0,
+          "description": "11/03 ACH Debit CAL BANK TRUST 000000000000000000 - LOAN PAYMT -"
+        },
+        {
+          "date": "11/04",
+          "amount": 34.69,
+          "description": "11/04 ACH Debit TRANSAMERICA - PREMIUM -"
+        },
+        {
+          "date": "11/05",
+          "amount": 9758.52,
+          "description": "11/05 ACH Debit BOEING EMP CR U 000000000000000000 - LOAN PAYMT -"
+        },
+        {
+          "date": "11/10",
+          "amount": 1000.0,
+          "description": "11/10 Withdrawal Transfer To ******0912 -"
+        },
+        {
+          "date": "11/10",
+          "amount": 1000.0,
+          "description": "11/10 Withdrawal Transfer To ******0912 -"
+        },
+        {
+          "date": "11/10",
+          "amount": 493.49,
+          "description": "11/10 ACH Debit BMW BANK - BMWFS PYMT -"
+        },
+        {
+          "date": "11/14",
+          "amount": 642.0,
+          "description": "11/14 ACH Debit PAYPAL INSTANT TRANSFER - INST XFER -"
+        },
+        {
+          "date": "11/17",
+          "amount": 331.55,
+          "description": "11/17 ACH Debit AMERICAN FAMILY - WEBPAYMENT -"
+        },
+        {
+          "date": "11/17",
+          "amount": 5500.0,
+          "description": "11/17 ACH Debit AMEX EPAYMENT ER AM - ACH PMT -"
+        },
+        {
+          "date": "11/19",
+          "amount": 105.55,
+          "description": "11/19 ACH Debit PUDNO1-SNOHOMISH 425-783-1000 - UTILITY -"
+        },
+        {
+          "date": "11/24",
+          "amount": 114.67,
+          "description": "11/24 ACH Debit WASTE MANAGEMENT - PAYMENT Log in to the MY WM Account Page -"
+        },
+        {
+          "date": "11/25",
+          "amount": 1505.08,
+          "description": "11/25 Withdrawal Ghosh Pmt from 9324733212 CK -"
+        },
+        {
+          "date": "11/26",
+          "amount": 25.0,
+          "description": "11/26 ACH Debit BK OF AMER VISA - ONLINE PMT -"
+        }
+      ]
+    },
+    "test.pdf": {
+      "count": 20,
+      "transactions": [
+        {
+          "date": "11/01",
+          "amount": 5.01,
+          "description": "Starting Balance"
+        },
+        {
+          "date": "11/01",
+          "amount": 2500.0,
+          "description": "11/01 Deposit Transfer From ******0912"
+        },
+        {
+          "date": "11/10",
+          "amount": 1500.0,
+          "description": "11/10 Deposit Ghosh Credit to 9324733212 CK"
+        },
+        {
+          "date": "11/12",
+          "amount": 2500.0,
+          "description": "11/12 ACH Deposit JPMorgan Chase - Ext Trnsfr"
+        },
+        {
+          "date": "11/12",
+          "amount": 5504.77,
+          "description": "11/12 ACH Deposit MICROSOFT - EDIPAYMENT"
+        },
+        {
+          "date": "11/14",
+          "amount": 619.3,
+          "description": "11/14 ACH Deposit PAYPAL TRANSFER - TRANSFER"
+        },
+        {
+          "date": "11/26",
+          "amount": 5504.77,
+          "description": "11/26 ACH Deposit MICROSOFT - EDIPAYMENT"
+        },
+        {
+          "date": "11/03",
+          "amount": 2759.0,
+          "description": "11/03 ACH Debit CAL BANK TRUST 000000000000000000 - LOAN PAYMT -"
+        },
+        {
+          "date": "11/04",
+          "amount": 34.69,
+          "description": "11/04 ACH Debit TRANSAMERICA - PREMIUM -"
+        },
+        {
+          "date": "11/05",
+          "amount": 9758.52,
+          "description": "11/05 ACH Debit BOEING EMP CR U 000000000000000000 - LOAN PAYMT -"
+        },
+        {
+          "date": "11/10",
+          "amount": 1000.0,
+          "description": "11/10 Withdrawal Transfer To ******0912 -"
+        },
+        {
+          "date": "11/10",
+          "amount": 1000.0,
+          "description": "11/10 Withdrawal Transfer To ******0912 -"
+        },
+        {
+          "date": "11/10",
+          "amount": 493.49,
+          "description": "11/10 ACH Debit BMW BANK - BMWFS PYMT -"
+        },
+        {
+          "date": "11/14",
+          "amount": 642.0,
+          "description": "11/14 ACH Debit PAYPAL INSTANT TRANSFER - INST XFER -"
+        },
+        {
+          "date": "11/17",
+          "amount": 331.55,
+          "description": "11/17 ACH Debit AMERICAN FAMILY - WEBPAYMENT -"
+        },
+        {
+          "date": "11/17",
+          "amount": 5500.0,
+          "description": "11/17 ACH Debit AMEX EPAYMENT ER AM - ACH PMT -"
+        },
+        {
+          "date": "11/19",
+          "amount": 105.55,
+          "description": "11/19 ACH Debit PUDNO1-SNOHOMISH 425-783-1000 - UTILITY -"
+        },
+        {
+          "date": "11/24",
+          "amount": 114.67,
+          "description": "11/24 ACH Debit WASTE MANAGEMENT - PAYMENT Log in to the MY WM Account Page -"
+        },
+        {
+          "date": "11/25",
+          "amount": 1505.08,
+          "description": "11/25 Withdrawal Ghosh Pmt from 9324733212 CK -"
+        },
+        {
+          "date": "11/26",
+          "amount": 25.0,
+          "description": "11/26 ACH Debit BK OF AMER VISA - ONLINE PMT -"
+        }
+      ]
+    }
+  },
+  "auto_detected": [
+    {
+      "source_name": "Ach Deposit Microsoft Edipayment",
+      "category": "salary",
+      "rule_matched": "Rule 1: Salary \u2014 keyword 'EDIPAYMENT'",
+      "amount_per_occurrence": 5504.77,
+      "total_amount": 42110.39,
+      "occurrence_count": 8,
+      "frequency": "biweekly",
+      "confidence": "high",
+      "monthly_totals": [
+        {
+          "month": "Jan",
+          "total": 8514.39,
+          "count": 2
+        },
+        {
+          "month": "Nov",
+          "total": 22019.08,
+          "count": 4
+        },
+        {
+          "month": "Dec",
+          "total": 11576.92,
+          "count": 2
+        }
+      ]
+    },
+    {
+      "source_name": "Ach Deposit Amit Ghosh",
+      "category": "other",
+      "rule_matched": "Rule 3: Other \u2014 ACH Deposit \u2265 $500",
+      "amount_per_occurrence": 10000.0,
+      "total_amount": 20000.0,
+      "occurrence_count": 2,
+      "frequency": "monthly",
+      "confidence": "medium",
+      "monthly_totals": [
+        {
+          "month": "Jan",
+          "total": 10000.0,
+          "count": 1
+        },
+        {
+          "month": "Dec",
+          "total": 10000.0,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "source_name": "Zelle Payment From Brian",
+      "category": "payments",
+      "rule_matched": "Rule 3: Other \u2014 keyword 'ZELLE PAYMENT FROM'",
+      "amount_per_occurrence": 4145.0,
+      "total_amount": 13989.32,
+      "occurrence_count": 3,
+      "frequency": "monthly",
+      "confidence": "high",
+      "monthly_totals": [
+        {
+          "month": "Jan",
+          "total": 4145.0,
+          "count": 1
+        },
+        {
+          "month": "Nov",
+          "total": 5699.32,
+          "count": 1
+        },
+        {
+          "month": "Dec",
+          "total": 4145.0,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "source_name": "Ach Deposit Jpmorgan Chase",
+      "category": "other",
+      "rule_matched": "Rule 3: Other \u2014 ACH Deposit \u2265 $500",
+      "amount_per_occurrence": 2500.0,
+      "total_amount": 12000.0,
+      "occurrence_count": 6,
+      "frequency": "monthly",
+      "confidence": "high",
+      "monthly_totals": [
+        {
+          "month": "Jan",
+          "total": 1000.0,
+          "count": 1
+        },
+        {
+          "month": "Nov",
+          "total": 5000.0,
+          "count": 2
+        },
+        {
+          "month": "Dec",
+          "total": 6000.0,
+          "count": 3
+        }
+      ]
+    },
+    {
+      "source_name": "Microsoft Edipayment Ppd Id:",
+      "category": "salary",
+      "rule_matched": "Rule 1: Salary \u2014 keyword 'EDIPAYMENT'",
+      "amount_per_occurrence": 1500.0,
+      "total_amount": 9000.0,
+      "occurrence_count": 6,
+      "frequency": "biweekly",
+      "confidence": "high",
+      "monthly_totals": [
+        {
+          "month": "Jan",
+          "total": 3000.0,
+          "count": 2
+        },
+        {
+          "month": "Nov",
+          "total": 3000.0,
+          "count": 2
+        },
+        {
+          "month": "Dec",
+          "total": 3000.0,
+          "count": 2
+        }
+      ]
+    },
+    {
+      "source_name": "Zelle Payment From Petro",
+      "category": "payments",
+      "rule_matched": "Rule 3: Other \u2014 keyword 'ZELLE PAYMENT FROM'",
+      "amount_per_occurrence": 2900.0,
+      "total_amount": 8700.0,
+      "occurrence_count": 3,
+      "frequency": "monthly",
+      "confidence": "high",
+      "monthly_totals": [
+        {
+          "month": "Jan",
+          "total": 2900.0,
+          "count": 1
+        },
+        {
+          "month": "Nov",
+          "total": 2900.0,
+          "count": 1
+        },
+        {
+          "month": "Dec",
+          "total": 2900.0,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "source_name": "Venmo Cashout Ppd Id:",
+      "category": "payments",
+      "rule_matched": "Rule 3: Other \u2014 keyword 'VENMO CASHOUT'",
+      "amount_per_occurrence": 2450.0,
+      "total_amount": 7350.0,
+      "occurrence_count": 3,
+      "frequency": "monthly",
+      "confidence": "high",
+      "monthly_totals": [
+        {
+          "month": "Jan",
+          "total": 2450.0,
+          "count": 1
+        },
+        {
+          "month": "Nov",
+          "total": 2450.0,
+          "count": 1
+        },
+        {
+          "month": "Dec",
+          "total": 2450.0,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "source_name": "Interest Payment",
+      "category": "interest",
+      "rule_matched": "Rule 3: Other \u2014 keyword 'INTEREST PAYMENT'",
+      "amount_per_occurrence": 0.03,
+      "total_amount": 0.08,
+      "occurrence_count": 3,
+      "frequency": "monthly",
+      "confidence": "high",
+      "monthly_totals": [
+        {
+          "month": "Jan",
+          "total": 0.03,
+          "count": 1
+        },
+        {
+          "month": "Nov",
+          "total": 0.02,
+          "count": 1
+        },
+        {
+          "month": "Dec",
+          "total": 0.03,
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "keyword_detected": [
+    {
+      "keywords": [
+        "deposit transfer"
+      ],
+      "source_name": "Deposit Transfer From ******0912",
+      "category": "other",
+      "total_amount": 13000.0,
+      "occurrence_count": 5,
+      "frequency": "monthly"
+    }
+  ]
+}

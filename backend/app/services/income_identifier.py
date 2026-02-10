@@ -43,6 +43,8 @@ RENTAL_KEYWORDS: List[str] = [
 OTHER_INCOME_KEYWORDS: Dict[str, List[str]] = {
     "pension": ["PENSION", "SOC SEC", "SOCIAL SECURITY", "SSA"],
     "freelance": ["FREELANCE", "CONSULTING", "COMMISSION", "1099"],
+    "interest": ["INTEREST PAYMENT", "INTEREST PAID", "INTEREST CREDIT"],
+    "payments": ["ZELLE PAYMENT FROM", "VENMO CASHOUT", "VENMO CREDIT"],
     "other": ["ANNUITY", "DIVIDEND", "ROYALT"],
 }
 
@@ -61,7 +63,6 @@ EXCLUSION_KEYWORDS: List[str] = [
     "CASH BACK",
     "REWARD",
     "REBATE",
-    "INTEREST",
 ]
 
 
