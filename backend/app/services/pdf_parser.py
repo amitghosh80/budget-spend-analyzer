@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Optional
+from typing import BinaryIO, List, Optional, Union
 
 import pdfplumber
 
@@ -18,11 +18,11 @@ class RawTransaction:
     line_text: str
 
 
-def extract_transactions(pdf_path: Path) -> List[RawTransaction]:
+def extract_transactions(pdf_source: Union[Path, BinaryIO]) -> List[RawTransaction]:
     """Extract credit/deposit transactions from a PDF statement."""
     transactions: List[RawTransaction] = []
     try:
-        with pdfplumber.open(pdf_path) as pdf:
+        with pdfplumber.open(pdf_source) as pdf:
             full_text = ""
             for page in pdf.pages:
                 page_text = page.extract_text() or ""

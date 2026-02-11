@@ -1,5 +1,6 @@
 """Regression tests for PDF parser — transaction extraction."""
 import sys
+from io import BytesIO
 from pathlib import Path
 
 import pytest
@@ -131,3 +132,22 @@ class TestKeyTransactionsExist:
             txns = extract_transactions(UNIQUE_PDFS[pdf_name])
             interest_txns = [t for t in txns if "INTEREST PAYMENT" in t.description.upper()]
             assert len(interest_txns) >= 1, f"No Interest Payment in {pdf_name}"
+
+
+# -----------------------------------------------------------------------
+# Test 4: BytesIO input produces same results as Path input
+# -----------------------------------------------------------------------
+class TestBytesIOInput:
+    def test_bytesio_matches_path(self):
+        """extract_transactions(BytesIO(bytes)) must match extract_transactions(Path)."""
+        pdf_path = UNIQUE_PDFS["20251231-statements-3278-.pdf"]
+        pdf_bytes = pdf_path.read_bytes()
+
+        txns_from_path = extract_transactions(pdf_path)
+        txns_from_bytes = extract_transactions(BytesIO(pdf_bytes))
+
+        assert len(txns_from_path) == len(txns_from_bytes)
+        for t1, t2 in zip(txns_from_path, txns_from_bytes):
+            assert t1.date == t2.date
+            assert t1.description == t2.description
+            assert t1.amount == t2.amount

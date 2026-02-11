@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 from datetime import datetime, timezone
+from io import BytesIO
 from pathlib import Path
 from typing import List
 from uuid import uuid4
@@ -19,6 +20,7 @@ from app.models import (
     RescanRequest,
     UploadResponse,
 )
+from app.services.encryption import encrypt
 from app.services.income_identifier import identify_income, identify_income_by_keywords
 from app.services.pdf_parser import RawTransaction, extract_transactions
 
@@ -65,10 +67,9 @@ async def upload_statements(files: List[UploadFile] = File(...)) -> UploadRespon
         stored_path = STORAGE_DIR / stored_name
         try:
             content = await upload.read()
-            stored_path.write_bytes(content)
+            txns = extract_transactions(BytesIO(content))
+            stored_path.write_bytes(encrypt(content))
             _stored_files.append(stored_path)
-
-            txns = extract_transactions(stored_path)
             all_transactions.extend(txns)
 
             _log_upload(fname, stored_name, len(content), len(txns))
