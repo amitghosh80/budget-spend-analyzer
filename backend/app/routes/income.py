@@ -16,6 +16,7 @@ from app.models import (
     ConfirmResponse,
     ConfirmedIncome,
     DetectedIncome,
+    ExcludedTransfer,
     FileResult,
     RescanRequest,
     UploadResponse,
@@ -40,6 +41,8 @@ _detected_cache: dict[str, DetectedIncome] = {}
 _transactions_cache: list[RawTransaction] = []
 # Track stored file paths for cleanup after confirmation
 _stored_files: list[Path] = []
+# In-memory cache of excluded transfers from most recent upload
+_excluded_transfers_cache: list[ExcludedTransfer] = []
 
 
 @router.post("/upload", response_model=UploadResponse)
@@ -68,6 +71,8 @@ async def upload_statements(files: List[UploadFile] = File(...)) -> UploadRespon
         try:
             content = await upload.read()
             txns = extract_transactions(BytesIO(content))
+            for t in txns:
+                t.source_file = fname
             stored_path.write_bytes(encrypt(content))
             _stored_files.append(stored_path)
             all_transactions.extend(txns)
@@ -98,7 +103,7 @@ async def upload_statements(files: List[UploadFile] = File(...)) -> UploadRespon
         except Exception as exc:
             file_results.append(FileResult(filename=fname, status="error", error=str(exc)))
 
-    detected = identify_income(all_transactions)
+    detected, excluded_transfers = identify_income(all_transactions)
 
     # Cache raw transactions for potential rescan
     _transactions_cache.clear()
@@ -109,11 +114,16 @@ async def upload_statements(files: List[UploadFile] = File(...)) -> UploadRespon
     for d in detected:
         _detected_cache[d.id] = d
 
+    # Cache excluded transfers
+    _excluded_transfers_cache.clear()
+    _excluded_transfers_cache.extend(excluded_transfers)
+
     return UploadResponse(
         total_files=len(file_results),
         stored_files=sum(1 for f in file_results if f.status in ("stored", "warning")),
         file_results=file_results,
         detected_income=detected,
+        excluded_transfers=excluded_transfers,
     )
 
 
@@ -121,6 +131,12 @@ async def upload_statements(files: List[UploadFile] = File(...)) -> UploadRespon
 def get_detected_income() -> List[DetectedIncome]:
     """Return the most recently detected income sources."""
     return list(_detected_cache.values())
+
+
+@router.get("/excluded-transfers", response_model=list[ExcludedTransfer])
+def get_excluded_transfers() -> list[ExcludedTransfer]:
+    """Return transfers excluded from income detection in the most recent upload."""
+    return list(_excluded_transfers_cache)
 
 
 @router.post("/rescan", response_model=list[DetectedIncome])

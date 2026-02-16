@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   DetectedIncome,
+  ExcludedTransfer,
   ConfirmationItem,
   confirmIncome,
   rescanIncome,
@@ -11,6 +12,7 @@ export type MonthlyOverrides = Record<string, Record<number, string>>;
 
 type Props = {
   detected: DetectedIncome[];
+  excludedTransfers: ExcludedTransfer[];
   onConfirmed: (resp: ConfirmResponse, overrides: MonthlyOverrides) => void;
   onMoreDetected: (newItems: DetectedIncome[]) => void;
 };
@@ -43,7 +45,7 @@ const CONFIDENCE_STYLES: Record<string, { bg: string; text: string }> = {
   low: { bg: "#fee2e2", text: "#991b1b" },
 };
 
-const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
+const IncomeReview = ({ detected, excludedTransfers, onConfirmed, onMoreDetected }: Props) => {
   const [decisions, setDecisions] = useState<Record<string, "confirmed" | "dismissed">>({});
   const [amountOverrides, setAmountOverrides] = useState<Record<string, string>>({});
   const [monthlyOverrides, setMonthlyOverrides] = useState<Record<string, Record<number, string>>>({});
@@ -53,11 +55,39 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
   const [keyword, setKeyword] = useState("");
   const [rescanning, setRescanning] = useState(false);
   const [rescanMsg, setRescanMsg] = useState<string | null>(null);
+  const [showTransfers, setShowTransfers] = useState(false);
+  const [expandedTxns, setExpandedTxns] = useState<Record<string, boolean>>({});
 
   const allDecided = detected.length > 0 && detected.every((d) => decisions[d.id]);
 
   const setDecision = (id: string, status: "confirmed" | "dismissed") => {
     setDecisions((prev) => ({ ...prev, [id]: status }));
+  };
+
+  // ── Bulk actions ──
+  const bulkSetAll = (status: "confirmed" | "dismissed") => {
+    const bulk: Record<string, "confirmed" | "dismissed"> = {};
+    for (const d of detected) {
+      bulk[d.id] = status;
+    }
+    setDecisions(bulk);
+  };
+
+  const bulkSetGroup = (category: string, status: "confirmed" | "dismissed") => {
+    setDecisions((prev) => {
+      const next = { ...prev };
+      for (const d of detected) {
+        if (d.category === category) {
+          next[d.id] = status;
+        }
+      }
+      return next;
+    });
+  };
+
+  // ── Transaction detail toggle ──
+  const toggleTxnExpand = (id: string) => {
+    setExpandedTxns((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   const setMonthAmount = (itemId: string, index: number, value: string) => {
@@ -107,7 +137,6 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
       const perMonth = monthlyOverrides[d.id];
       const hasPerMonth = perMonth && Object.keys(perMonth).length > 0;
 
-      // Per-month mode: send monthly_overrides
       if (hasPerMonth) {
         const overrides: Record<number, number> = {};
         for (const [idx, val] of Object.entries(perMonth)) {
@@ -123,7 +152,6 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
         };
       }
 
-      // Fix-all mode
       const override = amountOverrides[d.id];
       const parsed = override !== undefined ? parseFloat(override) : NaN;
       return {
@@ -178,6 +206,10 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
     ...Object.keys(groups).filter((c) => !categoryOrder.includes(c)),
   ];
 
+  const confirmedCount = Object.values(decisions).filter((d) => d === "confirmed").length;
+  const dismissedCount = Object.values(decisions).filter((d) => d === "dismissed").length;
+  const pendingCount = detected.length - Object.keys(decisions).length;
+
   return (
     <div className="step-card fade-in">
       <div className="step-icon">2</div>
@@ -193,6 +225,33 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
         </div>
       ) : (
         <>
+          {/* ── Bulk actions bar ── */}
+          <div className="bulk-actions">
+            <button
+              className="btn btn--confirm btn--sm"
+              onClick={() => bulkSetAll("confirmed")}
+              type="button"
+            >
+              Confirm All ({detected.length})
+            </button>
+            <button
+              className="btn btn--dismiss btn--sm"
+              onClick={() => bulkSetAll("dismissed")}
+              type="button"
+            >
+              Dismiss All
+            </button>
+            {Object.keys(decisions).length > 0 && (
+              <button
+                className="btn btn--outline btn--sm"
+                onClick={() => setDecisions({})}
+                type="button"
+              >
+                Reset All
+              </button>
+            )}
+          </div>
+
           {sortedCategories.map((cat) => (
             <div key={cat} className="income-group">
               <div className="income-group__header">
@@ -202,12 +261,33 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
                 />
                 <h3>{CATEGORY_LABELS[cat] || cat}</h3>
                 <span className="income-group__count">{groups[cat].length}</span>
+                {/* Per-group bulk buttons */}
+                {groups[cat].length > 1 && (
+                  <div className="income-group__bulk">
+                    <button
+                      className="btn btn--confirm btn--xs"
+                      onClick={() => bulkSetGroup(cat, "confirmed")}
+                      type="button"
+                    >
+                      Confirm group
+                    </button>
+                    <button
+                      className="btn btn--dismiss btn--xs"
+                      onClick={() => bulkSetGroup(cat, "dismissed")}
+                      type="button"
+                    >
+                      Dismiss group
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="income-cards">
                 {groups[cat].map((item) => {
                   const conf = CONFIDENCE_STYLES[item.confidence] || CONFIDENCE_STYLES.low;
                   const decision = decisions[item.id];
+                  const txnsExpanded = expandedTxns[item.id] ?? false;
+                  const txns = item.transactions ?? [];
                   return (
                     <div
                       key={item.id}
@@ -301,11 +381,40 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
                         {item.rule_matched}
                       </div>
 
-                      {item.sample_descriptions.length > 0 && (
-                        <div className="income-card__samples">
-                          {item.sample_descriptions.map((s, i) => (
-                            <code key={i}>{s}</code>
-                          ))}
+                      {/* ── Per-transaction detail (expandable) ── */}
+                      {txns.length > 0 && (
+                        <div className="txn-detail">
+                          <button
+                            type="button"
+                            className="txn-detail__toggle"
+                            onClick={() => toggleTxnExpand(item.id)}
+                          >
+                            {txnsExpanded ? "Hide" : "Show"} {txns.length} transaction{txns.length !== 1 ? "s" : ""}
+                          </button>
+                          {txnsExpanded && (
+                            <div className="txn-detail__table-wrap">
+                              <table className="txn-detail__table">
+                                <thead>
+                                  <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Source</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {txns.map((t, i) => (
+                                    <tr key={i}>
+                                      <td className="txn-detail__date">{t.date}</td>
+                                      <td className="txn-detail__desc">{t.description}</td>
+                                      <td className="txn-detail__amount">${t.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                                      <td className="txn-detail__source">{t.source_file || "-"}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          )}
                         </div>
                       )}
 
@@ -329,6 +438,51 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
               </div>
             </div>
           ))}
+
+          {/* ── Excluded transfers section ── */}
+          {excludedTransfers.length > 0 && (
+            <div className="excluded-section">
+              <button
+                className="btn btn--outline btn--sm"
+                onClick={() => setShowTransfers((s) => !s)}
+                type="button"
+              >
+                {showTransfers ? "Hide" : "Show"} excluded transfers ({excludedTransfers.length})
+              </button>
+              {showTransfers && (
+                <div className="excluded-panel">
+                  <p className="excluded-hint">
+                    These transactions were automatically excluded because they look like
+                    inter-account transfers. Review them to make sure nothing was incorrectly filtered.
+                  </p>
+                  <div className="txn-detail__table-wrap">
+                    <table className="txn-detail__table">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Description</th>
+                          <th>Amount</th>
+                          <th>Reason</th>
+                          <th>Source</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {excludedTransfers.map((t, i) => (
+                          <tr key={i}>
+                            <td className="txn-detail__date">{t.date}</td>
+                            <td className="txn-detail__desc">{t.description}</td>
+                            <td className="txn-detail__amount">${t.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                            <td className="txn-detail__reason">{t.reason}</td>
+                            <td className="txn-detail__source">{t.source_file || "-"}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="rescan-section">
             <button
@@ -369,13 +523,13 @@ const IncomeReview = ({ detected, onConfirmed, onMoreDetected }: Props) => {
           <div className="review-footer">
             <div className="review-footer__summary">
               <span className="pill pill--green">
-                {Object.values(decisions).filter((d) => d === "confirmed").length} confirmed
+                {confirmedCount} confirmed
               </span>
               <span className="pill pill--red">
-                {Object.values(decisions).filter((d) => d === "dismissed").length} dismissed
+                {dismissedCount} dismissed
               </span>
               <span className="pill pill--gray">
-                {detected.length - Object.keys(decisions).length} pending
+                {pendingCount} pending
               </span>
             </div>
             <button

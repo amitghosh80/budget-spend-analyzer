@@ -15,6 +15,13 @@ export type MonthlyTotal = {
   transaction_count: number;
 };
 
+export type IncomeTransaction = {
+  date: string;
+  description: string;
+  amount: number;
+  source_file: string;
+};
+
 export type DetectedIncome = {
   id: string;
   source_name: string;
@@ -28,6 +35,15 @@ export type DetectedIncome = {
   sample_descriptions: string[];
   is_recurring: boolean;
   monthly_totals: MonthlyTotal[];
+  transactions: IncomeTransaction[];
+};
+
+export type ExcludedTransfer = {
+  date: string;
+  description: string;
+  amount: number;
+  reason: string;
+  source_file: string;
 };
 
 export type UploadResponse = {
@@ -35,6 +51,7 @@ export type UploadResponse = {
   stored_files: number;
   file_results: FileResult[];
   detected_income: DetectedIncome[];
+  excluded_transfers: ExcludedTransfer[];
 };
 
 export type ConfirmationItem = {

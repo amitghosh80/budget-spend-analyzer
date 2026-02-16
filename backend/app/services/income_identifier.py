@@ -10,7 +10,7 @@ from collections import defaultdict
 from typing import Dict, List, Optional, Tuple
 from uuid import uuid4
 
-from app.models import DetectedIncome, MonthlyTotal
+from app.models import DetectedIncome, ExcludedTransfer, IncomeTransaction, MonthlyTotal
 from app.services.pdf_parser import RawTransaction
 
 # ---------------------------------------------------------------------------
@@ -51,30 +51,52 @@ OTHER_INCOME_KEYWORDS: Dict[str, List[str]] = {
 # ---------------------------------------------------------------------------
 # Exclusion keywords – credits that are NOT income
 # ---------------------------------------------------------------------------
-EXCLUSION_KEYWORDS: List[str] = [
+TRANSFER_KEYWORDS: List[str] = [
+    "TRANSFER",
+    "XFER",
+    "TFR",
+]
+
+NON_TRANSFER_EXCLUSIONS: List[str] = [
     "REFUND",
     "RETURN",
     "REVERSAL",
     "CREDIT ADJ",
-    "TRANSFER",
-    "XFER",
-    "TFR",
     "CASHBACK",
     "CASH BACK",
     "REWARD",
     "REBATE",
 ]
 
+EXCLUSION_KEYWORDS: List[str] = NON_TRANSFER_EXCLUSIONS + TRANSFER_KEYWORDS
 
-def identify_income(transactions: List[RawTransaction]) -> List[DetectedIncome]:
-    """Run all income rules against a list of transactions and return aggregated results."""
 
-    # Step 1: classify each transaction
+IncomeResult = Tuple[List[DetectedIncome], List[ExcludedTransfer]]
+
+
+def identify_income(transactions: List[RawTransaction]) -> IncomeResult:
+    """Run all income rules against a list of transactions and return aggregated results plus excluded transfers."""
+
+    # Step 1: classify each transaction, tracking transfer exclusions
     classified: List[Tuple[RawTransaction, str, str]] = []  # (txn, category, rule)
+    excluded_transfers: List[ExcludedTransfer] = []
     for txn in transactions:
         result = _classify_transaction(txn)
         if result:
             classified.append((txn, result[0], result[1]))
+        else:
+            # Check if it was excluded specifically as a transfer
+            reason = _transfer_exclusion_reason(txn)
+            if reason:
+                excluded_transfers.append(
+                    ExcludedTransfer(
+                        date=txn.date,
+                        description=txn.description,
+                        amount=txn.amount,
+                        reason=reason,
+                        source_file=txn.source_file,
+                    )
+                )
 
     # Step 2: aggregate by source (category + cleaned description key)
     groups: Dict[str, Dict] = defaultdict(lambda: {
@@ -83,6 +105,7 @@ def identify_income(transactions: List[RawTransaction]) -> List[DetectedIncome]:
         "amounts": [],
         "descriptions": [],
         "dates": [],
+        "transactions": [],
     })
 
     for txn, category, rule in classified:
@@ -93,6 +116,14 @@ def identify_income(transactions: List[RawTransaction]) -> List[DetectedIncome]:
         group["amounts"].append(txn.amount)
         group["descriptions"].append(txn.line_text)
         group["dates"].append(txn.date)
+        group["transactions"].append(
+            IncomeTransaction(
+                date=txn.date,
+                description=txn.description,
+                amount=txn.amount,
+                source_file=txn.source_file,
+            )
+        )
 
     # Step 3: build DetectedIncome list
     results: List[DetectedIncome] = []
@@ -123,11 +154,12 @@ def identify_income(transactions: List[RawTransaction]) -> List[DetectedIncome]:
                 sample_descriptions=group["descriptions"],
                 is_recurring=is_recurring,
                 monthly_totals=monthly,
+                transactions=group["transactions"],
             )
         )
 
     results.sort(key=lambda d: d.total_amount, reverse=True)
-    return results
+    return results, excluded_transfers
 
 
 def identify_income_by_keywords(
@@ -164,6 +196,7 @@ def identify_income_by_keywords(
         "amounts": [],
         "descriptions": [],
         "dates": [],
+        "transactions": [],
     })
 
     for txn, category, rule in classified:
@@ -174,6 +207,14 @@ def identify_income_by_keywords(
         group["amounts"].append(txn.amount)
         group["descriptions"].append(txn.line_text)
         group["dates"].append(txn.date)
+        group["transactions"].append(
+            IncomeTransaction(
+                date=txn.date,
+                description=txn.description,
+                amount=txn.amount,
+                source_file=txn.source_file,
+            )
+        )
 
     results: List[DetectedIncome] = []
     for key, group in groups.items():
@@ -201,11 +242,21 @@ def identify_income_by_keywords(
                 sample_descriptions=group["descriptions"],
                 is_recurring=is_recurring,
                 monthly_totals=monthly,
+                transactions=group["transactions"],
             )
         )
 
     results.sort(key=lambda d: d.total_amount, reverse=True)
     return results
+
+
+def _transfer_exclusion_reason(txn: RawTransaction) -> Optional[str]:
+    """Return the transfer keyword that caused exclusion, or None."""
+    desc_upper = txn.description.upper()
+    for kw in TRANSFER_KEYWORDS:
+        if kw in desc_upper:
+            return kw
+    return None
 
 
 def _classify_transaction(txn: RawTransaction) -> Optional[Tuple[str, str]]:

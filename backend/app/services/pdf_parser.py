@@ -16,6 +16,7 @@ class RawTransaction:
     description: str
     amount: float
     line_text: str
+    source_file: str = ""
 
 
 def extract_transactions(pdf_source: Union[Path, BinaryIO]) -> List[RawTransaction]:

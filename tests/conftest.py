@@ -42,7 +42,8 @@ def all_transactions():
 @pytest.fixture(scope="session")
 def auto_detected(all_transactions):
     """Run auto income detection on all transactions."""
-    return identify_income(all_transactions)
+    detected, _excluded = identify_income(all_transactions)
+    return detected
 
 
 @pytest.fixture(scope="session")
