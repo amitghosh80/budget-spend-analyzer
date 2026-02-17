@@ -21,14 +21,15 @@ from app.models import (
     RescanRequest,
     UploadResponse,
 )
-from app.services.encryption import encrypt
+from app.services.encryption import decrypt, encrypt
 from app.services.income_identifier import identify_income, identify_income_by_keywords
 from app.services.pdf_parser import RawTransaction, extract_transactions
 
 router = APIRouter()
 
 STORAGE_DIR = Path(__file__).resolve().parents[1] / "storage" / "uploads"
-CONFIRMED_PATH = Path(__file__).resolve().parents[1] / "storage" / "confirmed_income.json"
+CONFIRMED_PATH = Path(__file__).resolve().parents[1] / "storage" / "confirmed_income.enc"
+_LEGACY_JSON_PATH = Path(__file__).resolve().parents[1] / "storage" / "confirmed_income.json"
 UPLOAD_LOG_PATH = Path(__file__).resolve().parents[1] / "storage" / "upload_log.json"
 
 MAX_FILES = 12
@@ -228,17 +229,29 @@ def _save_confirmed(items: List[ConfirmedIncome]) -> None:
         if item.id not in existing_ids:
             existing.append(item)
             existing_ids.add(item.id)
-    CONFIRMED_PATH.write_text(
-        json.dumps([c.model_dump() for c in existing], indent=2),
-        encoding="utf-8",
-    )
+    plaintext = json.dumps([c.model_dump() for c in existing], indent=2).encode("utf-8")
+    CONFIRMED_PATH.write_bytes(encrypt(plaintext))
+
+
+def _migrate_legacy_json() -> None:
+    """One-time migration: encrypt plaintext .json to .enc."""
+    if _LEGACY_JSON_PATH.exists() and not CONFIRMED_PATH.exists():
+        try:
+            raw = _LEGACY_JSON_PATH.read_text(encoding="utf-8")
+            CONFIRMED_PATH.write_bytes(encrypt(raw.encode("utf-8")))
+            _LEGACY_JSON_PATH.unlink()
+            logger.info("Migrated confirmed_income.json → confirmed_income.enc")
+        except Exception:
+            logger.warning("Failed to migrate confirmed_income.json")
 
 
 def _load_confirmed() -> List[ConfirmedIncome]:
+    _migrate_legacy_json()
     if not CONFIRMED_PATH.exists():
         return []
     try:
-        data = json.loads(CONFIRMED_PATH.read_text(encoding="utf-8"))
+        plaintext = decrypt(CONFIRMED_PATH.read_bytes())
+        data = json.loads(plaintext.decode("utf-8"))
         return [ConfirmedIncome(**item) for item in data]
     except Exception:
         return []
