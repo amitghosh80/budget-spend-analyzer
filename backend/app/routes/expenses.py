@@ -158,16 +158,10 @@ def _is_income_transaction(description: str, income_names: set[str]) -> bool:
     return False
 
 
-# Import the income module's transaction cache for reuse
-def _get_bank_transactions():
-    """Pull cached checking/savings transactions from the income module."""
-    from app.routes.income import _transactions_cache
-    return list(_transactions_cache)
-
 
 @router.post("/upload", response_model=ExpenseUploadResponse)
 async def upload_expenses(files: List[UploadFile] = File(...)) -> ExpenseUploadResponse:
-    """Upload credit card PDFs, merge with bank data, categorize all expenses."""
+    """Upload credit card PDFs, categorize expenses."""
     STORAGE_DIR.mkdir(parents=True, exist_ok=True)
 
     file_results: List[FileResult] = []
@@ -204,12 +198,7 @@ async def upload_expenses(files: List[UploadFile] = File(...)) -> ExpenseUploadR
         except Exception as exc:
             file_results.append(FileResult(filename=fname, status="error", error=str(exc)))
 
-    # Pull in checking/savings transactions from Phase 1
-    bank_txns = _get_bank_transactions()
-    bank_data = [(txn, "bank_statement", "checking", None) for txn in bank_txns]
-
-    # Combine all transactions
-    all_txn_data = cc_transactions + bank_data
+    all_txn_data = cc_transactions
 
     # Load confirmed income info for exclusion
     income_names = _load_confirmed_income_descriptions()
