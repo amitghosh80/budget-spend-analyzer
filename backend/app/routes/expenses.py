@@ -65,22 +65,47 @@ def _fingerprint(date: str, description: str, amount: float) -> str:
     return hashlib.sha256(raw.encode()).hexdigest()[:16]
 
 
-def _normalize_date(date_str: str) -> str:
+def _year_from_filename(filename: str) -> Optional[int]:
+    """Extract a 4-digit year from common statement filename patterns.
+
+    Matches: '20251010-statements-...' or '2025-11-09.pdf' etc.
+    """
+    import re
+    m = re.search(r"(20\d{2})", filename)
+    return int(m.group(1)) if m else None
+
+
+def _normalize_date(date_str: str, statement_year: Optional[int] = None) -> str:
     """Normalize MM/DD or MM/DD/YY(YY) to YYYY-MM-DD.
 
-    If no year is present, uses the current year.
+    If no year is present, uses *statement_year* (extracted from the PDF
+    filename) when available, otherwise falls back to the current year.
+    When statement_year is provided and the resulting date would be in the
+    future, the previous year is used instead (handles Dec statement with
+    a Jan filename date, etc.).
     """
     parts = date_str.strip().split("/")
     if len(parts) == 2:
         month, day = parts
-        year = str(datetime.now().year)
+        base_year = statement_year or datetime.now().year
+        year = str(base_year)
     elif len(parts) == 3:
         month, day, year = parts
         if len(year) == 2:
             year = "20" + year
     else:
         return date_str
-    return f"{year}-{int(month):02d}-{int(day):02d}"
+
+    # Guard against future dates when year was inferred
+    if len(parts) == 2:
+        try:
+            candidate = datetime(int(year), int(month), int(day))
+            if candidate > datetime.now():
+                year = str(int(year) - 1)
+        except ValueError:
+            pass
+
+    return f"{int(year)}-{int(month):02d}-{int(day):02d}"
 
 
 def _month_label(iso_date: str) -> str:
@@ -162,8 +187,9 @@ async def upload_expenses(files: List[UploadFile] = File(...)) -> ExpenseUploadR
             txns = extract_transactions(BytesIO(content))
             stored_path.write_bytes(encrypt(content))
 
+            stmt_year = _year_from_filename(fname)
             for txn in txns:
-                cc_transactions.append((txn, fname, "credit_card"))
+                cc_transactions.append((txn, fname, "credit_card", stmt_year))
 
             file_results.append(
                 FileResult(
@@ -180,7 +206,7 @@ async def upload_expenses(files: List[UploadFile] = File(...)) -> ExpenseUploadR
 
     # Pull in checking/savings transactions from Phase 1
     bank_txns = _get_bank_transactions()
-    bank_data = [(txn, "bank_statement", "checking") for txn in bank_txns]
+    bank_data = [(txn, "bank_statement", "checking", None) for txn in bank_txns]
 
     # Combine all transactions
     all_txn_data = cc_transactions + bank_data
@@ -195,8 +221,8 @@ async def upload_expenses(files: List[UploadFile] = File(...)) -> ExpenseUploadR
     excluded_count = 0
 
     try:
-        for txn, source_file, account_source in all_txn_data:
-            date = _normalize_date(txn.date)
+        for txn, source_file, account_source, stmt_year in all_txn_data:
+            date = _normalize_date(txn.date, statement_year=stmt_year)
             fp = _fingerprint(txn.date, txn.description, txn.amount)
 
             # Check if this is income
