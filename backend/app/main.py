@@ -7,7 +7,9 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.routes.auth import router as auth_router
 from app.routes.income import router as income_router
+from app.routes.expenses import router as expenses_router
 
 logger = logging.getLogger(__name__)
 
@@ -81,4 +83,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth_router, prefix="/auth", tags=["auth"])
 app.include_router(income_router, prefix="/income", tags=["income"])
+app.include_router(expenses_router, prefix="/expenses", tags=["expenses"])

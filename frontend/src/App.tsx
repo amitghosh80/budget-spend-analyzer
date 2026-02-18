@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import UploadStatements from "./pages/UploadStatements";
 import IncomeReview from "./pages/IncomeReview";
 import IncomeConfirmed from "./pages/IncomeConfirmed";
 import ExpenseUpload from "./pages/ExpenseUpload";
 import ExpenseReview from "./pages/ExpenseReview";
 import ExpenseDashboard from "./pages/ExpenseDashboard";
+import AuthGate from "./pages/AuthGate";
 import { UploadResponse, ConfirmResponse, DetectedIncome, ExcludedTransfer } from "./api/incomeApi";
 import { ExpenseUploadResponse } from "./api/expenseApi";
+import { getMe, getStoredToken, clearToken, type UserInfo } from "./api/authApi";
 import type { MonthlyOverrides } from "./pages/IncomeReview";
 
 type Phase = "income" | "expenses" | "insights";
@@ -41,6 +43,11 @@ const App = () => {
   const [phase, setPhase] = useState<Phase>("income");
   const [incomeComplete, setIncomeComplete] = useState(false);
 
+  // Auth state
+  const [authUser, setAuthUser] = useState<UserInfo | null>(null);
+  const [isGuest, setIsGuest] = useState(false);
+  const [showAuthGate, setShowAuthGate] = useState(false);
+
   // Income sub-state
   const [incomeStep, setIncomeStep] = useState<IncomeStep>("upload");
   const [detected, setDetected] = useState<DetectedIncome[]>([]);
@@ -51,6 +58,18 @@ const App = () => {
   // Expense sub-state
   const [expenseStep, setExpenseStep] = useState<ExpenseStep>("upload");
   const [expenseUploadResult, setExpenseUploadResult] = useState<ExpenseUploadResponse | null>(null);
+
+  // Check stored token on mount
+  useEffect(() => {
+    const token = getStoredToken();
+    if (token) {
+      getMe()
+        .then((user) => setAuthUser(user))
+        .catch(() => clearToken());
+    }
+  }, []);
+
+  const isAuthenticated = authUser !== null || isGuest;
 
   // ── Income handlers ──
   const handleUploadComplete = (data: UploadResponse) => {
@@ -83,7 +102,29 @@ const App = () => {
   };
 
   const handleContinueToExpenses = () => {
+    if (isAuthenticated) {
+      setPhase("expenses");
+    } else {
+      setShowAuthGate(true);
+    }
+  };
+
+  const handleAuthSuccess = (user: UserInfo) => {
+    setAuthUser(user);
+    setShowAuthGate(false);
     setPhase("expenses");
+  };
+
+  const handleGuestContinue = () => {
+    setIsGuest(true);
+    setShowAuthGate(false);
+    setPhase("expenses");
+  };
+
+  const handleLogout = () => {
+    clearToken();
+    setAuthUser(null);
+    setIsGuest(false);
   };
 
   // ── Expense handlers ──
@@ -103,8 +144,18 @@ const App = () => {
 
   // ── Phase nav ──
   const handlePhaseClick = (p: Phase) => {
-    if (p === "income") setPhase(p);
-    if (p === "expenses" && incomeComplete) setPhase(p);
+    if (p === "income") {
+      setShowAuthGate(false);
+      setPhase(p);
+    }
+    if (p === "expenses" && incomeComplete) {
+      if (isAuthenticated) {
+        setShowAuthGate(false);
+        setPhase(p);
+      } else {
+        setShowAuthGate(true);
+      }
+    }
     // insights locked for now
   };
 
@@ -131,9 +182,24 @@ const App = () => {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>
-          <span className="logo-icon">$</span> Spend Analyzer
-        </h1>
+        <div className="app-header__top">
+          <h1>
+            <span className="logo-icon">$</span> Spend Analyzer
+          </h1>
+          {authUser && (
+            <div className="auth-badge">
+              <span className="auth-badge__email">{authUser.email}</span>
+              <button className="auth-badge__logout" onClick={handleLogout} type="button">
+                Sign out
+              </button>
+            </div>
+          )}
+          {isGuest && !authUser && (
+            <div className="auth-badge auth-badge--guest">
+              <span className="auth-badge__label">Guest Mode</span>
+            </div>
+          )}
+        </div>
         <p>{PHASE_SUBTITLES[phase]}</p>
       </header>
 
@@ -144,7 +210,7 @@ const App = () => {
             const isDone =
               (p.key === "income" && incomeComplete && phase !== "income") ||
               false;
-            const isActive = phase === p.key;
+            const isActive = phase === p.key && !showAuthGate;
             const isLocked =
               (p.key === "expenses" && !incomeComplete) ||
               p.key === "insights";
@@ -169,7 +235,7 @@ const App = () => {
         </nav>
 
         {/* Sub-stepper for the active phase */}
-        {subSteps && (
+        {subSteps && !showAuthGate && (
           <div className="sub-stepper">
             {subSteps.map((s, i) => {
               const isActive = currentSubStep === s.key;
@@ -191,8 +257,16 @@ const App = () => {
       </div>
 
       <main className="app-main">
+        {/* Auth Gate interstitial */}
+        {showAuthGate && (
+          <AuthGate
+            onAuthenticated={handleAuthSuccess}
+            onGuest={handleGuestContinue}
+          />
+        )}
+
         {/* Phase 1: Income */}
-        {phase === "income" && (
+        {!showAuthGate && phase === "income" && (
           <>
             {incomeStep === "upload" && (
               <UploadStatements onComplete={handleUploadComplete} />
@@ -218,7 +292,7 @@ const App = () => {
         )}
 
         {/* Phase 2: Expenses */}
-        {phase === "expenses" && (
+        {!showAuthGate && phase === "expenses" && (
           <>
             {expenseStep === "upload" && (
               <ExpenseUpload onComplete={handleExpenseUploadComplete} />
@@ -236,7 +310,7 @@ const App = () => {
         )}
 
         {/* Phase 3: Insights (placeholder) */}
-        {phase === "insights" && (
+        {!showAuthGate && phase === "insights" && (
           <div className="step-card fade-in">
             <div className="step-icon">3</div>
             <h2>Cashflow Insights</h2>

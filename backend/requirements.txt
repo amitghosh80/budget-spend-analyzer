@@ -4,3 +4,6 @@ python-multipart
 pdfplumber
 cryptography
 sqlcipher3
+bcrypt
+python-jose[cryptography]
+pydantic[email]

@@ -2,7 +2,30 @@ from __future__ import annotations
 
 from typing import Dict, List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
+
+
+# ── Auth Models ──────────────────────────────────────────────────
+
+
+class RegisterRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class AuthResponse(BaseModel):
+    token: str
+    user: "UserInfo"
+
+
+class UserInfo(BaseModel):
+    id: str
+    email: str
 
 
 # ── Shared Models ────────────────────────────────────────────────
