@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/auth";
+const BASE = `${import.meta.env.VITE_API_BASE}/auth`;
 
 export type UserInfo = {
   id: string;

@@ -14,6 +14,7 @@ from app.services.auth import (
     find_user_by_id,
     verify_password,
 )
+from app.services.notifications import send_signup_notification
 
 router = APIRouter()
 
@@ -37,6 +38,7 @@ def register(body: RegisterRequest):
         raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
     user = create_user(body.email, body.password)
     token = create_token(user["id"], user["email"])
+    send_signup_notification(user["email"])
     return AuthResponse(token=token, user=UserInfo(id=user["id"], email=user["email"]))
 
 

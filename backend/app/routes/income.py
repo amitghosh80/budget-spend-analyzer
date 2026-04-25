@@ -209,8 +209,8 @@ def confirm_income(request: ConfirmRequest) -> ConfirmResponse:
     # Persist to disk
     _save_confirmed(confirmed_list)
 
-    # Auto-delete uploaded PDFs now that income is confirmed
-    _cleanup_uploaded_files()
+    # NOTE: Do NOT delete uploaded PDFs here — leave them for the expense step to
+    # reuse. The 48-hour startup purge in main.py handles cleanup automatically.
 
     return ConfirmResponse(confirmed=confirmed_list, dismissed_count=dismissed)
 

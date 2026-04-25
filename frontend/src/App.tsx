@@ -1,19 +1,45 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import UploadStatements from "./pages/UploadStatements";
 import IncomeReview from "./pages/IncomeReview";
 import IncomeConfirmed from "./pages/IncomeConfirmed";
 import ExpenseUpload from "./pages/ExpenseUpload";
 import ExpenseReview from "./pages/ExpenseReview";
 import ExpenseDashboard from "./pages/ExpenseDashboard";
+import InsightsDashboard from "./pages/InsightsDashboard";
+import CategoryEditor from "./pages/CategoryEditor";
 import AuthGate from "./pages/AuthGate";
-import { UploadResponse, ConfirmResponse, DetectedIncome, ExcludedTransfer } from "./api/incomeApi";
+import {
+  UploadResponse, ConfirmResponse, DetectedIncome, ExcludedTransfer,
+  getDetectedIncome, getConfirmedIncome,
+} from "./api/incomeApi";
 import { ExpenseUploadResponse } from "./api/expenseApi";
 import { getMe, getStoredToken, clearToken, type UserInfo } from "./api/authApi";
 import type { MonthlyOverrides } from "./pages/IncomeReview";
 
-type Phase = "income" | "expenses" | "insights";
+type Phase = "income" | "expenses" | "insights" | "categories";
 type IncomeStep = "upload" | "review" | "confirmed";
 type ExpenseStep = "upload" | "review" | "dashboard";
+
+const NAV_KEY = "bsa_nav";
+type SavedNav = {
+  phase: Phase;
+  incomeStep: IncomeStep;
+  expenseStep: ExpenseStep;
+  incomeComplete: boolean;
+  isGuest: boolean;
+  expenseUploadResult: ExpenseUploadResponse | null;
+};
+function loadNav(): Partial<SavedNav> {
+  try {
+    const raw = localStorage.getItem(NAV_KEY);
+    return raw ? (JSON.parse(raw) as Partial<SavedNav>) : {};
+  } catch {
+    return {};
+  }
+}
+function saveNav(nav: SavedNav) {
+  try { localStorage.setItem(NAV_KEY, JSON.stringify(nav)); } catch { /* ignore */ }
+}
 
 const PHASES: { key: Phase; label: string }[] = [
   { key: "income", label: "Income" },
@@ -25,6 +51,7 @@ const PHASE_SUBTITLES: Record<Phase, string> = {
   income: "Upload statements, detect income, confirm & save.",
   expenses: "Categorize expenses and visualize spending patterns.",
   insights: "Net cashflow analysis and savings recommendations.",
+  categories: "Edit category keyword rules and re-run categorization.",
 };
 
 const INCOME_STEPS: { key: IncomeStep; label: string }[] = [
@@ -40,24 +67,31 @@ const EXPENSE_STEPS: { key: ExpenseStep; label: string }[] = [
 ];
 
 const App = () => {
-  const [phase, setPhase] = useState<Phase>("income");
-  const [incomeComplete, setIncomeComplete] = useState(false);
+  // Read saved nav state once on mount
+  const initNav = useMemo(() => loadNav(), []);
+
+  const [phase, setPhase] = useState<Phase>(initNav.phase ?? "income");
+  const [incomeComplete, setIncomeComplete] = useState(initNav.incomeComplete ?? false);
 
   // Auth state
   const [authUser, setAuthUser] = useState<UserInfo | null>(null);
-  const [isGuest, setIsGuest] = useState(false);
+  const [isGuest, setIsGuest] = useState(initNav.isGuest ?? false);
   const [showAuthGate, setShowAuthGate] = useState(false);
 
   // Income sub-state
-  const [incomeStep, setIncomeStep] = useState<IncomeStep>("upload");
+  const [incomeStep, setIncomeStep] = useState<IncomeStep>(initNav.incomeStep ?? "upload");
   const [detected, setDetected] = useState<DetectedIncome[]>([]);
   const [excludedTransfers, setExcludedTransfers] = useState<ExcludedTransfer[]>([]);
   const [confirmResult, setConfirmResult] = useState<ConfirmResponse | null>(null);
   const [monthlyOverrides, setMonthlyOverrides] = useState<MonthlyOverrides>({});
 
-  // Expense sub-state
-  const [expenseStep, setExpenseStep] = useState<ExpenseStep>("upload");
-  const [expenseUploadResult, setExpenseUploadResult] = useState<ExpenseUploadResponse | null>(null);
+  // Expense sub-state — if restoring to "review" but no saved result, fall back to "upload"
+  const [expenseStep, setExpenseStep] = useState<ExpenseStep>(
+    initNav.expenseStep === "review" && !initNav.expenseUploadResult ? "upload" : (initNav.expenseStep ?? "upload")
+  );
+  const [expenseUploadResult, setExpenseUploadResult] = useState<ExpenseUploadResponse | null>(
+    initNav.expenseUploadResult ?? null
+  );
 
   // Check stored token on mount
   useEffect(() => {
@@ -68,6 +102,24 @@ const App = () => {
         .catch(() => clearToken());
     }
   }, []);
+
+  // Restore income API data when refreshing onto review/confirmed steps
+  useEffect(() => {
+    const nav = initNav;
+    if (nav.incomeStep === "review" || nav.incomeStep === "confirmed") {
+      getDetectedIncome().then(setDetected).catch(() => {});
+    }
+    if (nav.incomeStep === "confirmed") {
+      getConfirmedIncome()
+        .then((items) => setConfirmResult({ confirmed: items, dismissed_count: 0 }))
+        .catch(() => {});
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Persist navigation state to localStorage whenever it changes
+  useEffect(() => {
+    saveNav({ phase, incomeStep, expenseStep, incomeComplete, isGuest, expenseUploadResult });
+  }, [phase, incomeStep, expenseStep, incomeComplete, isGuest, expenseUploadResult]);
 
   const isAuthenticated = authUser !== null || isGuest;
 
@@ -99,6 +151,7 @@ const App = () => {
     setConfirmResult(null);
     setMonthlyOverrides({});
     setIncomeStep("upload");
+    setIncomeComplete(false);
   };
 
   const handleContinueToExpenses = () => {
@@ -127,6 +180,16 @@ const App = () => {
     setIsGuest(false);
   };
 
+  // ── Back handlers (navigate without clearing state) ──
+  const handleBackFromIncomeReview = () => setIncomeStep("upload");
+  const handleBackFromIncomeConfirmed = () => setIncomeStep("review");
+  const handleBackFromExpenseUpload = () => { setPhase("income"); setIncomeStep("confirmed"); };
+  const handleBackFromExpenseReview = () => setExpenseStep("upload");
+  const handleBackFromExpenseDashboard = () => setExpenseStep("review");
+  const handleBackFromInsights = () => { setPhase("expenses"); setExpenseStep("dashboard"); };
+  const handleGoToCategoryEditor = () => setPhase("categories");
+  const handleBackFromCategoryEditor = () => setPhase("insights");
+
   // ── Expense handlers ──
   const handleExpenseUploadComplete = (data: ExpenseUploadResponse) => {
     setExpenseUploadResult(data);
@@ -140,6 +203,21 @@ const App = () => {
   const handleExpenseReset = () => {
     setExpenseUploadResult(null);
     setExpenseStep("upload");
+  };
+
+  const handleFullReset = () => {
+    localStorage.removeItem(NAV_KEY);
+    setPhase("income");
+    setIncomeStep("upload");
+    setExpenseStep("upload");
+    setIncomeComplete(false);
+    setIsGuest(false);
+    setShowAuthGate(false);
+    setDetected([]);
+    setExcludedTransfers([]);
+    setConfirmResult(null);
+    setMonthlyOverrides({});
+    setExpenseUploadResult(null);
   };
 
   // ── Phase nav ──
@@ -156,7 +234,10 @@ const App = () => {
         setShowAuthGate(true);
       }
     }
-    // insights locked for now
+    if (p === "insights" && incomeComplete) {
+      setShowAuthGate(false);
+      setPhase(p);
+    }
   };
 
   // Figure out which sub-steps to show
@@ -186,19 +267,29 @@ const App = () => {
           <h1>
             <span className="logo-icon">$</span> Spend Analyzer
           </h1>
-          {authUser && (
-            <div className="auth-badge">
-              <span className="auth-badge__email">{authUser.email}</span>
-              <button className="auth-badge__logout" onClick={handleLogout} type="button">
-                Sign out
-              </button>
-            </div>
-          )}
-          {isGuest && !authUser && (
-            <div className="auth-badge auth-badge--guest">
-              <span className="auth-badge__label">Guest Mode</span>
-            </div>
-          )}
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            {authUser && (
+              <div className="auth-badge">
+                <span className="auth-badge__email">{authUser.email}</span>
+                <button className="auth-badge__logout" onClick={handleLogout} type="button">
+                  Sign out
+                </button>
+              </div>
+            )}
+            {isGuest && !authUser && (
+              <div className="auth-badge auth-badge--guest">
+                <span className="auth-badge__label">Guest Mode</span>
+              </div>
+            )}
+            <button
+              className="btn-restart"
+              onClick={handleFullReset}
+              type="button"
+              title="Clear all data and start over"
+            >
+              ↺ Start Over
+            </button>
+          </div>
         </div>
         <p>{PHASE_SUBTITLES[phase]}</p>
       </header>
@@ -213,7 +304,7 @@ const App = () => {
             const isActive = phase === p.key && !showAuthGate;
             const isLocked =
               (p.key === "expenses" && !incomeComplete) ||
-              p.key === "insights";
+              (p.key === "insights" && !incomeComplete);
 
             return (
               <button
@@ -277,7 +368,13 @@ const App = () => {
                 excludedTransfers={excludedTransfers}
                 onConfirmed={handleConfirmed}
                 onMoreDetected={handleMoreDetected}
+                onBack={handleBackFromIncomeReview}
               />
+            )}
+            {incomeStep === "confirmed" && !confirmResult && (
+              <div className="step-card fade-in">
+                <p style={{ textAlign: "center", color: "#94a3b8" }}>Loading...</p>
+              </div>
             )}
             {incomeStep === "confirmed" && confirmResult && (
               <IncomeConfirmed
@@ -286,6 +383,7 @@ const App = () => {
                 monthlyOverrides={monthlyOverrides}
                 onReset={handleIncomeReset}
                 onContinue={handleContinueToExpenses}
+                onBack={handleBackFromIncomeConfirmed}
               />
             )}
           </>
@@ -295,29 +393,36 @@ const App = () => {
         {!showAuthGate && phase === "expenses" && (
           <>
             {expenseStep === "upload" && (
-              <ExpenseUpload onComplete={handleExpenseUploadComplete} />
+              <ExpenseUpload onComplete={handleExpenseUploadComplete} onBack={handleBackFromExpenseUpload} />
             )}
             {expenseStep === "review" && expenseUploadResult && (
               <ExpenseReview
                 uploadResult={expenseUploadResult}
                 onContinue={handleExpenseContinueToDashboard}
+                onBack={handleBackFromExpenseReview}
               />
             )}
             {expenseStep === "dashboard" && (
-              <ExpenseDashboard onReset={handleExpenseReset} />
+              <ExpenseDashboard
+                onReset={handleExpenseReset}
+                onInsights={() => setPhase("insights")}
+                onBack={handleBackFromExpenseDashboard}
+              />
             )}
           </>
         )}
 
-        {/* Phase 3: Insights (placeholder) */}
+        {/* Phase 3: Insights */}
         {!showAuthGate && phase === "insights" && (
-          <div className="step-card fade-in">
-            <div className="step-icon">3</div>
-            <h2>Cashflow Insights</h2>
-            <p className="step-desc">
-              Net cashflow analysis and savings recommendations. Coming soon.
-            </p>
-          </div>
+          <InsightsDashboard
+            onBack={handleBackFromInsights}
+            onCategoryEditor={handleGoToCategoryEditor}
+          />
+        )}
+
+        {/* Category Editor (accessible from Insights) */}
+        {!showAuthGate && phase === "categories" && (
+          <CategoryEditor onBack={handleBackFromCategoryEditor} />
         )}
       </main>
     </div>

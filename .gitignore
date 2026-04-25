@@ -7,3 +7,10 @@ dist/
 backend/app/storage/
 *.log
 nul
+# Secrets & local config
+.env
+.env.*
+backend/app/.db_encryption_key
+# Personal / test data
+expenses.md
+upload_test*.json

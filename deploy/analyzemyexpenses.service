@@ -1,0 +1,15 @@
+[Unit]
+Description=Analyze My Expenses - FastAPI Backend
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory=/opt/analyzemyexpenses/backend
+ExecStart=/opt/analyzemyexpenses/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=5
+Environment=PYTHONPATH=/opt/analyzemyexpenses/backend
+EnvironmentFile=/etc/analyzemyexpenses.env
+
+[Install]
+WantedBy=multi-user.target

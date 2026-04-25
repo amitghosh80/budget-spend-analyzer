@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000/income";
+const BASE = `${import.meta.env.VITE_API_BASE}/income`;
 
 export type FileResult = {
   filename: string;
@@ -114,6 +114,12 @@ export async function rescanIncome(
 
 export async function getConfirmedIncome(): Promise<ConfirmedIncome[]> {
   const res = await fetch(`${BASE}/confirmed`);
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+export async function getDetectedIncome(): Promise<DetectedIncome[]> {
+  const res = await fetch(`${BASE}/detected`);
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }

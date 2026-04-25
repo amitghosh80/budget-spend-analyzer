@@ -17,6 +17,11 @@ from fastapi import APIRouter, File, Query, UploadFile
 from fastapi.responses import StreamingResponse
 
 from app.models import (
+    AccountBreakdown,
+    AccountBreakdownResponse,
+    AccountMonthlyTotal,
+    CashflowMonth,
+    CashflowSummary,
     CategoryDefinition,
     CategoryTotal,
     CategoryUpdate,
@@ -24,6 +29,8 @@ from app.models import (
     ExpenseTransaction,
     ExpenseUploadResponse,
     FileResult,
+    MerchantTotal,
+    MerchantsResponse,
     MonthlyExpenseTotal,
     PivotCell,
     PivotRow,
@@ -47,7 +54,7 @@ from app.services.expense_categorizer import (
     clean_merchant_name,
     get_category_name,
 )
-from app.services.pdf_parser import extract_transactions
+from app.services.pdf_parser import detect_statement_type, extract_transactions
 
 router = APIRouter()
 
@@ -160,30 +167,69 @@ def _is_income_transaction(description: str, income_names: set[str]) -> bool:
 
 
 @router.post("/upload", response_model=ExpenseUploadResponse)
-async def upload_expenses(files: List[UploadFile] = File(...)) -> ExpenseUploadResponse:
-    """Upload credit card PDFs, categorize expenses."""
+async def upload_expenses(
+    files: List[UploadFile] = File(default=[]),
+    include_existing: bool = Query(
+        False,
+        description="Also process statements already uploaded during the income step.",
+    ),
+) -> ExpenseUploadResponse:
+    """Upload bank and/or credit card PDFs and categorize expenses.
+
+    Pass include_existing=true to also process statements that are already
+    stored from the income step (checking account PDFs, etc.) alongside any
+    newly uploaded files. Duplicate transactions are silently skipped.
+    """
     STORAGE_DIR.mkdir(parents=True, exist_ok=True)
 
     file_results: List[FileResult] = []
-    cc_transactions = []
+    all_txn_data = []
 
-    # Parse uploaded CC statements
+    # ── Step 1: Existing stored files (income-step uploads) ─────────────────
+    if include_existing:
+        for stored_path in sorted(STORAGE_DIR.glob("*.pdf")):
+            try:
+                content = decrypt(stored_path.read_bytes())
+                stmt_type = detect_statement_type(BytesIO(content))
+                account_source = stmt_type if stmt_type in ("checking", "savings") else "credit_card"
+                txns = extract_transactions(BytesIO(content))
+                stmt_year = _year_from_filename(stored_path.name)
+                for txn in txns:
+                    all_txn_data.append((txn, stored_path.name, account_source, stmt_year))
+                file_results.append(
+                    FileResult(
+                        filename=stored_path.name,
+                        stored_as=stored_path.name,
+                        size_bytes=stored_path.stat().st_size,
+                        status="stored" if txns else "warning",
+                        error=None if txns else "No transactions found.",
+                        transaction_count=len(txns),
+                    )
+                )
+            except Exception as exc:
+                file_results.append(
+                    FileResult(filename=stored_path.name, status="error", error=str(exc))
+                )
+
+    # ── Step 2: Newly uploaded files ────────────────────────────────────────
     for upload in files[:MAX_FILES]:
         fname = upload.filename or "unknown"
         if not fname.lower().endswith(".pdf"):
             file_results.append(FileResult(filename=fname, status="skipped", error="Not a PDF"))
             continue
 
-        stored_name = f"cc_{uuid4().hex[:8]}_{_safe(fname)}"
+        stored_name = f"stmt_{uuid4().hex[:8]}_{_safe(fname)}"
         stored_path = STORAGE_DIR / stored_name
         try:
             content = await upload.read()
+            stmt_type = detect_statement_type(BytesIO(content))
+            account_source = stmt_type if stmt_type in ("checking", "savings") else "credit_card"
             txns = extract_transactions(BytesIO(content))
             stored_path.write_bytes(encrypt(content))
 
             stmt_year = _year_from_filename(fname)
             for txn in txns:
-                cc_transactions.append((txn, fname, "credit_card", stmt_year))
+                all_txn_data.append((txn, fname, account_source, stmt_year))
 
             file_results.append(
                 FileResult(
@@ -197,8 +243,6 @@ async def upload_expenses(files: List[UploadFile] = File(...)) -> ExpenseUploadR
             )
         except Exception as exc:
             file_results.append(FileResult(filename=fname, status="error", error=str(exc)))
-
-    all_txn_data = cc_transactions
 
     # Load confirmed income info for exclusion
     income_names = _load_confirmed_income_descriptions()
@@ -486,6 +530,203 @@ def create_category(definition: CategoryDefinition) -> CategoryDefinition:
     finally:
         conn.close()
     return definition
+
+
+@router.get("/merchants", response_model=MerchantsResponse)
+def top_merchants(limit: int = Query(default=15, ge=1, le=50)) -> MerchantsResponse:
+    """Return top merchants by total spend, excluding income and excluded transactions."""
+    conn = get_connection()
+    try:
+        rows = conn.execute(
+            """
+            SELECT
+                merchant,
+                SUM(amount)          AS total,
+                COUNT(*)             AS txn_count,
+                AVG(amount)          AS avg_amt,
+                MAX(category)        AS top_category
+            FROM transactions
+            WHERE is_excluded = 0
+              AND is_income = 0
+              AND merchant != ''
+            GROUP BY merchant
+            ORDER BY total DESC
+            LIMIT ?
+            """,
+            (limit,),
+        ).fetchall()
+    finally:
+        conn.close()
+
+    merchants = [
+        MerchantTotal(
+            merchant=r["merchant"],
+            total=round(r["total"], 2),
+            transaction_count=r["txn_count"],
+            avg_per_transaction=round(r["avg_amt"], 2),
+            top_category=r["top_category"] or "other",
+        )
+        for r in rows
+    ]
+    return MerchantsResponse(merchants=merchants)
+
+
+@router.get("/cashflow", response_model=CashflowSummary)
+def cashflow_summary() -> CashflowSummary:
+    """Return monthly income vs expense cashflow, using actual transactions in the DB."""
+    conn = get_connection()
+    try:
+        income_rows = conn.execute(
+            """
+            SELECT substr(date, 1, 7) AS month, SUM(amount) AS total
+            FROM transactions
+            WHERE is_income = 1
+            GROUP BY month
+            ORDER BY month
+            """
+        ).fetchall()
+
+        expense_rows = conn.execute(
+            """
+            SELECT substr(date, 1, 7) AS month, SUM(amount) AS total
+            FROM transactions
+            WHERE is_excluded = 0 AND is_income = 0
+            GROUP BY month
+            ORDER BY month
+            """
+        ).fetchall()
+    finally:
+        conn.close()
+
+    income_by_month: dict[str, float] = {r["month"]: round(r["total"], 2) for r in income_rows}
+    expense_by_month: dict[str, float] = {r["month"]: round(r["total"], 2) for r in expense_rows}
+
+    # Only report months that have meaningful expense data (> $1,000)
+    # to exclude partial months at statement edges
+    all_months = sorted(
+        m for m, amt in expense_by_month.items() if amt > 1000
+    )
+
+    months: list[CashflowMonth] = []
+    for m in all_months:
+        inc = income_by_month.get(m, 0.0)
+        exp = expense_by_month.get(m, 0.0)
+        months.append(CashflowMonth(
+            month=m,
+            month_label=_month_label(m + "-01"),
+            income=inc,
+            expenses=exp,
+            net=round(inc - exp, 2),
+        ))
+
+    n = len(months) or 1
+    total_income = sum(m.income for m in months)
+    total_expenses = sum(m.expenses for m in months)
+    total_net = round(total_income - total_expenses, 2)
+
+    return CashflowSummary(
+        months=months,
+        total_income=round(total_income, 2),
+        total_expenses=round(total_expenses, 2),
+        total_net=total_net,
+        avg_monthly_income=round(total_income / n, 2),
+        avg_monthly_expenses=round(total_expenses / n, 2),
+        avg_monthly_net=round(total_net / n, 2),
+    )
+
+
+@router.get("/account-breakdown", response_model=AccountBreakdownResponse)
+def account_breakdown() -> AccountBreakdownResponse:
+    """Return monthly expense totals broken down by account source."""
+    conn = get_connection()
+    try:
+        rows = conn.execute(
+            """
+            SELECT account_source, substr(date, 1, 7) AS month, SUM(amount) AS total
+            FROM transactions
+            WHERE is_excluded = 0 AND is_income = 0
+            GROUP BY account_source, month
+            ORDER BY account_source, month
+            """
+        ).fetchall()
+    finally:
+        conn.close()
+
+    account_data: dict[str, dict[str, float]] = {}
+    for r in rows:
+        src = r["account_source"]
+        month = r["month"]
+        if src not in account_data:
+            account_data[src] = {}
+        account_data[src][month] = round(r["total"], 2)
+
+    all_months = sorted({m for months in account_data.values() for m in months})
+    n_months = max(len(all_months), 1)
+    month_labels = {m: _month_label(m + "-01") for m in all_months}
+
+    accounts = []
+    for src, month_totals in account_data.items():
+        monthly = [
+            AccountMonthlyTotal(
+                month=m,
+                month_label=month_labels[m],
+                total=month_totals.get(m, 0.0),
+            )
+            for m in all_months
+        ]
+        total = sum(month_totals.values())
+        accounts.append(AccountBreakdown(
+            account_source=src,
+            total=round(total, 2),
+            avg_monthly=round(total / n_months, 2),
+            monthly_totals=monthly,
+        ))
+    accounts.sort(key=lambda a: a.total, reverse=True)
+
+    return AccountBreakdownResponse(
+        accounts=accounts,
+        months=all_months,
+        month_labels=month_labels,
+    )
+
+
+@router.post("/recategorize")
+def recategorize_all() -> dict:
+    """Re-apply keyword rules from DB categories to all auto-categorized transactions."""
+    conn = get_connection()
+    try:
+        cat_rows = get_all_categories(conn)
+        # Build keyword → slug mapping (uppercase, first match wins)
+        kw_map: list[tuple[str, str]] = []
+        for cat in cat_rows:
+            if cat["slug"] == "uncategorized":
+                continue
+            keywords = json.loads(cat["keywords"]) if cat["keywords"] else []
+            for kw in keywords:
+                kw_map.append((kw.upper(), cat["slug"]))
+
+        txns = conn.execute(
+            "SELECT id, description FROM transactions "
+            "WHERE category_source = 'auto' AND is_income = 0 AND is_excluded = 0"
+        ).fetchall()
+
+        count = 0
+        for txn in txns:
+            desc_upper = txn["description"].upper()
+            new_cat = "uncategorized"
+            for kw_upper, slug in kw_map:
+                if kw_upper in desc_upper:
+                    new_cat = slug
+                    break
+            conn.execute(
+                "UPDATE transactions SET category = ? WHERE id = ?",
+                (new_cat, txn["id"]),
+            )
+            count += 1
+        conn.commit()
+    finally:
+        conn.close()
+    return {"recategorized": count}
 
 
 @router.get("/export")

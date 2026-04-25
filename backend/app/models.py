@@ -199,9 +199,61 @@ class CategoryUpdate(BaseModel):
     new_category: str
 
 
+class CashflowMonth(BaseModel):
+    month: str        # "YYYY-MM"
+    month_label: str  # "Jan 2025"
+    income: float
+    expenses: float
+    net: float
+
+
+class CashflowSummary(BaseModel):
+    months: List[CashflowMonth]
+    total_income: float
+    total_expenses: float
+    total_net: float
+    avg_monthly_income: float
+    avg_monthly_expenses: float
+    avg_monthly_net: float
+
+
+class MerchantTotal(BaseModel):
+    merchant: str
+    total: float
+    transaction_count: int
+    avg_per_transaction: float
+    top_category: str
+
+
+class MerchantsResponse(BaseModel):
+    merchants: List[MerchantTotal]
+
+
 class CategoryDefinition(BaseModel):
     slug: str
     name: str
     type: str = "variable"
     is_custom: bool = False
     keywords: List[str] = []
+
+
+# ── Phase 3: Insights Models ─────────────────────────────────────
+
+
+class AccountMonthlyTotal(BaseModel):
+    month: str        # "YYYY-MM"
+    month_label: str  # "Jan 2025"
+    total: float
+
+
+class AccountBreakdown(BaseModel):
+    account_source: str  # "checking" | "credit_card" | "savings"
+    total: float
+    avg_monthly: float
+    monthly_totals: List[AccountMonthlyTotal]
+
+
+class AccountBreakdownResponse(BaseModel):
+    accounts: List[AccountBreakdown]
+    months: List[str]           # ordered YYYY-MM list
+    month_labels: Dict[str, str]

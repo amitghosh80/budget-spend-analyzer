@@ -15,6 +15,7 @@ type Props = {
   excludedTransfers: ExcludedTransfer[];
   onConfirmed: (resp: ConfirmResponse, overrides: MonthlyOverrides) => void;
   onMoreDetected: (newItems: DetectedIncome[]) => void;
+  onBack: () => void;
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -45,7 +46,7 @@ const CONFIDENCE_STYLES: Record<string, { bg: string; text: string }> = {
   low: { bg: "#fee2e2", text: "#991b1b" },
 };
 
-const IncomeReview = ({ detected, excludedTransfers, onConfirmed, onMoreDetected }: Props) => {
+const IncomeReview = ({ detected, excludedTransfers, onConfirmed, onMoreDetected, onBack }: Props) => {
   const [decisions, setDecisions] = useState<Record<string, "confirmed" | "dismissed">>({});
   const [amountOverrides, setAmountOverrides] = useState<Record<string, string>>({});
   const [monthlyOverrides, setMonthlyOverrides] = useState<Record<string, Record<number, string>>>({});
@@ -58,7 +59,7 @@ const IncomeReview = ({ detected, excludedTransfers, onConfirmed, onMoreDetected
   const [showTransfers, setShowTransfers] = useState(false);
   const [expandedTxns, setExpandedTxns] = useState<Record<string, boolean>>({});
 
-  const allDecided = detected.length > 0 && detected.every((d) => decisions[d.id]);
+  const canSubmit = detected.length > 0 && Object.keys(decisions).length > 0;
 
   const setDecision = (id: string, status: "confirmed" | "dismissed") => {
     setDecisions((prev) => ({ ...prev, [id]: status }));
@@ -212,6 +213,7 @@ const IncomeReview = ({ detected, excludedTransfers, onConfirmed, onMoreDetected
 
   return (
     <div className="step-card fade-in">
+      <button className="back-btn" onClick={onBack} type="button">← Back</button>
       <div className="step-icon">2</div>
       <h2>Review Detected Income</h2>
       <p className="step-desc">
@@ -265,14 +267,14 @@ const IncomeReview = ({ detected, excludedTransfers, onConfirmed, onMoreDetected
                 {groups[cat].length > 1 && (
                   <div className="income-group__bulk">
                     <button
-                      className="btn btn--confirm btn--xs"
+                      className={`btn btn--confirm btn--xs${groups[cat].every((d) => decisions[d.id] === "confirmed") ? " btn--active" : " btn--ghost"}`}
                       onClick={() => bulkSetGroup(cat, "confirmed")}
                       type="button"
                     >
                       Confirm group
                     </button>
                     <button
-                      className="btn btn--dismiss btn--xs"
+                      className={`btn btn--dismiss btn--xs${groups[cat].every((d) => decisions[d.id] === "dismissed") ? " btn--active" : " btn--ghost"}`}
                       onClick={() => bulkSetGroup(cat, "dismissed")}
                       type="button"
                     >
@@ -535,7 +537,7 @@ const IncomeReview = ({ detected, excludedTransfers, onConfirmed, onMoreDetected
             <button
               className="btn btn--primary btn--lg"
               onClick={handleSubmit}
-              disabled={!allDecided || submitting}
+              disabled={!canSubmit || submitting}
             >
               {submitting ? "Saving..." : "Confirm & Save"}
             </button>

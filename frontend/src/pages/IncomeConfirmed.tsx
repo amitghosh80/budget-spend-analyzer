@@ -6,6 +6,8 @@ type Props = {
   detected: DetectedIncome[];
   monthlyOverrides: MonthlyOverrides;
   onReset: () => void;
+  onContinue: () => void;
+  onBack: () => void;
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -21,7 +23,7 @@ type MonthBreakdown = {
   sources: { name: string; category: string; amount: number }[];
 };
 
-const IncomeConfirmed = ({ result, detected, monthlyOverrides, onReset }: Props) => {
+const IncomeConfirmed = ({ result, detected, monthlyOverrides, onReset, onContinue, onBack }: Props) => {
   const confirmedIds = new Set(result.confirmed.map((c) => c.id));
 
   // Build month-wise totals with per-source breakdown
@@ -52,6 +54,7 @@ const IncomeConfirmed = ({ result, detected, monthlyOverrides, onReset }: Props)
 
   return (
     <div className="step-card fade-in">
+      <button className="back-btn" onClick={onBack} type="button">← Back</button>
       <div className="step-icon step-icon--done">&#10003;</div>
       <h2>Income Confirmed!</h2>
       <p className="step-desc">
@@ -109,9 +112,14 @@ const IncomeConfirmed = ({ result, detected, monthlyOverrides, onReset }: Props)
         </div>
       )}
 
-      <button className="btn btn--primary btn--lg" onClick={onReset}>
-        Upload More Statements
-      </button>
+      <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+        <button className="btn btn--primary btn--lg" onClick={onContinue}>
+          Continue to Expenses &rarr;
+        </button>
+        <button className="btn btn--outline btn--lg" onClick={onReset}>
+          Upload More Statements
+        </button>
+      </div>
     </div>
   );
 };

@@ -19,6 +19,45 @@ class RawTransaction:
     source_file: str = ""
 
 
+_CHECKING_MARKERS = [
+    "TOTAL CHECKING", "CHECKING ACCOUNT", "CHECKING SUMMARY",
+    "CHECKING ACTIVITY", "CHASE TOTAL CHECKING", "AVAILABLE IN CHECKING",
+]
+_SAVINGS_MARKERS = [
+    "TOTAL SAVINGS", "SAVINGS ACCOUNT", "SAVINGS SUMMARY",
+    "CHASE SAVINGS", "AVAILABLE IN SAVINGS",
+]
+_CC_MARKERS = [
+    "CREDIT CARD ACCOUNT", "MINIMUM PAYMENT DUE", "CREDIT LIMIT",
+    "STATEMENT BALANCE", "REVOLVING LINE", "NEW BALANCE",
+    "MINIMUM PAYMENT", "PURCHASES AND ADJUSTMENTS",
+]
+
+
+def detect_statement_type(pdf_source: Union[Path, BinaryIO]) -> str:
+    """Detect whether a PDF is a checking, savings, or credit card statement.
+
+    Scans the first two pages for identifying keywords.
+    Returns 'checking', 'savings', or 'credit_card'.
+    """
+    if hasattr(pdf_source, "seek"):
+        pdf_source.seek(0)
+    try:
+        with pdfplumber.open(pdf_source) as pdf:
+            text = ""
+            for page in pdf.pages[:2]:
+                text += (page.extract_text() or "").upper()
+            if any(m in text for m in _CC_MARKERS):
+                return "credit_card"
+            if any(m in text for m in _SAVINGS_MARKERS):
+                return "savings"
+            if any(m in text for m in _CHECKING_MARKERS):
+                return "checking"
+    except Exception:
+        pass
+    return "credit_card"  # safe default
+
+
 def extract_transactions(pdf_source: Union[Path, BinaryIO]) -> List[RawTransaction]:
     """Extract credit/deposit transactions from a PDF statement."""
     transactions: List[RawTransaction] = []
