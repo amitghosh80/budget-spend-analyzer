@@ -571,9 +571,50 @@ def top_merchants(limit: int = Query(default=15, ge=1, le=50)) -> MerchantsRespo
     return MerchantsResponse(merchants=merchants)
 
 
+def _confirmed_monthly_income(n_months: int) -> float | None:
+    """Return the user-confirmed monthly income total, or None if not available.
+
+    Converts per-occurrence amounts to a monthly figure based on frequency.
+    Falls back to None so callers can use DB data instead.
+    """
+    try:
+        from app.routes.income import _load_confirmed  # lazy import to avoid circular deps
+        confirmed = [c for c in _load_confirmed() if c.status == "confirmed"]
+    except Exception:
+        return None
+
+    if not confirmed:
+        return None
+
+    monthly = 0.0
+    for src in confirmed:
+        freq = (src.frequency or "monthly").lower()
+        amt = src.amount_per_occurrence or 0.0
+        if freq == "monthly":
+            monthly += amt
+        elif freq == "biweekly":
+            monthly += amt * 26 / 12
+        elif freq == "weekly":
+            monthly += amt * 52 / 12
+        elif freq in ("once", "one-time"):
+            # Spread a one-time amount evenly across the expense months
+            monthly += amt / (n_months or 1)
+        elif freq == "quarterly":
+            monthly += amt / 3
+        else:
+            monthly += amt  # treat unknown as monthly
+
+    return round(monthly, 2)
+
+
 @router.get("/cashflow", response_model=CashflowSummary)
 def cashflow_summary() -> CashflowSummary:
-    """Return monthly income vs expense cashflow, using actual transactions in the DB."""
+    """Return monthly income vs expense cashflow.
+
+    Income amounts use the user-confirmed figures from the income step (including
+    any overrides). Falls back to raw DB income transactions if no confirmed income
+    is on file.
+    """
     conn = get_connection()
     try:
         income_rows = conn.execute(
@@ -601,15 +642,18 @@ def cashflow_summary() -> CashflowSummary:
     income_by_month: dict[str, float] = {r["month"]: round(r["total"], 2) for r in income_rows}
     expense_by_month: dict[str, float] = {r["month"]: round(r["total"], 2) for r in expense_rows}
 
-    # Only report months that have meaningful expense data (> $1,000)
-    # to exclude partial months at statement edges
-    all_months = sorted(
-        m for m, amt in expense_by_month.items() if amt > 1000
-    )
+    # Use every month that has any expense data — same set as /summary — so that
+    # avg_monthly_expenses here matches the avg_monthly shown on the expenses step.
+    all_months = sorted(expense_by_month.keys())
+    n = len(all_months) or 1
+
+    # Use confirmed income from the income step if available; otherwise fall back
+    # to the raw DB income transactions so the avg matches what the user set.
+    confirmed_monthly = _confirmed_monthly_income(n)
 
     months: list[CashflowMonth] = []
     for m in all_months:
-        inc = income_by_month.get(m, 0.0)
+        inc = confirmed_monthly if confirmed_monthly is not None else income_by_month.get(m, 0.0)
         exp = expense_by_month.get(m, 0.0)
         months.append(CashflowMonth(
             month=m,
@@ -619,7 +663,6 @@ def cashflow_summary() -> CashflowSummary:
             net=round(inc - exp, 2),
         ))
 
-    n = len(months) or 1
     total_income = sum(m.income for m in months)
     total_expenses = sum(m.expenses for m in months)
     total_net = round(total_income - total_expenses, 2)
