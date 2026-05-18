@@ -48,10 +48,10 @@ const PHASES: { key: Phase; label: string }[] = [
 ];
 
 const PHASE_SUBTITLES: Record<Phase, string> = {
-  income: "Upload statements, detect income, confirm & save.",
-  expenses: "Categorize expenses and visualize spending patterns.",
-  insights: "Net cashflow analysis and savings recommendations.",
-  categories: "Edit category keyword rules and re-run categorization.",
+  income: "Upload your statements. Get a complete picture of your income, spending, and where you can save.",
+  expenses: "Every dollar tracked. Every spending pattern revealed.",
+  insights: "The full picture — income, expenses, and what you actually keep.",
+  categories: "Your spending, your rules. Fine-tune how we read your finances.",
 };
 
 const INCOME_STEPS: { key: IncomeStep; label: string }[] = [
