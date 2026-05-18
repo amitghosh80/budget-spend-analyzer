@@ -4132,3 +4132,512 @@ body {
   padding-top: 16px;
   border-top: 1px solid rgba(255,255,255,0.07);
 }
+
+/* ============================================================
+   MOBILE RESPONSIVE — Comprehensive additions
+   ============================================================ */
+
+/* Push controls to right by default */
+.app-header__controls {
+  justify-content: flex-end;
+}
+
+/* Ensure insights card body scrolls horizontally for tables */
+.insights-card__body {
+  overflow-x: auto;
+}
+
+
+/* ---- 768px: Tablet ---- */
+@media (max-width: 768px) {
+  .app {
+    max-width: 100%;
+    padding: 24px 16px 72px;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .phase-nav__item {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Insights stats: 3 columns on tablet */
+  .insights-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .insights-bar-row {
+    grid-template-columns: 140px 1fr 100px;
+  }
+
+  .fv-columns {
+    gap: 10px;
+  }
+}
+
+/* ---- 640px: Large phone / small tablet (extends existing block) ---- */
+@media (max-width: 640px) {
+  /* Header */
+  .app-header {
+    padding: 22px 0 14px;
+  }
+
+  .app-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .app-header p {
+    font-size: 0.9rem;
+  }
+
+  .app-header__top {
+    justify-content: space-between;
+  }
+
+  /* Make auth badge flow inline instead of absolute */
+  .auth-badge {
+    position: static;
+    transform: none;
+    top: auto;
+    right: auto;
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+
+  .auth-badge__email {
+    max-width: 110px;
+  }
+
+  /* Nav container */
+  .nav-container {
+    padding: 14px 16px;
+  }
+
+  /* Phase nav: wrap and fill width */
+  .phase-nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .phase-nav__item {
+    padding: 9px 14px;
+    font-size: 0.85rem;
+    flex: 1;
+    min-width: 80px;
+    justify-content: center;
+  }
+
+  .phase-nav__num {
+    width: 26px;
+    height: 26px;
+    font-size: 0.78rem;
+  }
+
+  /* Sub-stepper */
+  .sub-stepper {
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Step card: tighter padding (overrides existing 32px 20px) */
+  .step-card {
+    padding: 28px 16px 20px;
+  }
+
+  .step-icon {
+    left: 20px;
+  }
+
+  /* Income cards */
+  .income-card__actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .income-card__actions .btn {
+    flex: 1;
+    min-width: 110px;
+    justify-content: center;
+  }
+
+  /* Bulk action bars */
+  .bulk-bar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .bulk-bar__count {
+    width: 100%;
+  }
+
+  .bulk-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Rescan: stack input + button */
+  .rescan-input-row {
+    flex-direction: column;
+  }
+
+  /* Fixed vs Variable: single column */
+  .fv-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .fv-stat-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .fv-stat {
+    min-width: calc(50% - 5px);
+  }
+
+  /* Insights stats: 2 columns (overrides 3 from 700px block) */
+  .insights-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Insights bar rows: tighter label column */
+  .insights-bar-row {
+    grid-template-columns: 110px 1fr 80px;
+  }
+
+  /* Goals: single column */
+  .insights-goals {
+    grid-template-columns: 1fr;
+  }
+
+  /* Savings rate: shrink month label */
+  .sr-benchmark {
+    margin-left: calc(75px + 10px);
+  }
+
+  .sr-row__month {
+    width: 75px;
+  }
+
+  /* Category income rows: tighter name column */
+  .ci-row__name {
+    width: 110px;
+  }
+
+  .ci-row__amt {
+    width: 65px;
+  }
+
+  /* Insights footer */
+  .id-footer .btn {
+    flex: 1;
+    min-width: 110px;
+    justify-content: center;
+  }
+
+  /* Cashflow bar column */
+  .cf-bar-group {
+    min-width: 80px;
+  }
+
+  /* Occurrence rows: wrap txn text */
+  .occurrence-row {
+    flex-wrap: wrap;
+  }
+
+  .occurrence-row__txns {
+    white-space: normal;
+  }
+
+  /* Month summary: 2 columns */
+  .month-summary__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Account breakdown rows */
+  .ab-row {
+    grid-template-columns: 90px 1fr 100px;
+  }
+
+  /* Category editor grid */
+  .ce-cats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- 480px: Small phones ---- */
+@media (max-width: 480px) {
+  .app {
+    padding: 8px 12px 64px;
+  }
+
+  /* Header: stack vertically */
+  .app-header {
+    padding: 16px 0 10px;
+  }
+
+  .app-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  .app-header p {
+    font-size: 0.85rem;
+    margin-top: 6px;
+  }
+
+  .app-header__top {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .app-header__controls {
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Nav container */
+  .nav-container {
+    padding: 10px 12px;
+    margin-bottom: 20px;
+  }
+
+  .phase-nav {
+    gap: 6px;
+  }
+
+  .phase-nav__item {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    gap: 5px;
+  }
+
+  .phase-nav__num {
+    width: 24px;
+    height: 24px;
+    font-size: 0.72rem;
+  }
+
+  .sub-stepper {
+    gap: 8px;
+  }
+
+  .sub-stepper__step {
+    font-size: 0.75rem;
+    gap: 5px;
+  }
+
+  .sub-stepper__dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Step cards */
+  .step-card {
+    padding: 22px 14px 18px;
+  }
+
+  .step-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+    left: 16px;
+    top: -18px;
+  }
+
+  .step-card h2 {
+    font-size: 1.15rem;
+  }
+
+  /* File upload drop zone */
+  .file-drop__inner {
+    padding: 24px 16px;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  /* Buttons */
+  .btn--lg {
+    padding: 12px 20px;
+    font-size: 0.92rem;
+  }
+
+  /* Stat cards */
+  .confirmed-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-card {
+    padding: 16px 10px;
+  }
+
+  .stat-card__value {
+    font-size: 1.5rem;
+  }
+
+  /* Cashflow stats */
+  .cf-stat {
+    padding: 14px 10px;
+  }
+
+  /* Insights stats */
+  .insights-stat {
+    padding: 12px 8px;
+  }
+
+  .insights-stat__value {
+    font-size: 1.1rem;
+  }
+
+  .insights-stat__label {
+    font-size: 0.68rem;
+  }
+
+  /* Insights bar rows */
+  .insights-bar-row {
+    grid-template-columns: 85px 1fr 68px;
+  }
+
+  .insights-bar-row__label {
+    font-size: 0.78rem;
+  }
+
+  .insights-bar-row__amount {
+    font-size: 0.78rem;
+  }
+
+  /* Savings rate */
+  .sr-benchmark {
+    margin-left: calc(62px + 10px);
+  }
+
+  .sr-row__month {
+    width: 62px;
+    font-size: 0.75rem;
+  }
+
+  .sr-row__pct {
+    width: 46px;
+    font-size: 0.75rem;
+  }
+
+  /* Category income rows */
+  .ci-row__name {
+    width: 85px;
+    font-size: 0.75rem;
+  }
+
+  .ci-row__amt {
+    width: 52px;
+    font-size: 0.72rem;
+  }
+
+  .ci-row__pct {
+    width: 38px;
+    font-size: 0.72rem;
+  }
+
+  /* Category breakdown */
+  .category-breakdown__name {
+    min-width: 90px;
+    font-size: 0.78rem;
+  }
+
+  .category-breakdown__total {
+    min-width: 65px;
+    font-size: 0.78rem;
+  }
+
+  /* Top merchants */
+  .tm-row__info {
+    max-width: 120px;
+  }
+
+  .tm-row__total {
+    width: 60px;
+    font-size: 0.78rem;
+  }
+
+  /* Month block */
+  .month-block__header {
+    padding: 10px 14px;
+  }
+
+  .month-block__name {
+    font-size: 0.92rem;
+  }
+
+  .month-block__total {
+    font-size: 1rem;
+  }
+
+  /* Security banner */
+  .security-banner {
+    font-size: 0.8rem;
+    padding: 10px 12px;
+  }
+
+  /* Pills */
+  .pill {
+    font-size: 0.78rem;
+    padding: 4px 10px;
+  }
+
+  .review-footer__summary {
+    gap: 6px;
+  }
+
+  /* Income group bulk: stack buttons */
+  .income-group__bulk {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .income-group__bulk .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Occurrence rows */
+  .occurrence-row__month {
+    min-width: 60px;
+  }
+
+  /* Fixed vs variable: fully stacked */
+  .fv-stat-row {
+    flex-direction: column;
+  }
+
+  .fv-stat {
+    min-width: unset;
+    width: 100%;
+  }
+
+  /* Drill-down panel: taller on small phones */
+  .drill-panel {
+    max-height: 80vh;
+  }
+
+  /* Account breakdown */
+  .ab-row {
+    grid-template-columns: 80px 1fr 90px;
+  }
+
+  /* Confirmed rows */
+  .confirmed-row__main {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}

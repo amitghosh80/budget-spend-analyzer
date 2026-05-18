@@ -267,7 +267,7 @@ const App = () => {
           <h1>
             <span className="logo-icon">$</span> Spend Analyzer
           </h1>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div className="app-header__controls" style={{ display: "flex", alignItems: "center", gap: 12 }}>
             {authUser && (
               <div className="auth-badge">
                 <span className="auth-badge__email">{authUser.email}</span>
